@@ -1,0 +1,5 @@
+{
+  "auth_token": "your auth token",
+  "screepsHost": "https://screeps.com",
+  "branch": "default"
+}
