@@ -4,8 +4,8 @@ const copy = require('recursive-copy');
 const { execSync } = require('child_process');
 const glob = require('glob');
 
-const optimizeLevel = process.env.ENV === 'dev' ? 0 : 4;
-const shrinkLevel = process.env.ENV === 'dev' ? 0 : 2;
+const optimizeLevel = process.env.OPTIMIZE === 'true' ? 4 : 0;
+const shrinkLevel = process.env.SHRINK === 'true' ? 2 : 0;
 
 const dockerCmd = `docker run --rm -v ${path.resolve('build')}:/mirror -w=/mirror terrorjack/asterius:200702`;
 const ahcLinkCmd = `ahc-link --input-hs=${'ahc-input'}/Main.hs --output-directory=${'ahc-output'} --yolo --browser --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`;

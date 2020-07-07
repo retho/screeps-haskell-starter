@@ -21,7 +21,6 @@ main :: IO ()
 main = do
   t <- Game.time
   print_int $ fib $ t `mod` 32
-  -- print_int $ fibs !! t `mod` 32
   when (t `mod` 32 == 11) $ do
     console_log "GC performing"
     performGC -- * haskell's garbage collection

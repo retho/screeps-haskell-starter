@@ -16,6 +16,6 @@ export default {
     clear({ targets: ["build/dist"] }),
     resolve(),
     commonjs(),
-    terser(),
+    process.env.SHRINK === 'true' && terser(),
   ],
 }
