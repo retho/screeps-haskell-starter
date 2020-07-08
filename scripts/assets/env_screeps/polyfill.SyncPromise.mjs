@@ -141,4 +141,7 @@ SyncPromise.race = function(promises) {
   });
 };
 
+SyncPromise.resolve = (val) => new Promise((rsv) => rsv(val));
+SyncPromise.reject = (err) => new Promise((_, rjc) => rjc(err));
+
 export default SyncPromise;

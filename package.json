@@ -1,10 +1,12 @@
 {
-  "name": "screeps-haskell-starter",
-  "version": "1.0.0",
+  "name": "screeps-haskell",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "nodemon --watch src -e hs scripts/compile.js",
-    "deploy": "cross-env OPTIMIZE=true SHRINK=true node scripts/compile.js && node scripts/link.js && node scripts/upload.js",
+    "start": "cross-env ENV=screeps nodemon --watch src -e hs scripts/compile.js",
+    "deploy": "cross-env-shell ENV=screeps OPTIMIZE=true SHRINK=true \"node scripts/compile.js && node scripts/link.js && node scripts/upload.js\"",
+    "test:node-screeps": "cross-env ENV=node-screeps node scripts/test.js",
+    "test:node-native": "cross-env ENV=node-native node scripts/test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +14,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
+    "args-parser": "^1.1.0",
     "cross-env": "^7.0.2",
     "glob": "^7.1.6",
     "moment": "^2.27.0",
@@ -19,7 +22,6 @@
     "nodemon": "^2.0.4",
     "recursive-copy": "^2.0.10",
     "rollup": "^2.18.1",
-    "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-terser": "^6.1.0",
     "text-encoding-polyfill": "^0.6.7"
   },

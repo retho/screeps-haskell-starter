@@ -5,4 +5,10 @@ import req from "./Main.req.mjs";
 
 const i = rts.newAsteriusInstance(Object.assign(req, {module: m}));
 
-module.exports.loop = i.exports.main;
+module.exports.loop = () => {
+  try {
+    i.exports.main();
+  } catch (err) {
+    if (!(err.startsWith('ExitSuccess') || err.startsWith('ExitFailure '))) i.fs.writeSync(2, `Main: ${err}`)
+  }
+};

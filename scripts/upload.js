@@ -1,3 +1,4 @@
+require('./utils/preboot.js');
 const moment = require('moment');
 const fs = require('fs');
 const fetch = require('node-fetch');
