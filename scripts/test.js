@@ -12,13 +12,13 @@ if (![Env.NODE_SCREEPS, Env.NODE_NATIVE].includes(process.env.ENV)) {
 }
 
 Promise.resolve().then(async () => {
-  execSync(`node scripts/compile.js --src=tests/${testSuite}`, {
+  execSync(`node scripts/compile.js --src=${testSuite}`, {
     stdio: [process.stdin, process.stdout, process.stderr],
   });
   execSync(`node scripts/link.js`, {
     stdio: [process.stdin, process.stdout, process.stderr],
   });
-  fs.copyFileSync(`tests/${testSuite}/spec.js`, 'build/dist/spec.js');
+  fs.copyFileSync(`${testSuite}/spec.js`, 'build/dist/spec.js');
   console.log('Running test...\n\n\n');
   execSync(`node spec.js`, {
     stdio: [process.stdin, process.stdout, process.stderr],
