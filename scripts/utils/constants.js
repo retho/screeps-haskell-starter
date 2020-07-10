@@ -1,8 +1,8 @@
 
-const Env = {
+const Target = {
   SCREEPS: 'screeps',
   NODE_SCREEPS: 'node-screeps',
   NODE_NATIVE: 'node-native',
 };
 
-exports.Env = Env;
+exports.Target = Target;

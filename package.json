@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "cross-env ENV=screeps nodemon --watch src -e hs scripts/compile.js",
-    "deploy": "cross-env-shell ENV=screeps OPTIMIZE=true SHRINK=true \"node scripts/compile.js && node scripts/link.js && node scripts/upload.js\"",
-    "test:node-screeps": "cross-env ENV=node-screeps node scripts/test.js",
-    "test:node-native": "cross-env ENV=node-native node scripts/test.js",
+    "start": "cross-env TARGET=screeps nodemon --watch src -e hs scripts/compile.js",
+    "deploy": "cross-env-shell TARGET=screeps OPTIMIZE=true SHRINK=true \"node scripts/compile.js && node scripts/link.js && node scripts/upload.js\"",
+    "test:node-screeps": "cross-env TARGET=node-screeps node scripts/test.js",
+    "test:node-native": "cross-env TARGET=node-native node scripts/test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,11 +22,14 @@
     "nodemon": "^2.0.4",
     "recursive-copy": "^2.0.10",
     "rollup": "^2.18.1",
-    "rollup-plugin-terser": "^6.1.0",
-    "text-encoding-polyfill": "^0.6.7"
+    "rollup-plugin-terser": "^6.1.0"
   },
   "engines": {
     "node": ">=12.14.1",
     "npm": ">=6.13.4"
+  },
+  "dependencies": {
+    "promise-polyfill": "^8.1.3",
+    "text-encoding-polyfill": "^0.6.7"
   }
 }

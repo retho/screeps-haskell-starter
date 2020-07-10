@@ -3,7 +3,7 @@ const fs = require('fs');
 const copy = require('recursive-copy');
 const {execSync} = require('child_process');
 const glob = require('glob');
-const {Env} = require('./utils/constants.js');
+const {Target} = require('./utils/constants.js');
 
 const rollupInputFiles = glob.sync('build/rollup-input/**/*.{mjs,wasm,html}');
 const distFiles = glob.sync('build/dist/**/*.{js,wasm}');
@@ -14,15 +14,16 @@ Promise.resolve().then(async () => {
   distFiles.forEach(x => fs.unlinkSync(x));
   await copy('build/ahc-output', 'build/rollup-input', {overwrite: true});
 
-  if (process.env.ENV === Env.SCREEPS) {
-    await copy('scripts/assets/env_screeps', 'build/rollup-input', {overwrite: true});
-  } else if (process.env.ENV === Env.NODE_SCREEPS) {
-    await copy('scripts/assets/env_screeps', 'build/rollup-input', {overwrite: true});
-    await copy('scripts/assets/env_node-screeps', 'build/rollup-input', {overwrite: true});
-  } else if (process.env.ENV === Env.NODE_NATIVE) {
-    await copy('scripts/assets/env_node-native', 'build/rollup-input', {overwrite: true});
+  if (process.env.TARGET === Target.SCREEPS) {
+    await copy('scripts/assets/screeps_environment', 'build/rollup-input', {overwrite: true});
+    await copy('scripts/assets/target_screeps', 'build/rollup-input', {overwrite: true});
+  } else if (process.env.TARGET === Target.NODE_SCREEPS) {
+    await copy('scripts/assets/screeps_environment', 'build/rollup-input', {overwrite: true});
+    await copy('scripts/assets/target_node-screeps', 'build/rollup-input', {overwrite: true});
+  } else if (process.env.TARGET === Target.NODE_NATIVE) {
+    await copy('scripts/assets/target_node-native', 'build/rollup-input', {overwrite: true});
   } else {
-    throw new Error(`Unknown process.env.ENV: ${process.env.ENV}`);
+    throw new Error(`Unknown process.env.TARGET: ${process.env.TARGET}`);
   }
 
   execSync('npx rollup -c=scripts/rollup/rollup.config.js', {

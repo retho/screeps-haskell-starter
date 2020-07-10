@@ -1,14 +1,14 @@
 require('./utils/preboot.js');
 const fs = require('fs');
 const {execSync} = require('child_process');
-const {Env} = require('./utils/constants.js');
+const {Target} = require('./utils/constants.js');
 const argsParser = require('args-parser');
 
 const args = argsParser(process.argv);
 const testSuite = args.suite;
 
-if (![Env.NODE_SCREEPS, Env.NODE_NATIVE].includes(process.env.ENV)) {
-  throw new Error(`Cannot run test suite within ENV=${process.env.ENV}`);
+if (![Target.NODE_SCREEPS, Target.NODE_NATIVE].includes(process.env.TARGET)) {
+  throw new Error(`Cannot run test suite for TARGET=${process.env.TARGET}`);
 }
 
 Promise.resolve().then(async () => {

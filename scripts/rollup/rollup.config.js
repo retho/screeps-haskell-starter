@@ -3,13 +3,13 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
-const { Env } = require('../utils/constants.js');
+const { Target } = require('../utils/constants.js');
 
 export default {
   input: `build/rollup-input/Main.mjs`,
   output: {
     file: "build/dist/main.js",
-    format: process.env.ENV === Env.SCREEPS ? "iife" : "cjs",
+    format: process.env.TARGET === Target.SCREEPS ? "iife" : "cjs", // * "cjs" doesn't work in simulation
     sourcemap: false
   },
   plugins: [
