@@ -16,7 +16,7 @@ const shrinkLevel = process.env.SHRINK === 'true' ? 2 : 0;
 const browserFlag = process.env.TARGET === Target.SCREEPS || process.env.TARGET === Target.NODE_SCREEPS ? '--browser' : '';
 
 const dockerCmd = `docker run --rm -v ${path.resolve('build')}:/mirror -w=/mirror terrorjack/asterius:200702`;
-const ahcLinkCmd = `ahc-link --input-hs=${'ahc-input'}/Main.hs --output-directory=${'ahc-output'} --yolo ${browserFlag} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`;
+const ahcLinkCmd = `ahc-link --input-hs=${'ahc-input'}/Main.hs --output-directory=${'ahc-output'} ${browserFlag} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`;
 
 const ahcInputFiles = glob.sync('build/ahc-input/**/*.{hs,hi,o,js}');
 const ahcOutputFiles = glob.sync('build/ahc-output/**/*.{mjs,wasm,html}');

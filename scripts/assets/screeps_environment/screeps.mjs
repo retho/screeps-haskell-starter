@@ -14,6 +14,12 @@ export default
     .then(i => {
       return () => {
         return i.exports.main()
-          .catch(err => {if (!(startsWith(err, 'ExitSuccess') || startsWith(err, 'ExitFailure '))) i.fs.writeSync(2, `Main: ${err}`)});
+          .catch(err => {
+            if (typeof err === 'string') {
+              if (!(startsWith(err, 'ExitSuccess') || startsWith(err, 'ExitFailure '))) i.fs.writeSync(2, `Main: ${err}`)
+            } else {
+              throw err;
+            }
+          });
       };
     });
