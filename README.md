@@ -1,9 +1,5 @@
 
 
-# Known Issues
-
-- `npm run test:node-screeps -- --suite=tests/reentrancy_guard/` throws error "ReentrancyGuard: Scheduler reentered!", while `npm run test:node -- --suite=tests/reentrancy_guard/` works as expected (throws "JSException \"RuntimeError: float unrepresentable in integer range ...\"")
-
 # Scripts
 
 `npm start` show compilation errors on changes in `src/*`
@@ -22,3 +18,7 @@
   + `node` - builds for node native environment
 - `OPTIMIZE=true`
 - `SHRINK=true`
+
+# Known Issues
+
+- errors like in `tests/reentrancy_guard` break script in [Simulation](https://screeps.com/a/#!/sim)
