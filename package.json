@@ -6,7 +6,7 @@
     "start": "cross-env TARGET=screeps nodemon --watch src -e hs scripts/compile.js",
     "deploy": "cross-env-shell TARGET=screeps OPTIMIZE=true SHRINK=true \"node scripts/compile.js && node scripts/link.js && node scripts/upload.js\"",
     "test:node-screeps": "cross-env TARGET=node-screeps node scripts/test.js",
-    "test:node-native": "cross-env TARGET=node-native node scripts/test.js",
+    "test:node": "cross-env TARGET=node node scripts/test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

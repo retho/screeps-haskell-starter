@@ -2,7 +2,7 @@
 const Target = {
   SCREEPS: 'screeps',
   NODE_SCREEPS: 'node-screeps',
-  NODE_NATIVE: 'node-native',
+  NODE: 'node',
 };
 
 exports.Target = Target;

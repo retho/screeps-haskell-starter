@@ -7,7 +7,7 @@ const argsParser = require('args-parser');
 const args = argsParser(process.argv);
 const testSuite = args.suite;
 
-if (![Target.NODE_SCREEPS, Target.NODE_NATIVE].includes(process.env.TARGET)) {
+if (![Target.NODE_SCREEPS, Target.NODE].includes(process.env.TARGET)) {
   throw new Error(`Cannot run test suite for TARGET=${process.env.TARGET}`);
 }
 
