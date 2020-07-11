@@ -1,7 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-import qualified System.Mem as Sys
 import Text.Printf (printf)
 import Asterius.Types (JSString(..), toJSString)
 import Control.Monad (when)
@@ -10,8 +9,10 @@ import qualified Screeps.Game as Game
 foreign import javascript "$1 + $2" js_concat_str :: JSString -> JSString -> JSString
 foreign import javascript "console.log($1)" console_log :: JSString -> IO ()
 foreign import javascript "Game.cpu.getUsed()" cpu_used :: IO Float
-foreign import javascript "Game.cpu.getHeapStatistics().used_heap_size" used_heap_size :: IO Int
-foreign import javascript "Game.cpu.getHeapStatistics().heap_size_limit" heap_size_limit :: IO Int
+foreign import javascript "Game.cpu.getHeapStatistics() && Game.cpu.getHeapStatistics().used_heap_size || 10" -- * Game.cpu.getHeapStatistics() is undefined in Simulation
+  used_heap_size :: IO Int
+foreign import javascript "Game.cpu.getHeapStatistics() && Game.cpu.getHeapStatistics().heap_size_limit || 30"
+  heap_size_limit :: IO Int
 
 fibs :: [Int]
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
