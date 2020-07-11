@@ -1,5 +1,8 @@
 
 
+# Known issues
+
+- `npm run test:node-screeps -- --suite=tests/reentrancy_guard/` throws error "ReentrancyGuard: Scheduler reentered!", while `npm run test:node -- --suite=tests/reentrancy_guard/` works as expected (throws "JSException \"RuntimeError: float unrepresentable in integer range ...\"")
 
 # Scripts
 
