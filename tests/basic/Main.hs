@@ -14,5 +14,5 @@ main = do
   t <- game_time
   print_int t
   when (t `mod` 32 == 11) $ do
-    console_log "GC performing"
+    console_log "manual GC performing"
     performGC -- * haskell's garbage collection

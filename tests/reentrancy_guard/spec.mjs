@@ -1,4 +1,4 @@
-const {loopPromise} = require('./main.js');
+import {loop} from './main.mjs';
 
 // * error message should not be like: "RuntimeError: ReentrancyGuard: Scheduler reentered!"
 
@@ -7,6 +7,4 @@ const Game = {
 };
 global.Game = Game;
 
-loopPromise.then(loop => {
-  return loop();
-});
+loop();

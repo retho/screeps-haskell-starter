@@ -6,7 +6,7 @@ process.on('unhandledRejection', up => {
   throw up;
 });
 
-module.exports.loopPromise = mdl
+export const loop = await mdl
   .then(m => rts.newAsteriusInstance(Object.assign(req, {module: m})))
   .then(i => {
     return () => i.exports.main().catch(err => {

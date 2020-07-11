@@ -1,3 +1,3 @@
 import loopPromise from './screeps.mjs';
 
-module.exports.loopPromise = loopPromise;
+export const loop = await loopPromise;

@@ -18,9 +18,9 @@ Promise.resolve().then(async () => {
   execSync(`node scripts/link.js`, {
     stdio: [process.stdin, process.stdout, process.stderr],
   });
-  fs.copyFileSync(`${testSuite}/spec.js`, 'build/dist/spec.js');
+  fs.copyFileSync(`${testSuite}/spec.mjs`, 'build/dist/spec.mjs');
   console.log('Running test...\n\n\n');
-  execSync(`node spec.js`, {
+  execSync(`node --harmony-top-level-await spec.mjs`, {
     stdio: [process.stdin, process.stdout, process.stderr],
     cwd: 'build/dist',
   });

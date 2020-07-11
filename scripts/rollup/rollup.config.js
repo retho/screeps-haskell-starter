@@ -8,8 +8,8 @@ const { Target } = require('../utils/constants.js');
 export default {
   input: `build/rollup-input/Main.mjs`,
   output: {
-    file: "build/dist/main.js",
-    format: process.env.TARGET === Target.SCREEPS ? "iife" : "cjs", // * "cjs" doesn't work in simulation
+    file: process.env.TARGET === Target.SCREEPS ? "build/dist/main.js" : "build/dist/main.mjs",
+    format: process.env.TARGET === Target.SCREEPS ? "iife" : "es",
     sourcemap: false
   },
   plugins: [
