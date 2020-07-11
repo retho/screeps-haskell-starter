@@ -13,7 +13,7 @@ export default
     .then(m => rts.newAsteriusInstance(Object.assign(req, {module: m})))
     .then(i => {
       return () => {
-        return i.exports.main()
+        const promise = i.exports.main()
           .catch(err => {
             if (typeof err === 'string') {
               if (!(startsWith(err, 'ExitSuccess') || startsWith(err, 'ExitFailure '))) {
@@ -24,5 +24,7 @@ export default
               throw err;
             }
           });
+        global.runImmediateQueue();
+        return promise;
       };
     });
