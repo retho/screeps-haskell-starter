@@ -21,7 +21,7 @@ Promise.resolve().then(async () => {
     await copy('scripts/assets/screeps_environment', 'build/rollup-input', {overwrite: true});
     await copy('scripts/assets/target_node-screeps', 'build/rollup-input', {overwrite: true});
   } else if (process.env.TARGET === Target.NODE) {
-    await copy('scripts/assets/target_node-native', 'build/rollup-input', {overwrite: true});
+    await copy('scripts/assets/target_node', 'build/rollup-input', {overwrite: true});
   } else {
     throw new Error(`Unknown process.env.TARGET: ${process.env.TARGET}`);
   }
