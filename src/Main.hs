@@ -9,6 +9,8 @@ import Text.Printf (printf)
 import qualified Screeps.Game as Game
 import qualified Screeps.Game.CPU as Game.CPU
 
+import Logging as Logging
+
 fibs :: [Int]
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 
@@ -22,14 +24,12 @@ printSystemStats = do
         0
         (\x -> 100 * fromIntegral (Game.CPU.used_heap_size x) / fromIntegral (Game.CPU.heap_size_limit x))
         maybe_heap_stats
-  consoleLog
-    $ "system stats:"
-    <> toJSString (printf " %.2f cpu used," cpu_used)
-    <> toJSString (printf " %.2f%% total memory used" memory_used)
+  info $ toJSString $ printf "system stats: %.2f cpu used, %.2f%% total memory used" cpu_used memory_used
 
 main :: IO ()
 main = do
+  setupLogging Logging.Info
   t <- Game.time
   let fib_index = t `mod` 64
-  consoleLog $ "fib " <> jsshow (fib_index + 1) <> " = " <> jsshow (fibs !! fib_index)
+  info $ "fib " <> jsshow (fib_index + 1) <> " = " <> jsshow (fibs !! fib_index)
   when (t `mod` 8 == 0) printSystemStats

@@ -2,10 +2,10 @@
 module Screeps.FfiUtils
   ( isNull
   , unsafeGetIndex
+  , FromJSVal(..)
   ) where
 
 import Screeps.Prelude
-
 
 class FromJSVal a where
   fromJSVal :: JSVal -> a
@@ -18,7 +18,6 @@ instance FromJSVal Int where fromJSVal = as_int
 instance FromJSVal Double where fromJSVal = as_double
 instance FromJSVal Bool where fromJSVal = as_bool
 instance FromJSVal JSString where fromJSVal = as_string
-
 
 foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool
 isNull :: JSVal -> Bool
