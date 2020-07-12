@@ -29,7 +29,7 @@ npm run deploy
 
 # Scripts
 
-`npm start` show compilation errors on changes in `src/*`
+`npm start` shows compilation errors on changes in `src/*`
 
 `npm run deploy` compiles and uploads the code to the server (based on settings in `screeps.json`)
 
