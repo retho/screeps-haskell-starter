@@ -1,4 +1,31 @@
 
+# haskell-screeps
+
+Haskell build tools for [Screeps](https://screeps.com/) based on [Asterius](https://github.com/tweag/asterius) compiler.
+
+
+
+# Quickstart
+
+[Node](https://nodejs.org/en/) (version >= 14.5.0) and [Docker](https://www.docker.com/get-started) must be installed. Docker must be running.
+
+```bash
+# clone:
+git clone https://github.com/retho/haskell-screeps.git
+cd haskell-screeps
+
+# cli dependencies:
+npm install
+
+# configure for uploading:
+cp screeps.example.json screeps.json
+nano screeps.json
+
+# compile and upload:
+npm run deploy
+```
+
+
 
 # Scripts
 
@@ -10,6 +37,7 @@
 (`npm run test:node-screeps -- --suite=<suite-path>` must work as well as `npm run test:node -- --suite=<suite-path>`)
 
 
+
 # Scripts Environment Variables
 
 - `TARGET=screeps|node-screeps|node`
@@ -18,6 +46,8 @@
   + `node` - builds for node native environment
 - `OPTIMIZE=true`
 - `SHRINK=true`
+
+
 
 # Known Issues
 

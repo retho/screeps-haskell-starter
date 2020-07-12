@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const screepsConfig = require('../screeps.json');
 
 console.log('uploading...');
-fetch(`${screepsConfig.screepsHost}/api/user/code`, {
+fetch(`${screepsConfig.screeps_host}/api/user/code`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
