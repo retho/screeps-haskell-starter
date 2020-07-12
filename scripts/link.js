@@ -6,7 +6,7 @@ const glob = require('glob');
 const {Target} = require('./utils/constants.js');
 
 const rollupInputFiles = glob.sync('build/rollup-input/**/*.{mjs,wasm,html}');
-const distFiles = glob.sync('build/dist/**/*.{js,wasm}');
+const distFiles = glob.sync('build/dist/**/*.{js,wasm,mjs}');
 
 Promise.resolve().then(async () => {
   console.log('linking...');

@@ -7,26 +7,30 @@ const glob = require('glob');
 const argsParser = require("args-parser");
 const {Target} = require('./utils/constants.js');
 
+const DOCKER_IMAGE = 'terrorjack/asterius:200702';
+
 const args = argsParser(process.argv);
 const srcDir = args.src || 'src';
+const inputDir = args.input || 'ahc-input';
+const outputDir = args.output || 'ahc-output';
 
 const optimizeLevel = process.env.OPTIMIZE === 'true' ? 4 : 0;
 const shrinkLevel = process.env.SHRINK === 'true' ? 2 : 0;
 
 const browserFlag = process.env.TARGET === Target.SCREEPS || process.env.TARGET === Target.NODE_SCREEPS ? '--browser' : '';
 
-const dockerCmd = `docker run --rm -v ${path.resolve('build')}:/mirror -w=/mirror terrorjack/asterius:200702`;
-const ahcLinkCmd = `ahc-link --input-hs=${'ahc-input'}/Main.hs --output-directory=${'ahc-output'} ${browserFlag} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`;
+const dockerCmd = `docker run --rm -v ${path.resolve('build')}:/mirror -w=/mirror ${DOCKER_IMAGE}`;
+const ahcLinkCmd = `ahc-link --input-hs=${inputDir}/Main.hs --output-directory=${outputDir} ${browserFlag} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`;
 
-const ahcInputFiles = glob.sync('build/ahc-input/**/*.{hs,hi,o,js}');
-const ahcOutputFiles = glob.sync('build/ahc-output/**/*.{mjs,wasm,html}');
+const ahcInputFiles = glob.sync(`build/${inputDir}/**/*.{hs,hi,o,js}`);
+const ahcOutputFiles = glob.sync(`build/${outputDir}/**/*.{mjs,wasm,html}`);
 
 Promise.resolve().then(async () => {
   console.log('compiling...');
   ahcInputFiles.forEach(x => fs.unlinkSync(x));
   ahcOutputFiles.forEach(x => fs.unlinkSync(x));
-  await copy(srcDir, 'build/ahc-input', {overwrite: true});
-  await fs.promises.mkdir(path.resolve('build', 'ahc-output')).catch(() => null);
+  await copy(srcDir, `build/${inputDir}`, {overwrite: true});
+  await fs.promises.mkdir(path.resolve('build', outputDir)).catch(() => null);
   execSync(`${dockerCmd} ${ahcLinkCmd}`, {
     stdio: [process.stdin, process.stdout, process.stderr],
   });
