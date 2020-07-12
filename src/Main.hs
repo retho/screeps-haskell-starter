@@ -1,41 +1,38 @@
 {-# OPTIONS_GHC -Wall #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 import Text.Printf (printf)
 import Asterius.Types (JSString(..), toJSString)
 import Control.Monad (when)
 import qualified Screeps.Game as Game
+import qualified Screeps.Game.CPU as Game.CPU
 
 foreign import javascript "$1 + $2" js_concat_str :: JSString -> JSString -> JSString
 foreign import javascript "console.log($1)" console_log :: JSString -> IO ()
-foreign import javascript "Game.cpu.getUsed()" cpu_used :: IO Float
-foreign import javascript "Game.cpu.getHeapStatistics() && Game.cpu.getHeapStatistics().used_heap_size || 10" -- * Game.cpu.getHeapStatistics() is undefined in Simulation
-  used_heap_size :: IO Int
-foreign import javascript "Game.cpu.getHeapStatistics() && Game.cpu.getHeapStatistics().heap_size_limit || 30"
-  heap_size_limit :: IO Int
 
 fibs :: [Int]
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 
 printSystemStats :: IO ()
 printSystemStats = do
-  uhs <- used_heap_size
-  hlim <- heap_size_limit
-  cpu <- cpu_used
-  console_log . toJSString
-    $ printf
-      "stats: %.2f cpu used; %.2f%% total memory used;"
-      cpu
-      (100 * fromIntegral uhs / fromIntegral hlim :: Float)
+  cpu_used <- Game.CPU.getUsed
+  maybe_heap_stats <- Game.CPU.getHeapStatistics
+  let
+    memory_used :: Double =
+      maybe
+        0
+        (\x -> 100 * fromIntegral (Game.CPU.used_heap_size x) / fromIntegral (Game.CPU.heap_size_limit x))
+        maybe_heap_stats
+  console_log . toJSString $ printf "stats: %.2f cpu used; %.2f%% total memory used;" cpu_used memory_used
 
 main :: IO ()
 main = do
   t <- Game.time
-  let fibIndex = t `mod` 64
+  let fib_index = t `mod` 64
   console_log
     $ "fib "
-    `js_concat_str` (toJSString $ show $ fibIndex + 1)
+    `js_concat_str` (toJSString $ show $ fib_index + 1)
     `js_concat_str` " = "
-    `js_concat_str` (toJSString . show $ fibs !! fibIndex)
+    `js_concat_str` (toJSString . show $ fibs !! fib_index)
   when (t `mod` 4 == 0) printSystemStats
-
