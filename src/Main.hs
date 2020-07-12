@@ -24,7 +24,7 @@ printSystemStats = do
         0
         (\x -> 100 * fromIntegral (Game.CPU.used_heap_size x) / fromIntegral (Game.CPU.heap_size_limit x))
         maybe_heap_stats
-  console_log . toJSString $ printf "stats: %.2f cpu used; %.2f%% total memory used;" cpu_used memory_used
+  console_log . toJSString $ printf "system stats: %.2f cpu used; %.2f%% total memory used;" cpu_used memory_used
 
 main :: IO ()
 main = do
@@ -35,4 +35,4 @@ main = do
     `js_concat_str` (toJSString $ show $ fib_index + 1)
     `js_concat_str` " = "
     `js_concat_str` (toJSString . show $ fibs !! fib_index)
-  when (t `mod` 4 == 0) printSystemStats
+  when (t `mod` 8 == 0) printSystemStats
