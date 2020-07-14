@@ -1,9 +1,9 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Objects.Creep
-  ( Creep()
+  ( Creep(..)
   ) where
 
 import Screeps.Prelude
 
-newtype Creep = Creep JSObj deriving (JSRef, JSShow)
+newtype Creep = Creep JSObject deriving (JSRef, JSShow)

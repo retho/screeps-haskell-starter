@@ -25,7 +25,7 @@ setupLogging :: Logging -> IO ()
 setupLogging = set_log_level . fromEnum
 
 getLogging :: IO Logging
-getLogging = get_log_level >>= pure . maybe Info toEnum . fromNullableJSVal
+getLogging = get_log_level >>= pure . maybe Info toEnum . fromJSVal
 
 logger :: Logging -> JSString -> IO ()
 logger logger_logging msg = do

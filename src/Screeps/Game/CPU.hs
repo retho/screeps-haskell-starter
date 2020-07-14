@@ -27,20 +27,20 @@ foreign import javascript "Game.cpu.getHeapStatistics()" js_get_heap_statistics 
 getHeapStatistics :: IO (Maybe HeapStatistics)
 getHeapStatistics = do
   jsref <- js_get_heap_statistics
-  let mjsobj :: Maybe (JSHashMap JSString Int) = fromNullableJSVal jsref
+  let mjsobj :: Maybe (JSHashMap JSString Int) = fromJSVal jsref
   pure $ do
     obj <- mjsobj
     pure $ HeapStatistics
-      { total_heap_size = unsafeGet obj "total_heap_size"
-      , total_heap_size_executable = unsafeGet obj "total_heap_size_executable"
-      , total_physical_size = unsafeGet obj "total_physical_size"
-      , total_available_size = unsafeGet obj "total_available_size"
-      , used_heap_size = unsafeGet obj "used_heap_size"
-      , heap_size_limit = unsafeGet obj "heap_size_limit"
-      , malloced_memory = unsafeGet obj "malloced_memory"
-      , peak_malloced_memory = unsafeGet obj "peak_malloced_memory"
-      , does_zap_garbage = unsafeGet obj "does_zap_garbage"
-      , externally_allocated_size = unsafeGet obj "externally_allocated_size"
+      { total_heap_size = unsafeGet "total_heap_size" obj
+      , total_heap_size_executable = unsafeGet "total_heap_size_executable" obj
+      , total_physical_size = unsafeGet "total_physical_size" obj
+      , total_available_size = unsafeGet "total_available_size" obj
+      , used_heap_size = unsafeGet "used_heap_size" obj
+      , heap_size_limit = unsafeGet "heap_size_limit" obj
+      , malloced_memory = unsafeGet "malloced_memory" obj
+      , peak_malloced_memory = unsafeGet "peak_malloced_memory" obj
+      , does_zap_garbage = unsafeGet "does_zap_garbage" obj
+      , externally_allocated_size = unsafeGet "externally_allocated_size" obj
       }
 
 foreign import javascript "Game.cpu.getUsed()" js_get_used :: IO Double
