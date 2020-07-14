@@ -9,7 +9,6 @@ module Logging
   ) where
 
 import Screeps.Prelude
-import Screeps.FfiUtils
 import Control.Monad (when)
 
 data Logging = Debug | Info | Warn deriving (Eq, Ord, Enum)
@@ -26,7 +25,7 @@ setupLogging :: Logging -> IO ()
 setupLogging = set_log_level . fromEnum
 
 getLogging :: IO Logging
-getLogging = get_log_level >>= \lg -> pure $ if isNull lg then Info else toEnum $ fromJSVal lg
+getLogging = get_log_level >>= pure . maybe Info toEnum . fromNullableJSVal
 
 logger :: Logging -> JSString -> IO ()
 logger logger_logging msg = do

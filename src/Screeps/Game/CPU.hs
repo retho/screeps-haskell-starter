@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Screeps.Game.CPU
   ( HeapStatistics(..)
@@ -7,7 +8,6 @@ module Screeps.Game.CPU
   ) where
 
 import Screeps.Prelude
-import Screeps.FfiUtils
 
 data HeapStatistics
   = HeapStatistics
@@ -27,20 +27,20 @@ foreign import javascript "Game.cpu.getHeapStatistics()" js_get_heap_statistics 
 getHeapStatistics :: IO (Maybe HeapStatistics)
 getHeapStatistics = do
   jsref <- js_get_heap_statistics
-  pure $
-    if isNull jsref
-    then Nothing
-    else Just $ HeapStatistics
-      { total_heap_size = unsafeGetIndex jsref "total_heap_size"
-      , total_heap_size_executable = unsafeGetIndex jsref "total_heap_size_executable"
-      , total_physical_size = unsafeGetIndex jsref "total_physical_size"
-      , total_available_size = unsafeGetIndex jsref "total_available_size"
-      , used_heap_size = unsafeGetIndex jsref "used_heap_size"
-      , heap_size_limit = unsafeGetIndex jsref "heap_size_limit"
-      , malloced_memory = unsafeGetIndex jsref "malloced_memory"
-      , peak_malloced_memory = unsafeGetIndex jsref "peak_malloced_memory"
-      , does_zap_garbage = unsafeGetIndex jsref "does_zap_garbage"
-      , externally_allocated_size = unsafeGetIndex jsref "externally_allocated_size"
+  let mjsobj :: Maybe (JSObject Int) = fromNullableJSVal jsref
+  pure $ do
+    obj <- mjsobj
+    pure $ HeapStatistics
+      { total_heap_size = unsafeGet obj "total_heap_size"
+      , total_heap_size_executable = unsafeGet obj "total_heap_size_executable"
+      , total_physical_size = unsafeGet obj "total_physical_size"
+      , total_available_size = unsafeGet obj "total_available_size"
+      , used_heap_size = unsafeGet obj "used_heap_size"
+      , heap_size_limit = unsafeGet obj "heap_size_limit"
+      , malloced_memory = unsafeGet obj "malloced_memory"
+      , peak_malloced_memory = unsafeGet obj "peak_malloced_memory"
+      , does_zap_garbage = unsafeGet obj "does_zap_garbage"
+      , externally_allocated_size = unsafeGet obj "externally_allocated_size"
       }
 
 foreign import javascript "Game.cpu.getUsed()" js_get_used :: IO Double
