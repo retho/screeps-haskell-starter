@@ -30,7 +30,9 @@ main = do
   printSystemStats
   setupLogging Logging.Info
   game_spawns <- Game.spawns
-  info $ "spawns: " <> jsshow (entries game_spawns)
+  info $ "spawns: " <> jsshow (values game_spawns)
+  game_creeps <- Game.creeps
+  info $ "creeps: " <> jsshow (values game_creeps)
   t <- Game.time
   let fib_index = t `mod` 64
   info $ "fib " <> jsshow (fib_index + 1) <> " = " <> jsshow (fibs !! fib_index)

@@ -1,9 +1,9 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Objects.StructureSpawn
-  ( StructureSpawn(..)
+  ( StructureSpawn()
   ) where
 
 import Screeps.Prelude
 
-newtype StructureSpawn = StructureSpawn JSVal deriving (JSRef, JSShow)
+newtype StructureSpawn = StructureSpawn JSObj deriving (JSRef, JSShow)

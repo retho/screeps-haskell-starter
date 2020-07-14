@@ -2,11 +2,15 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Prelude.Ffi
-  ( module Asterius
-  , isUndefined
+  ( JSVal(..)
+  , JSString(..)
+  , JSObj(..)
+  , toJSString
+  , fromJSString
+  , JSIndex(..)
   , JSRef(..)
   , fromNullableJSVal
-  , JSObject(..)
+  , JSHashMap(..)
   , unsafeGet
   , get
   , keys
@@ -14,14 +18,43 @@ module Screeps.Prelude.Ffi
   , entries
   ) where
 
-import Asterius.Types as Asterius (JSVal(..), JSString(..), JSArray(..), toJSString, fromJSString, toJSArray, fromJSArray)
+import Asterius.Types (JSVal(..), JSString(..), JSArray(..), toJSString, fromJSString, toJSArray, fromJSArray)
+import Data.Coerce (coerce)
 
-foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool
+newtype JSObj = JSObj JSVal deriving JSRef
+
+instance Semigroup JSString where (<>) = js_concat_str
+
 isUndefined :: JSVal -> Bool
 isUndefined = is_null_or_undefined
 
-foreign import javascript "$1 + $2" js_concat_str :: JSString -> JSString -> JSString
-instance Semigroup JSString where (<>) = js_concat_str
+class JSRef a where
+  fromJSVal :: JSVal -> a
+  toJSVal :: a -> JSVal
+
+fromNullableJSVal :: JSRef a => JSVal -> Maybe a
+fromNullableJSVal val = if isUndefined val then Nothing else Just $ fromJSVal val
+
+class JSIndex a where
+  toIndex :: a -> JSString
+  fromIndex :: JSString -> a
+
+newtype JSHashMap k v = JSHashMap JSObj deriving JSRef
+unsafeGet :: (JSIndex k, JSRef v) => JSHashMap k v -> k -> v
+get :: (JSIndex k, JSRef v) => JSHashMap k v -> k -> Maybe v
+keys :: (JSIndex k, JSRef v) => JSHashMap k v -> [] k
+values :: (JSIndex k, JSRef v) => JSHashMap k v -> [] v
+entries :: (JSIndex k, JSRef v) => JSHashMap k v -> [] (k, v)
+
+
+foreign import javascript "$1..toString()" int_to_index :: Int -> JSString
+foreign import javascript "+$1" index_to_int :: JSString -> Int
+instance JSIndex Int where
+  toIndex = int_to_index
+  fromIndex = index_to_int
+instance JSIndex JSString where
+  toIndex = id
+  fromIndex = id
 
 foreign import javascript "$1" jsval_as_int :: JSVal -> Int
 foreign import javascript "$1" int_as_jsval :: Int -> JSVal
@@ -32,16 +65,6 @@ foreign import javascript "$1" double_as_jsval :: Double -> JSVal
 foreign import javascript "$1" jsval_as_bool :: JSVal -> Bool
 foreign import javascript "$1" bool_as_jsval :: Bool -> JSVal
 
-foreign import javascript "$1" jsval_as_jsstring :: JSVal -> JSString
-foreign import javascript "$1" jsstring_as_jsval :: JSString -> JSVal
-
-foreign import javascript "$1" jsval_as_jsarr :: JSVal -> JSArray
-foreign import javascript "$1" jsarr_as_jsval :: JSArray -> JSVal
-
-class JSRef a where
-  fromJSVal :: JSVal -> a
-  toJSVal :: a -> JSVal
-
 instance JSRef Int where
   fromJSVal = jsval_as_int
   toJSVal = int_as_jsval
@@ -51,39 +74,28 @@ instance JSRef Double where
 instance JSRef Bool where
   fromJSVal = jsval_as_bool
   toJSVal = bool_as_jsval
-instance JSRef JSString where
-  fromJSVal = jsval_as_jsstring
-  toJSVal = jsstring_as_jsval
-instance JSRef JSArray where
-  fromJSVal = jsval_as_jsarr
-  toJSVal = jsarr_as_jsval
 instance JSRef JSVal where
   fromJSVal = id
   toJSVal = id
+instance JSRef JSString where
+  fromJSVal = coerce
+  toJSVal = coerce
 instance JSRef a => JSRef [a] where
-  fromJSVal = map fromJSVal . fromJSArray . fromJSVal
-  toJSVal = toJSVal . toJSArray . map toJSVal
+  fromJSVal = map fromJSVal . fromJSArray . coerce
+  toJSVal = coerce . toJSArray . map toJSVal
+
+foreign import javascript "$1[$2]" js_get :: JSObj -> JSString -> JSVal
+unsafeGet (JSHashMap obj) key = fromJSVal $ js_get obj $ toIndex key
+get (JSHashMap obj) key = fromNullableJSVal $ js_get obj $ toIndex key
+
+foreign import javascript "Object.keys($1)" js_keys :: JSObj -> JSVal
+keys (JSHashMap obj) = map fromIndex $ fromJSVal $ js_keys obj
+
+foreign import javascript "Object.values($1)" js_values :: JSObj -> JSVal
+values (JSHashMap obj) = fromJSVal $ js_values obj
+
+entries x = zipWith (\k v -> (k, v)) (keys x) (values x)
 
 
-fromNullableJSVal :: JSRef a => JSVal -> Maybe a
-fromNullableJSVal val = if isUndefined val then Nothing else Just $ fromJSVal val
-
-newtype JSObject a = JSObject JSVal deriving JSRef
-unsafeGet :: JSRef a => JSObject a -> JSString -> a
-get :: JSRef a => JSObject a -> JSString -> Maybe a
-keys :: JSRef a => JSObject a -> [] JSString
-values :: JSRef a => JSObject a -> [] a
-entries :: JSRef a => JSObject a -> [] (JSString, a)
-
-foreign import javascript "$1[$2]" js_get :: JSVal -> JSString -> JSVal
-unsafeGet (JSObject jsref) key = fromJSVal $ js_get jsref key
-get (JSObject jsref) key = fromNullableJSVal $ js_get jsref key
-
-foreign import javascript "Object.keys($1)" js_keys :: JSVal -> JSVal
-keys (JSObject jsref) = fromJSVal $ js_keys jsref
-
-foreign import javascript "Object.values($1)" js_values :: JSVal -> JSVal
-values (JSObject jsref) = fromJSVal $ js_values jsref
-
-entries x = zipWith (\x y -> (x, y)) (keys x) (values x)
-
+foreign import javascript "$1 + $2" js_concat_str :: JSString -> JSString -> JSString
+foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool

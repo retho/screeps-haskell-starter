@@ -27,7 +27,7 @@ foreign import javascript "Game.cpu.getHeapStatistics()" js_get_heap_statistics 
 getHeapStatistics :: IO (Maybe HeapStatistics)
 getHeapStatistics = do
   jsref <- js_get_heap_statistics
-  let mjsobj :: Maybe (JSObject Int) = fromNullableJSVal jsref
+  let mjsobj :: Maybe (JSHashMap JSString Int) = fromNullableJSVal jsref
   pure $ do
     obj <- mjsobj
     pure $ HeapStatistics
