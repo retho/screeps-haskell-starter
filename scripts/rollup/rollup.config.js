@@ -15,6 +15,6 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
-    process.env.SHRINK === 'true' && terser(),
+    false && process.env.SHRINK === 'true' && terser(),
   ],
 }
