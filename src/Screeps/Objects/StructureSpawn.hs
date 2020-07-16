@@ -15,13 +15,14 @@ import Screeps.Constants.ReturnCode
 
 newtype StructureSpawn = StructureSpawn JSObject deriving (JSRef, JSShow)
 
+instance HasStore StructureSpawn where store = defaultStore
+
 foreign import javascript "$1.name" name :: StructureSpawn -> JSString
-foreign import javascript "$1.store" store :: StructureSpawn -> Store
 
 spawnCreep :: StructureSpawn -> [BodyPart] -> JSString -> IO ReturnCode
-spawnCreep spawn body name = spawn_creep spawn (toJSVal body) name
+spawnCreep spawn body name = spawn_creep spawn (toJSRef body) name
 
 
--- * ffi
+-- *
 
 foreign import javascript "$1.spawnCreep($2, $3)" spawn_creep :: StructureSpawn -> JSVal -> JSString -> IO ReturnCode

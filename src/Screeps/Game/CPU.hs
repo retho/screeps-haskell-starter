@@ -7,7 +7,7 @@ module Screeps.Game.CPU
   , getUsed
   ) where
 
-import Screeps.Prelude
+import Screeps.Core
 
 data HeapStatistics
   = HeapStatistics
@@ -27,7 +27,7 @@ foreign import javascript "Game.cpu.getHeapStatistics()" js_get_heap_statistics 
 getHeapStatistics :: IO (Maybe HeapStatistics)
 getHeapStatistics = do
   jsref <- js_get_heap_statistics
-  let mjsobj :: Maybe (JSHashMap JSString Int) = fromJSVal jsref
+  let mjsobj :: Maybe (JSHashMap JSString Int) = fromJSRef jsref
   pure $ do
     obj <- mjsobj
     pure $ HeapStatistics

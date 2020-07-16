@@ -21,7 +21,7 @@ module Screeps.Constants.ReturnCode
   , err_gcl_not_enough
   ) where
 
-import Screeps.Prelude
+import Screeps.Core
 
 newtype ReturnCode = ReturnCode Int deriving (JSShow, JSIndex, JSRef, Eq)
 

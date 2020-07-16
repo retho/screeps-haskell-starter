@@ -6,7 +6,7 @@ module Screeps.Game
   , creeps
   ) where
 
-import Screeps.Prelude
+import Screeps.Core
 import Screeps.Objects.StructureSpawn (StructureSpawn)
 import Screeps.Objects.Creep (Creep)
 

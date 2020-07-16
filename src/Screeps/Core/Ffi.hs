@@ -4,8 +4,9 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Screeps.Prelude.Ffi
-  ( JSVal(..)
+module Screeps.Core.Ffi
+  ( module Coerce
+  , JSVal(..)
   , JSString(..)
   , JSObject(..)
   , toJSString
@@ -23,19 +24,21 @@ module Screeps.Prelude.Ffi
   ) where
 
 import Asterius.Types (JSVal(..), JSString(..), JSArray(..), toJSString, fromJSString, toJSArray, fromJSArray)
-import Data.Coerce (Coercible, coerce)
+import Data.Coerce as Coerce (Coercible, coerce)
 
 newtype JSObject = JSObject JSVal deriving JSRef
 
 instance Semigroup JSString where (<>) = js_concat_str
 
+newtype JSKey = JSKey JSString deriving JSRef
+
 class JSRef a where
-  fromJSVal :: JSVal -> a
-  toJSVal :: a -> JSVal
+  fromJSRef :: JSVal -> a
+  toJSRef :: a -> JSVal
 
 class JSIndex a where
-  toIndex :: a -> JSString
-  fromIndex :: JSString -> a
+  toIndex :: a -> JSKey
+  fromIndex :: JSKey -> a
 
 newtype JSHashMap k v = JSHashMap JSObject deriving JSRef
 unsafeGet :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> v
@@ -52,14 +55,14 @@ defaultHashmap = coerce
 
 -- * impl
 
-foreign import javascript "$1..toString()" int_to_index :: Int -> JSString
-foreign import javascript "+$1" index_to_int :: JSString -> Int
+foreign import javascript "$1..toString()" int_to_index :: Int -> JSKey
+foreign import javascript "+$1" index_to_int :: JSKey -> Int
 instance JSIndex Int where
   toIndex = int_to_index
   fromIndex = index_to_int
 instance JSIndex JSString where
-  toIndex = id
-  fromIndex = id
+  toIndex = coerce
+  fromIndex = coerce
 
 foreign import javascript "undefined" js_null :: JSVal
 
@@ -73,39 +76,39 @@ foreign import javascript "$1" jsval_as_bool :: JSVal -> Bool
 foreign import javascript "$1" bool_as_jsval :: Bool -> JSVal
 
 instance JSRef Int where
-  fromJSVal = jsval_as_int
-  toJSVal = int_as_jsval
+  fromJSRef = jsval_as_int
+  toJSRef = int_as_jsval
 instance JSRef Double where
-  fromJSVal = jsval_as_double
-  toJSVal = double_as_jsval
+  fromJSRef = jsval_as_double
+  toJSRef = double_as_jsval
 instance JSRef Bool where
-  fromJSVal = jsval_as_bool
-  toJSVal = bool_as_jsval
+  fromJSRef = jsval_as_bool
+  toJSRef = bool_as_jsval
 instance JSRef JSVal where
-  fromJSVal = id
-  toJSVal = id
+  fromJSRef = id
+  toJSRef = id
 instance JSRef JSString where
-  fromJSVal = coerce
-  toJSVal = coerce
+  fromJSRef = coerce
+  toJSRef = coerce
 instance JSRef a => JSRef [a] where
-  fromJSVal = map fromJSVal . fromJSArray . coerce
-  toJSVal = coerce . toJSArray . map toJSVal
+  fromJSRef = map fromJSRef . fromJSArray . coerce
+  toJSRef = coerce . toJSArray . map toJSRef
 instance JSRef a => JSRef (Maybe a) where
-  fromJSVal val
+  fromJSRef val
     | is_null_or_undefined val = Nothing
-    | otherwise = pure $ fromJSVal val
-  toJSVal Nothing = js_null
-  toJSVal (Just x) = toJSVal x
+    | otherwise = pure $ fromJSRef val
+  toJSRef Nothing = js_null
+  toJSRef (Just x) = toJSRef x
 
-foreign import javascript "$1[$2]" js_get :: JSObject -> JSString -> JSVal
-unsafeGet key (JSHashMap obj) = fromJSVal $ js_get obj $ toIndex key
-get key (JSHashMap obj) = fromJSVal . js_get obj $ toIndex key
+foreign import javascript "$1[$2]" js_get :: JSObject -> JSKey -> JSVal
+unsafeGet key (JSHashMap obj) = fromJSRef $ js_get obj $ toIndex key
+get key (JSHashMap obj) = fromJSRef . js_get obj $ toIndex key
 
 foreign import javascript "Object.keys($1)" js_keys :: JSObject -> JSVal
-keys (JSHashMap obj) = map fromIndex $ fromJSVal $ js_keys obj
+keys (JSHashMap obj) = map fromIndex . fromJSRef $ js_keys obj
 
 foreign import javascript "Object.values($1)" js_values :: JSObject -> JSVal
-values (JSHashMap obj) = fromJSVal $ js_values obj
+values (JSHashMap obj) = fromJSRef $ js_values obj
 
 entries x = zipWith (\k v -> (k, v)) (keys x) (values x)
 

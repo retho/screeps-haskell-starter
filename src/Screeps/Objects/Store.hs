@@ -8,7 +8,7 @@ module Screeps.Objects.Store
   , getUsedCapacity
   ) where
 
-import Screeps.Prelude
+import Screeps.Core
 import Screeps.Constants.Resource (Resource)
 
 newtype Store = Store JSObject deriving (JSRef, JSShow)
@@ -19,9 +19,9 @@ getCapacity :: Store -> Maybe Resource -> Int
 getFreeCapacity :: Store -> Maybe Resource -> Int
 getUsedCapacity :: Store -> Maybe Resource -> Int
 
-getCapacity x = get_capacity x . toJSVal
-getFreeCapacity x = get_free_capacity x . toJSVal
-getUsedCapacity x = get_used_uapacity x . toJSVal
+getCapacity x = get_capacity x . toJSRef
+getFreeCapacity x = get_free_capacity x . toJSRef
+getUsedCapacity x = get_used_uapacity x . toJSRef
 
 
 -- * ffi
