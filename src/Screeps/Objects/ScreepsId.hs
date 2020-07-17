@@ -1,19 +1,18 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Screeps.Common.HasId
+module Screeps.Objects.ScreepsId
   ( ScreepsId(..)
-  , HasId(..)
+  , HasScreepsId(..)
   , defaultSid
   ) where
 
 import Screeps.Core
 import Data.String (IsString)
 
-
 newtype ScreepsId a = ScreepsId JSString deriving (IsString, JSShow, JSIndex, JSRef, Eq)
 
-class JSRef a => HasId a where
+class JSRef a => HasScreepsId a where
   sid :: a -> ScreepsId a
 
 defaultSid :: Coercible a JSObject => a -> ScreepsId a

@@ -4,5 +4,5 @@ module Screeps.Prelude
   , module Common
   ) where
 
-import Screeps.Core as Core
-import Screeps.Common as Common
+import Screeps.Core as Core hiding (Coercible, coerce)
+import Screeps.Objects.Store as Common

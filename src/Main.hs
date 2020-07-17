@@ -11,7 +11,7 @@ import Data.Foldable (for_)
 
 import qualified Screeps.Game as Game
 import qualified Screeps.Game.CPU as Game.CPU
-import qualified Screeps.Objects.StructureSpawn as Spawn
+import qualified Screeps.Objects.Structure.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
 import qualified Screeps.Constants.Resource as Resource
 import qualified Screeps.Constants.ReturnCode as ReturnCode
@@ -23,6 +23,7 @@ main :: IO ()
 main = do
   Game.CPU.getUsed >>= \cpu -> debug $ "loop starting! cpu: " <> showjs cpu
   setupLogging Logging.Info
+
   game_spawns <- Game.spawns
   game_creeps <- Game.creeps
 
