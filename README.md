@@ -53,3 +53,4 @@ npm run deploy
 # Known Issues
 
 - errors like in `tests/reentrancy_guard` are not displayed within [Simulation](https://screeps.com/a/#!/sim),
+- the error `RuntimeError: ReentrancyGuard: GC reentered!` occurs after a while running the script

@@ -24,7 +24,12 @@ export default
               throw err;
             }
           });
-        global.runImmediateQueue();
+        try {
+          global.runImmediateQueue();
+        } catch (err) {
+          if (err.message && startsWith(err.message, 'ReentrancyGuard:')) Game.cpu.halt();
+          throw err;
+        }
         return promise;
       };
     });
