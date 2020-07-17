@@ -4,3 +4,4 @@ module Screeps.Common
   ) where
 
 import Screeps.Common.HasStore as C
+import Screeps.Common.HasId as C

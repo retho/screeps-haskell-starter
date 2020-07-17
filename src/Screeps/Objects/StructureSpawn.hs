@@ -16,6 +16,7 @@ import Screeps.Constants.ReturnCode
 newtype StructureSpawn = StructureSpawn JSObject deriving (JSRef, JSShow)
 
 instance HasStore StructureSpawn where store = defaultStore
+instance HasId StructureSpawn where sid = defaultSid
 
 foreign import javascript "$1.name" name :: StructureSpawn -> JSString
 

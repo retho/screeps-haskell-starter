@@ -4,21 +4,21 @@ module Screeps.Game
   ( time
   , spawns
   , creeps
+  , getObjectById
   ) where
 
-import Screeps.Core
+import Screeps.Prelude
 import Screeps.Objects.StructureSpawn (StructureSpawn)
 import Screeps.Objects.Creep (Creep)
 
-foreign import javascript "Game.time" raw_time :: IO Int
-foreign import javascript "Game.spawns" raw_spawns :: IO (JSHashMap JSString StructureSpawn)
-foreign import javascript "Game.creeps" raw_creeps :: IO (JSHashMap JSString Creep)
+foreign import javascript "Game.time" time :: IO Int
+foreign import javascript "Game.spawns" spawns :: IO (JSHashMap JSString StructureSpawn)
+foreign import javascript "Game.creeps" creeps :: IO (JSHashMap JSString Creep)
 
-time :: IO Int
-time = raw_time
+getObjectById :: HasId a => ScreepsId a -> IO a
+getObjectById x = get_object_by_id (toJSRef x) >>= pure . fromJSRef
 
-spawns :: IO (JSHashMap JSString StructureSpawn)
-spawns = raw_spawns
 
-creeps :: IO (JSHashMap JSString Creep)
-creeps = raw_creeps
+-- *
+
+foreign import javascript "Game.getObjectById($1)" get_object_by_id :: JSVal -> IO JSVal

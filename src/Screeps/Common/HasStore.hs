@@ -2,10 +2,10 @@
 
 module Screeps.Common.HasStore
   ( HasStore(..)
+  , defaultStore
   , storeCapacity
   , storeFreeCapacity
   , storeUsedCapacity
-  , defaultStore
   ) where
 
 import Screeps.Core
