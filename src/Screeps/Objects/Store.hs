@@ -12,22 +12,22 @@ module Screeps.Objects.Store
   ) where
 
 import Screeps.Core
-import Screeps.Constants.Resource (Resource)
+import Screeps.Constants.ResourceType (ResourceType)
 
 newtype Store = Store JSObject deriving (JSRef, JSShow)
 instance HasStore Store where store = id
-instance AsJSHashMap Store Resource Int where hashmap = defaultHashmap
+instance AsJSHashMap Store ResourceType Int where hashmap = defaultHashmap
 
 class HasStore a where
   store :: a -> Store
 
-storeCapacity :: HasStore a => a -> Maybe Resource -> Int
+storeCapacity :: HasStore a => a -> Maybe ResourceType -> Int
 storeCapacity x = get_capacity (store x) . toJSRef
 
-storeFreeCapacity :: HasStore a => a -> Maybe Resource -> Int
+storeFreeCapacity :: HasStore a => a -> Maybe ResourceType -> Int
 storeFreeCapacity x = get_free_capacity (store x) . toJSRef
 
-storeUsedCapacity :: HasStore a => a -> Maybe Resource -> Int
+storeUsedCapacity :: HasStore a => a -> Maybe ResourceType -> Int
 storeUsedCapacity x = get_used_uapacity (store x) . toJSRef
 
 defaultStore :: Coercible a JSObject => a -> Store

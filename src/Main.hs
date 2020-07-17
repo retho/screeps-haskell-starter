@@ -13,7 +13,7 @@ import qualified Screeps.Game as Game
 import qualified Screeps.Game.CPU as Game.CPU
 import qualified Screeps.Objects.Structure.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
-import qualified Screeps.Constants.Resource as Resource
+import qualified Screeps.Constants.ResourceType as ResourceType
 import qualified Screeps.Constants.ReturnCode as ReturnCode
 
 import Logging as Logging
@@ -30,7 +30,7 @@ main = do
   for_ (values game_spawns) $ \spawn -> do
     debug $ "running spawn " <> Spawn.name spawn
     let body = [BodyPart.move, BodyPart.move, BodyPart.carry, BodyPart.work]
-    when (storeUsedCapacity spawn (pure Resource.energy) >= sum (map BodyPart.cost body)) $ do
+    when (storeUsedCapacity spawn (pure ResourceType.energy) >= sum (map BodyPart.cost body)) $ do
       -- * create a unique name, spawn.
       name_base <- Game.time
       let
