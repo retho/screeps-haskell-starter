@@ -15,7 +15,7 @@ module Screeps.Core.Ffi
   , JSRef(..)
   , JSHashMap(..)
   , unsafeGet
-  , get
+  , safeGet
   , keys
   , values
   , entries
@@ -42,7 +42,7 @@ class JSIndex a where
 
 newtype JSHashMap k v = JSHashMap JSObject deriving JSRef
 unsafeGet :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> v
-get :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> Maybe v
+safeGet :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> Maybe v
 keys :: (JSIndex k, JSRef v) => JSHashMap k v -> [] k
 values :: (JSIndex k, JSRef v) => JSHashMap k v -> [] v
 entries :: (JSIndex k, JSRef v) => JSHashMap k v -> [] (k, v)
@@ -102,7 +102,7 @@ instance JSRef a => JSRef (Maybe a) where
 
 foreign import javascript "$1[$2]" js_get :: JSObject -> JSKey -> JSVal
 unsafeGet key (JSHashMap obj) = fromJSRef $ js_get obj $ toIndex key
-get key (JSHashMap obj) = fromJSRef . js_get obj $ toIndex key
+safeGet key (JSHashMap obj) = fromJSRef . js_get obj $ toIndex key
 
 foreign import javascript "Object.keys($1)" js_keys :: JSObject -> JSVal
 keys (JSHashMap obj) = map fromIndex . fromJSRef $ js_keys obj
@@ -111,7 +111,6 @@ foreign import javascript "Object.values($1)" js_values :: JSObject -> JSVal
 values (JSHashMap obj) = fromJSRef $ js_values obj
 
 entries x = zipWith (\k v -> (k, v)) (keys x) (values x)
-
 
 foreign import javascript "$1 + $2" js_concat_str :: JSString -> JSString -> JSString
 foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool
