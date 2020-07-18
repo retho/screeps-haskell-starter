@@ -7,7 +7,7 @@ Haskell build tools for [Screeps](https://screeps.com/) based on [Asterius](http
 
 # Quickstart
 
-[Node](https://nodejs.org/en/) (version >= 14.5.0) and [Docker](https://www.docker.com/get-started) must be installed. Docker must be running.
+[Node](https://nodejs.org/en/) and [Docker](https://www.docker.com/get-started) must be installed. Docker must be running.
 
 ```bash
 # clone:
@@ -34,7 +34,8 @@ npm run deploy
 `npm run deploy` compiles and uploads the code to the server (based on settings in `screeps.json`)
 
 `npm run test:<target-name> -- --suite=<suite-path>` runs test suite within environment `<target-name>`, where `<suite-path>` is path to folder with test, e.g. `--suite=tests/basic`
-(`npm run test:node-screeps -- --suite=<suite-path>` must work as well as `npm run test:node -- --suite=<suite-path>`)
+  + `npm run test:node-screeps -- --suite=<suite-path>` must work as well as `npm run test:node -- --suite=<suite-path>`
+  + requires Node >= v14.5.0
 
 
 
@@ -51,4 +52,5 @@ npm run deploy
 
 # Known Issues
 
-- errors like in `tests/reentrancy_guard` break script in [Simulation](https://screeps.com/a/#!/sim)
+- errors like in `tests/reentrancy_guard` are not displayed within [Simulation](https://screeps.com/a/#!/sim),
+- the error `RuntimeError: ReentrancyGuard: GC reentered!` occurs after a while running the script

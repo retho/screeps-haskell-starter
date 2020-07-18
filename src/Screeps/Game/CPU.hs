@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Screeps.Game.CPU
   ( HeapStatistics(..)
@@ -6,16 +7,10 @@ module Screeps.Game.CPU
   , getUsed
   ) where
 
-import Asterius.Types (JSVal (..), JSString(..))
+import Screeps.Core
 
-foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool
-foreign import javascript "$1[$2]" unsafe_get_field_int :: JSVal -> JSString -> Int
-
-foreign import javascript "Game.cpu.getHeapStatistics()" js_get_heap_statistics :: IO JSVal
-foreign import javascript "Game.cpu.getUsed()" js_get_used :: IO Float
-
-data HeapStatistics =
-  HeapStatistics
+data HeapStatistics
+  = HeapStatistics
     { total_heap_size :: Int
     , total_heap_size_executable :: Int
     , total_physical_size :: Int
@@ -28,24 +23,26 @@ data HeapStatistics =
     , externally_allocated_size :: Int
     }
 
+foreign import javascript "Game.cpu.getHeapStatistics()" js_get_heap_statistics :: IO JSVal
 getHeapStatistics :: IO (Maybe HeapStatistics)
 getHeapStatistics = do
   jsref <- js_get_heap_statistics
-  pure $
-    if is_null_or_undefined jsref
-    then Nothing
-    else Just $ HeapStatistics
-      { total_heap_size = unsafe_get_field_int jsref "total_heap_size"
-      , total_heap_size_executable = unsafe_get_field_int jsref "total_heap_size_executable"
-      , total_physical_size = unsafe_get_field_int jsref "total_physical_size"
-      , total_available_size = unsafe_get_field_int jsref "total_available_size"
-      , used_heap_size = unsafe_get_field_int jsref "used_heap_size"
-      , heap_size_limit = unsafe_get_field_int jsref "heap_size_limit"
-      , malloced_memory = unsafe_get_field_int jsref "malloced_memory"
-      , peak_malloced_memory = unsafe_get_field_int jsref "peak_malloced_memory"
-      , does_zap_garbage = unsafe_get_field_int jsref "does_zap_garbage"
-      , externally_allocated_size = unsafe_get_field_int jsref "externally_allocated_size"
+  let mjsobj :: Maybe (JSHashMap JSString Int) = fromJSRef jsref
+  pure $ do
+    obj <- mjsobj
+    pure $ HeapStatistics
+      { total_heap_size = unsafeGet "total_heap_size" obj
+      , total_heap_size_executable = unsafeGet "total_heap_size_executable" obj
+      , total_physical_size = unsafeGet "total_physical_size" obj
+      , total_available_size = unsafeGet "total_available_size" obj
+      , used_heap_size = unsafeGet "used_heap_size" obj
+      , heap_size_limit = unsafeGet "heap_size_limit" obj
+      , malloced_memory = unsafeGet "malloced_memory" obj
+      , peak_malloced_memory = unsafeGet "peak_malloced_memory" obj
+      , does_zap_garbage = unsafeGet "does_zap_garbage" obj
+      , externally_allocated_size = unsafeGet "externally_allocated_size" obj
       }
 
-getUsed :: IO Float
+foreign import javascript "Game.cpu.getUsed()" js_get_used :: IO Double
+getUsed :: IO Double
 getUsed = js_get_used
