@@ -6,6 +6,8 @@ module Screeps.Memory
   , root
   , get
   , set
+  , del
+  , path
   , keys
   , HasMemory(..)
   ) where
@@ -30,6 +32,13 @@ set :: JSRef a => JSString -> a -> Memory -> IO ()
 set key val (Memory path) = do
   mem_ref <- create_path_to_last_ref path root_mem_ref
   mem_set mem_ref key (toJSRef val)
+
+del :: Memory -> JSString -> IO ()
+del (Memory path) key = do
+  maybe_mem_ref <- get_last_ref path root_mem_ref
+  case maybe_mem_ref of
+    Nothing -> pure ()
+    Just mem_ref -> mem_del mem_ref key
 
 path :: Memory -> [JSString] -> Memory
 path (Memory init) path = Memory $ init <> path
@@ -63,6 +72,8 @@ foreign import javascript "global.Memory" root_mem_ref :: MemoryReference
 foreign import javascript "$1[$2]" mem_get :: MemoryReference -> JSString -> IO JSVal
 
 foreign import javascript "$1[$2] = $3" mem_set :: MemoryReference -> JSString -> JSVal -> IO ()
+
+foreign import javascript "delete $1[$2]" mem_del :: MemoryReference -> JSString -> IO ()
 
 foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool
 

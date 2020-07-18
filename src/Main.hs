@@ -10,6 +10,7 @@ import Control.Monad (when)
 import Data.Foldable (for_)
 
 import qualified Screeps.Game as Game
+import qualified Screeps.Memory as Mem
 import qualified Screeps.Game.CPU as Game.CPU
 import qualified Screeps.Objects.Structure.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
@@ -25,8 +26,6 @@ main = do
   setupLogging Logging.Info
 
   game_spawns <- Game.spawns
-  game_creeps <- Game.creeps
-
   for_ (values game_spawns) $ \spawn -> do
     debug $ "running spawn " <> Spawn.name spawn
     let body = [BodyPart.move, BodyPart.move, BodyPart.carry, BodyPart.work]
@@ -43,5 +42,24 @@ main = do
       when (res /= ReturnCode.ok) $ do
         warn $ "couldn't spawn: " <> showjs res
 
+  game_creeps <- Game.creeps
   info $ "creeps: " <> showjs (values game_creeps)
+
+  time <- Game.time
+  when (time `mod` 32 == 3) $ do
+    info "running memory cleanup"
+    cleanup_memory
+
   Game.CPU.getUsed >>= \cpu -> info . toJSString $ printf "done! cpu: %.2f" cpu
+
+
+cleanup_memory :: IO ()
+cleanup_memory = do
+  alive_creeps :: [JSString] <- Game.creeps >>= pure . keys
+  let creeps_mem = Mem.path Mem.root ["creeps"]
+  creeps_memory_keys <- Mem.keys creeps_mem >>= pure . maybe [] id
+
+  for_ creeps_memory_keys $ \mem_name -> do
+    when (mem_name `notElem` alive_creeps) $ do
+      debug $ "cleaning up creep memory of dead creep " <> mem_name
+      Mem.del creeps_mem mem_name
