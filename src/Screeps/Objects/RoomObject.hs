@@ -9,7 +9,7 @@ module Screeps.Objects.RoomObject
   ) where
 
 import Screeps.Core
-import Screeps.Objects.Room
+import Screeps.Objects.Core.Room
 import Screeps.Objects.RoomPosition
 
 newtype RoomObject = RoomObject JSObject deriving (JSRef, JSShow)

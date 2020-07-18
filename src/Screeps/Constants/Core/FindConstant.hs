@@ -1,6 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Screeps.Constants.FindConstant.Type
+module Screeps.Constants.Core.FindConstant
   ( FindConstant(..)
   ) where
 

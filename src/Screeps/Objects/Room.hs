@@ -3,20 +3,25 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Screeps.Objects.Room
-  ( Room(..)
-  , name
+  ( module Room
+  , find
+  , controller
   ) where
 
 import Screeps.Core
-import Screeps.Memory
-import Screeps.Constants.FindConstant.Type
+import Screeps.Constants.Core.FindConstant
+import Screeps.Objects.Core.Room as Room
+import Screeps.Objects.Structure.StructureController
 
-newtype Room = Room JSObject deriving (JSRef, JSShow)
-instance HasMemory Room where memory x = Memory ["rooms", name x]
 
-foreign import javascript "$1.name" name :: Room -> JSString
+find :: JSRef a => FindConstant a -> Room -> IO [a]
+find x room = raw_find room (toJSRef x) >>= pure . fromJSRef
 
-find :: JSRef a => FindConstant a -> [a]
-find = fromJSRef . raw_find . toJSRef
+controller :: Room -> Maybe StructureController
+controller = fromJSRef . raw_controller
 
-foreign import javascript "$1.find($2)" raw_find :: JSVal -> JSVal
+foreign import javascript "$1.controller" raw_controller :: Room -> JSVal
+
+-- *
+
+foreign import javascript "$1.find($2)" raw_find :: Room -> JSVal -> IO JSVal

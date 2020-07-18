@@ -6,12 +6,17 @@ import Prelude hiding (break)
 import Screeps.Prelude
 
 import Text.Printf (printf)
-import Control.Monad (when)
+import Control.Monad (when, void)
 import Data.Foldable (for_)
+
+import Screeps.Constants.FindConstant
+import Screeps.Objects.RoomPosition (isNearTo)
 
 import qualified Screeps.Game as Game
 import qualified Screeps.Memory as Mem
 import qualified Screeps.Game.CPU as Game.CPU
+import qualified Screeps.Objects.Room as Room
+import qualified Screeps.Objects.Creep as Creep
 import qualified Screeps.Objects.Structure.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
 import qualified Screeps.Constants.ResourceType as ResourceType
@@ -42,8 +47,32 @@ main = do
       when (res /= ReturnCode.ok) $ do
         warn $ "couldn't spawn: " <> showjs res
 
+  debug "running creeps"
   game_creeps <- Game.creeps
-  info $ "creeps: " <> showjs (values game_creeps)
+  for_ (values game_creeps) $ \creep -> do
+    let name = Creep.name creep
+    debug $ "running creep " <> name
+    when (not $ Creep.spawning creep) $ do
+      Mem.get "harvesting" (memory creep) >>= pure . maybe False id >>= \harvesting ->
+        if harvesting
+          then when (storeFreeCapacity creep (Just ResourceType.energy) == 0) $ Mem.set "harvesting" False $ memory creep
+          else when (storeUsedCapacity creep (Just ResourceType.energy) == 0) $ Mem.set "harvesting" True $ memory creep
+      Mem.get "harvesting" (memory creep) >>= pure . maybe False id >>= \harvesting ->
+        if harvesting
+          then do
+            source <- Room.find find_sources (Creep.room creep) >>= pure . (!! 0)
+            if creep `isNearTo` source
+              then Creep.harvest creep source >>= \r -> when (r /= ReturnCode.ok) . warn $ "couldn't harvest: " <> showjs r
+              else void $ Creep.moveTo creep source
+          else do
+            let mc = Room.controller (Creep.room creep)
+            case mc of
+              Just c -> do
+                r <- Creep.upgradeController creep c
+                if r == ReturnCode.err_not_in_range
+                  then void $ Creep.moveTo creep c
+                  else when (r /= ReturnCode.ok) . warn $ "couldn't upgrade: " <> showjs r
+              Nothing -> warn "creep room has no controller!"
 
   time <- Game.time
   when (time `mod` 32 == 3) $ do

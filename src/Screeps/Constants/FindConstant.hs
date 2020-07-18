@@ -41,14 +41,14 @@ module Screeps.Constants.FindConstant
   ) where
 
 import Screeps.Core
-import Screeps.Constants.FindConstant.Type
+import Screeps.Constants.Core.FindConstant
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.Creep
 import Screeps.Objects.Structure
 import Screeps.Objects.Structure.StructureSpawn
+import Screeps.Objects.Source
 
 newtype Unknown = Unknown ()
-type Source = Unknown
 type Resource = Unknown
 type Flag = Unknown
 type ConstructionSite = Unknown

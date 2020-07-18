@@ -2,7 +2,8 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module Screeps.Objects.OwnedStructure
-  ( OwnedStructure(..)
+  ( module Structure
+  , OwnedStructure(..)
   , IsOwnedStructure(..)
   , my
   ) where
@@ -11,7 +12,7 @@ import Screeps.Core
 import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject
-import Screeps.Objects.Structure
+import Screeps.Objects.Structure as Structure
 
 newtype OwnedStructure = OwnedStructure Structure deriving (HasScreepsId, HasRoomPosition, JSRef, JSShow)
 instance IsRoomObject OwnedStructure where

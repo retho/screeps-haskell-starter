@@ -2,14 +2,17 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module Screeps.Objects.Structure
-  ( Structure(..)
+  ( module RoomObject
+  , Structure(..)
   , IsStructure(..)
+  , hits
+  , hitsMax
   ) where
 
 import Screeps.Core
 import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
-import Screeps.Objects.RoomObject
+import Screeps.Objects.RoomObject as RoomObject
 
 newtype Structure = Structure RoomObject deriving (HasRoomPosition, JSRef, JSShow)
 instance HasScreepsId Structure where sid = defaultSid
