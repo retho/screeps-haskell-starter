@@ -1,5 +1,5 @@
 
-# haskell-screeps
+# screeps-haskell-starter
 
 Haskell build tools for [Screeps](https://screeps.com/) based on [Asterius](https://github.com/tweag/asterius) compiler.
 
