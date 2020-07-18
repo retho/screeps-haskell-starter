@@ -84,7 +84,7 @@ main = do
 
 cleanup_memory :: IO ()
 cleanup_memory = do
-  alive_creeps :: [JSString] <- Game.creeps >>= pure . keys
+  alive_creeps <- Game.creeps >>= pure . keys
   let creeps_mem = Mem.path Mem.root ["creeps"]
   creeps_memory_keys <- Mem.keys creeps_mem >>= pure . maybe [] id
 
