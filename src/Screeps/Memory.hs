@@ -1,5 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Screeps.Memory
   ( Memory(..)
@@ -16,67 +17,41 @@ import Screeps.Core hiding (keys)
 
 data Memory = Memory [JSString]
 
-newtype MemoryReference = MemoryReference JSObject deriving JSRef
-
 root :: Memory
 root = Memory []
 
 get :: JSRef a => JSString -> Memory -> IO (Maybe a)
 get key (Memory path) = do
-  maybe_mem_ref <- get_last_ref path root_mem_ref
-  case maybe_mem_ref of
-    Nothing -> pure Nothing
-    Just mem_ref -> mem_get mem_ref key >>= pure . fromJSRef
+  val <- mem_get $ join path "." <> "." <> key
+  pure $ fromJSRef val
 
 set :: JSRef a => JSString -> a -> Memory -> IO ()
-set key val (Memory path) = do
-  mem_ref <- create_path_to_last_ref path root_mem_ref
-  mem_set mem_ref key (toJSRef val)
+set key val (Memory path) = mem_set (join path "." <> "." <> key) $ toJSRef val
 
 del :: Memory -> JSString -> IO ()
-del (Memory path) key = do
-  maybe_mem_ref <- get_last_ref path root_mem_ref
-  case maybe_mem_ref of
-    Nothing -> pure ()
-    Just mem_ref -> mem_del mem_ref key
+del (Memory path) key = mem_del (join path ".") key
 
 path :: Memory -> [JSString] -> Memory
 path (Memory init) path = Memory $ init <> path
 
 keys :: Memory -> IO (Maybe [JSString])
-keys (Memory path) = do
-  maybe_mem_ref <- get_last_ref path root_mem_ref
-  case maybe_mem_ref of
-    Nothing -> pure Nothing
-    Just mem_ref -> mem_ref_keys mem_ref >>= pure . fromJSRef
+keys (Memory path) = mem_keys (join path ".") >>= pure . fromJSRef
 
 class HasMemory a where
   memory :: a -> Memory
 
 
-get_last_ref :: [JSString] -> MemoryReference -> IO (Maybe MemoryReference)
-get_last_ref [] ref = pure $ pure ref
-get_last_ref (p:ps) ref = do
-  next_ref <- mem_get ref p
-  if is_null_or_undefined next_ref then pure Nothing else get_last_ref ps $ fromJSRef next_ref
+join :: [JSString] -> JSString -> JSString
+join [] sep = ""
+join (x:[]) sep = x
+join (x:xs) sep = x <> sep <> join xs sep
 
-create_path_to_last_ref :: [JSString] -> MemoryReference -> IO MemoryReference
-create_path_to_last_ref [] ref = pure ref
-create_path_to_last_ref (p:ps) ref = do
-  next_ref <- mem_get ref p
-  if is_null_or_undefined next_ref then new_ref >>= create_path_to_last_ref ps else create_path_to_last_ref ps $ fromJSRef next_ref
+foreign import javascript "Object.keys(_.get(global.Memory, $1))" mem_keys :: JSString -> IO JSVal
 
+foreign import javascript "_.get(global.Memory, $1)" mem_get :: JSString -> IO JSVal
 
-foreign import javascript "global.Memory" root_mem_ref :: MemoryReference
+foreign import javascript "_.set(global.Memory, $1, $2)" mem_set :: JSString -> JSVal -> IO ()
 
-foreign import javascript "$1[$2]" mem_get :: MemoryReference -> JSString -> IO JSVal
-
-foreign import javascript "$1[$2] = $3" mem_set :: MemoryReference -> JSString -> JSVal -> IO ()
-
-foreign import javascript "delete $1[$2]" mem_del :: MemoryReference -> JSString -> IO ()
+foreign import javascript "((obj, path, key) => {delete _.get(obj, path)[key];})(global.Memory, $1, $2)" mem_del :: JSString -> JSString -> IO ()
 
 foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool
-
-foreign import javascript "{}" new_ref :: IO MemoryReference
-
-foreign import javascript "Object.keys($1)" mem_ref_keys :: MemoryReference -> IO JSVal
