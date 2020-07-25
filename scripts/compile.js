@@ -5,9 +5,7 @@ const copy = require('recursive-copy');
 const { execSync } = require('child_process');
 const glob = require('glob');
 const argsParser = require("args-parser");
-const {Target} = require('./utils/constants.js');
-
-const DOCKER_IMAGE = 'terrorjack/asterius:200702';
+const {Target, DOCKER_IMAGE} = require('./utils/constants.js');
 
 const args = argsParser(process.argv);
 const srcDir = args.src || 'src';
