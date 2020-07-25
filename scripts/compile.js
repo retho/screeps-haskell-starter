@@ -27,6 +27,7 @@ Promise.resolve().then(async () => {
   console.log('compiling...');
   ahcInputFiles.forEach(x => fs.unlinkSync(x));
   ahcOutputFiles.forEach(x => fs.unlinkSync(x));
+  await copy('lib', `build/${inputDir}`, {overwrite: true});
   await copy(srcDir, `build/${inputDir}`, {overwrite: true});
   await fs.promises.mkdir(path.resolve('build', outputDir)).catch(() => null);
   execSync(`${dockerCmd} ${ahcLinkCmd}`, {
