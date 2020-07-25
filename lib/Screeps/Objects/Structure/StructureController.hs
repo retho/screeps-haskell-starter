@@ -3,6 +3,8 @@
 module Screeps.Objects.Structure.StructureController
   ( module OwnedStructure
   , StructureController(..)
+  , name
+  , spawnCreep
   ) where
 
 import Screeps.Core
@@ -32,7 +34,7 @@ instance IsOwnedStructure StructureController where
 foreign import javascript "$1.name" name :: StructureController -> JSString
 
 spawnCreep :: StructureController -> [BodyPart] -> JSString -> IO ReturnCode
-spawnCreep spawn body name = spawn_creep spawn (toJSRef body) name
+spawnCreep spawn body creep_name = spawn_creep spawn (toJSRef body) creep_name
 
 
 

@@ -6,7 +6,6 @@ module Screeps.Core.JSShow
   ) where
 
 import Screeps.Core.Ffi as Ffi
-import Data.Coerce (coerce)
 
 class JSShow a where
   showjs :: a -> JSString
@@ -23,10 +22,10 @@ instance JSShow JSString where showjs = json_stringify . coerce
 instance JSShow JSObject where showjs = show_jsobj . coerce
 instance JSShow (JSHashMap k v) where showjs = show_jsobj . coerce
 instance JSShow a => JSShow [a] where
-  showjs xs = "[" <> showList xs <> "]"
+  showjs xs = "[" <> showjsList xs <> "]"
     where
-      showList [] = ""
-      showList (x:[]) = showjs x
-      showList (x:xs) = showjs x <> "," <> showList xs
+      showjsList [] = ""
+      showjsList (y:[]) = showjs y
+      showjsList (y:ys) = showjs y <> "," <> showjsList ys
 instance (JSShow a, JSShow b) => JSShow (a, b) where
   showjs (x, y) = "(" <> showjs x <> ", " <> showjs y <> ")"

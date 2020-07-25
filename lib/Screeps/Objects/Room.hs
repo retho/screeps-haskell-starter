@@ -15,7 +15,7 @@ import Screeps.Objects.Structure.StructureController
 
 
 find :: JSRef a => FindConstant a -> Room -> IO [a]
-find x room = raw_find room (toJSRef x) >>= pure . fromJSRef
+find x rm = raw_find rm (toJSRef x) >>= pure . fromJSRef
 
 controller :: Room -> Maybe StructureController
 controller = fromJSRef . raw_controller

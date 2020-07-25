@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "cross-env TARGET=screeps nodemon --watch src -e hs scripts/compile.js --input=watch-input --output=watch-output",
+    "start": "cross-env TARGET=screeps nodemon --watch src --watch lib -e hs scripts/compile.js --input=watch-input --output=watch-output",
     "deploy": "cross-env-shell TARGET=screeps OPTIMIZE=true SHRINK=true \"node scripts/compile.js && node scripts/link.js && node scripts/upload.js\"",
+    "docker-it": "node scripts/docker-it.js",
     "test:node-screeps": "cross-env TARGET=node-screeps node scripts/test.js",
     "test:node": "cross-env TARGET=node node scripts/test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
