@@ -34,7 +34,7 @@ instance IsOwnedStructure StructureSpawn where
 foreign import javascript "$1.name" name :: StructureSpawn -> JSString
 
 spawnCreep :: StructureSpawn -> [BodyPart] -> JSString -> IO ReturnCode
-spawnCreep spawn body name = spawn_creep spawn (toJSRef body) name
+spawnCreep spawn body creep_name = spawn_creep spawn (toJSRef body) creep_name
 
 
 

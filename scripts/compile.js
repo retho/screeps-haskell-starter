@@ -18,7 +18,7 @@ const shrinkLevel = process.env.SHRINK === 'true' ? 2 : 0;
 const browserFlag = process.env.TARGET === Target.SCREEPS || process.env.TARGET === Target.NODE_SCREEPS ? '--browser' : '';
 
 const dockerCmd = `docker run --rm -v ${path.resolve('build')}:/mirror -w=/mirror ${DOCKER_IMAGE}`;
-const ahcLinkCmd = `ahc-link --input-hs=${inputDir}/Main.hs --output-directory=${outputDir} ${browserFlag} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`;
+const ahcLinkCmd = `ahc-link --input-hs=${inputDir}/Main.hs --output-directory=${outputDir} ${browserFlag} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel} --ghc-option=-Wall`;
 
 const ahcInputFiles = glob.sync(`build/${inputDir}/**/*.{hs,hi,o,js}`);
 const ahcOutputFiles = glob.sync(`build/${outputDir}/**/*.{mjs,wasm,html}`);

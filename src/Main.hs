@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -Wall #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
@@ -23,7 +22,6 @@ import qualified Screeps.Constants.ResourceType as ResourceType
 import qualified Screeps.Constants.ReturnCode as ReturnCode
 
 import Logging as Logging
-
 
 main :: IO ()
 main = do

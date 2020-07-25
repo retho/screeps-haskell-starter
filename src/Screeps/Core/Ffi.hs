@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-orphans #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
@@ -6,7 +7,7 @@
 
 module Screeps.Core.Ffi
   ( module Coerce
-  , JSVal(..)
+  , JSVal
   , JSString(..)
   , JSObject(..)
   , toJSString
@@ -23,7 +24,7 @@ module Screeps.Core.Ffi
   , defaultHashmap
   ) where
 
-import Asterius.Types (JSVal(..), JSString(..), JSArray(..), toJSString, fromJSString, toJSArray, fromJSArray)
+import Asterius.Types (JSVal, JSString(..), JSArray(..), toJSString, fromJSString, toJSArray, fromJSArray)
 import Data.Coerce as Coerce (Coercible, coerce)
 
 newtype JSObject = JSObject JSVal deriving JSRef

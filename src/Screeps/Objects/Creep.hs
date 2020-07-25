@@ -17,7 +17,7 @@ import Screeps.Objects.Classes
 import Screeps.Objects.Store
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
-import Screeps.Objects.Structure.StructureController
+import Screeps.Objects.Structure.StructureController hiding (name)
 import Screeps.Constants.ReturnCode
 
 newtype Creep = Creep RoomObject deriving (HasRoomPosition, JSRef, JSShow)

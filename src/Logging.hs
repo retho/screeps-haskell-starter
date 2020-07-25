@@ -32,6 +32,9 @@ logger logger_logging msg = do
   current_logging <- getLogging
   when (logger_logging >= current_logging) $ consoleLog $ showjs logger_logging <> " " <> msg
 
+debug :: JSString -> IO ()
+info :: JSString -> IO ()
+warn :: JSString -> IO ()
 debug = logger Debug
 info = logger Info
 warn = logger Warn

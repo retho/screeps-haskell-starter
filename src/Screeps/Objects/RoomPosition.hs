@@ -6,8 +6,8 @@ module Screeps.Objects.RoomPosition
   , HasRoomPosition(..)
   , new
   , roomName
-  , x
-  , y
+  , _x
+  , _y
   , isNearTo
   ) where
 
@@ -22,11 +22,11 @@ class HasRoomPosition a where
 foreign import javascript "new RoomPosition($1, $2, $3)" new :: Int -> Int -> JSString -> RoomPosition
 
 foreign import javascript "$1.roomName" roomName :: RoomPosition -> JSString
-foreign import javascript "$1.x" x :: RoomPosition -> Int
-foreign import javascript "$1.y" y :: RoomPosition -> Int
+foreign import javascript "$1.x" _x :: RoomPosition -> Int
+foreign import javascript "$1.y" _y :: RoomPosition -> Int
 
 isNearTo :: (HasRoomPosition a, HasRoomPosition b) => a -> b -> Bool
-isNearTo x y = is_near_to (pos x) (pos y)
+isNearTo xx yy = is_near_to (pos xx) (pos yy)
 
 
 -- *
