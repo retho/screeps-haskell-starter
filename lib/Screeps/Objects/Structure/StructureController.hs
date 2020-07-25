@@ -9,6 +9,7 @@ module Screeps.Objects.Structure.StructureController
 
 import Screeps.Core
 
+import Screeps.Objects.Classes
 import Screeps.Objects.Store
 import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
@@ -18,7 +19,7 @@ import Screeps.Objects.OwnedStructure as OwnedStructure
 import Screeps.Constants.BodyPart
 import Screeps.Constants.ReturnCode
 
-newtype StructureController = StructureController OwnedStructure deriving (HasScreepsId, HasRoomPosition, JSRef, JSShow)
+newtype StructureController = StructureController OwnedStructure deriving (HasOwner, HasScreepsId, HasRoomPosition, JSRef, JSShow)
 instance HasStore StructureController where store = defaultStore
 instance IsRoomObject StructureController where
   asRoomObject = coerce
@@ -35,7 +36,6 @@ foreign import javascript "$1.name" name :: StructureController -> JSString
 
 spawnCreep :: StructureController -> [BodyPart] -> JSString -> IO ReturnCode
 spawnCreep spawn body creep_name = spawn_creep spawn (toJSRef body) creep_name
-
 
 
 foreign import javascript "$1 instanceof StructureController ? $1 : null" maybe_spawn :: JSVal -> JSVal

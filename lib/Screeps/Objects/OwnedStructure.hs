@@ -5,10 +5,10 @@ module Screeps.Objects.OwnedStructure
   ( module Structure
   , OwnedStructure(..)
   , IsOwnedStructure(..)
-  , my
   ) where
 
 import Screeps.Core
+import Screeps.Objects.Classes
 import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject
@@ -24,14 +24,12 @@ instance IsStructure OwnedStructure where
 instance IsOwnedStructure OwnedStructure where
   asOwnedStructure = id
   fromOwnedStruture = pure
+instance HasOwner OwnedStructure where
+  my = defaultMy
+  owner = defaultOwner
 
 class IsStructure a => IsOwnedStructure a where
   asOwnedStructure :: a -> OwnedStructure
   fromOwnedStruture :: OwnedStructure -> Maybe a
 
-my :: IsOwnedStructure a => a -> Bool
-my = raw_my . asOwnedStructure
-
-
-foreign import javascript "$1.my" raw_my :: OwnedStructure -> Bool
 foreign import javascript "$1 instanceof OwnedStructure ? $1 : null" maybe_owned_structure :: JSVal -> JSVal

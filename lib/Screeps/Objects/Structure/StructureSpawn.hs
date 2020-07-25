@@ -9,6 +9,7 @@ module Screeps.Objects.Structure.StructureSpawn
 
 import Screeps.Core
 
+import Screeps.Objects.Classes
 import Screeps.Objects.Store
 import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
@@ -18,7 +19,7 @@ import Screeps.Objects.OwnedStructure
 import Screeps.Constants.BodyPart
 import Screeps.Constants.ReturnCode
 
-newtype StructureSpawn = StructureSpawn OwnedStructure deriving (HasScreepsId, HasRoomPosition, JSRef, JSShow)
+newtype StructureSpawn = StructureSpawn OwnedStructure deriving (HasOwner, HasScreepsId, HasRoomPosition, JSRef, JSShow)
 instance HasStore StructureSpawn where store = defaultStore
 instance IsRoomObject StructureSpawn where
   asRoomObject = coerce
