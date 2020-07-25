@@ -11,8 +11,8 @@ Haskell build tools for [Screeps](https://screeps.com/) based on [Asterius](http
 
 ```bash
 # clone:
-git clone https://github.com/retho/haskell-screeps.git
-cd haskell-screeps
+git clone https://github.com/retho/screeps-haskell-starter.git
+cd screeps-haskell-starter
 
 # cli dependencies:
 npm install
