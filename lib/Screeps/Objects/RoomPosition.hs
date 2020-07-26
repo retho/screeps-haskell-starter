@@ -16,8 +16,9 @@ import Screeps.Core
 newtype RoomPosition = RoomPosition JSObject deriving (JSRef, JSShow)
 instance HasRoomPosition RoomPosition where pos = id
 
-class HasRoomPosition a where
+class JSRef a => HasRoomPosition a where
   pos :: a -> RoomPosition
+  pos = js_pos . toJSRef
 
 foreign import javascript "new RoomPosition($1, $2, $3)" new :: Int -> Int -> JSString -> RoomPosition
 
@@ -32,3 +33,4 @@ isNearTo xx yy = is_near_to (pos xx) (pos yy)
 -- *
 
 foreign import javascript "$1.isNearTo($2)" is_near_to :: RoomPosition -> RoomPosition -> Bool
+foreign import javascript "$1.pos" js_pos :: JSVal -> RoomPosition

@@ -30,26 +30,25 @@ main = do
 
   game_spawns <- Game.spawns
   for_ (values game_spawns) $ \spawn -> do
-    debug $ "running spawn " <> Spawn.name spawn
+    debug $ "running spawn " <> name spawn
     let body = [BodyPart.move, BodyPart.move, BodyPart.carry, BodyPart.work]
     when (storeUsedCapacity spawn (pure ResourceType.energy) >= sum (map BodyPart.cost body)) $ do
-      -- * create a unique name, spawn.
+      -- * create a unique nm, spawn.
       name_base <- Game.time
       let
         loop :: (a -> Bool) -> [IO a] -> IO a
         loop _ [] = undefined
         loop break (x:xs) = x >>= \r -> if break r then pure r else loop break xs
       res <- loop (/= ReturnCode.err_name_exists) $ flip map [0..] $ \(additional :: Int) -> do
-        let name = showjs name_base <> "-" <> showjs additional
-        Spawn.spawnCreep spawn body name
+        let nm = showjs name_base <> "-" <> showjs additional
+        Spawn.spawnCreep spawn body nm
       when (res /= ReturnCode.ok) $ do
         warn $ "couldn't spawn: " <> showjs res
 
   debug "running creeps"
   game_creeps <- Game.creeps
   for_ (values game_creeps) $ \creep -> do
-    let name = Creep.name creep
-    debug $ "running creep " <> name
+    debug $ "running creep " <> name creep
     when (not $ Creep.spawning creep) $ do
       Mem.get "harvesting" (memory creep) >>= pure . maybe False id >>= \harvesting ->
         if harvesting

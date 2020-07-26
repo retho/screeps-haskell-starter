@@ -20,6 +20,7 @@ module Screeps.Core.Ffi
   , keys
   , values
   , entries
+  , fromEntries
   , AsJSHashMap(..)
   , defaultHashmap
   ) where
@@ -47,6 +48,7 @@ safeGet :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> Maybe v
 keys :: (JSIndex k, JSRef v) => JSHashMap k v -> [] k
 values :: (JSIndex k, JSRef v) => JSHashMap k v -> [] v
 entries :: (JSIndex k, JSRef v) => JSHashMap k v -> [] (k, v)
+fromEntries :: (JSIndex k, JSRef v) => [] (k, v) -> JSHashMap k v
 
 class (JSIndex k, JSRef v) => AsJSHashMap a k v | a -> k v where
   hashmap :: a -> JSHashMap k v
@@ -112,6 +114,9 @@ foreign import javascript "Object.values($1)" js_values :: JSObject -> JSVal
 values (JSHashMap obj) = fromJSRef $ js_values obj
 
 entries x = zipWith (\k v -> (k, v)) (keys x) (values x)
+
+foreign import javascript "_.zipObject($1)" js_from_entries :: JSArray -> JSObject
+fromEntries es = coerce . js_from_entries . toJSArray . flip map es $ \(k, v) -> coerce $ toJSArray [coerce $ toIndex k, toJSRef v]
 
 foreign import javascript "$1 + $2" js_concat_str :: JSString -> JSString -> JSString
 foreign import javascript "$1 == null" is_null_or_undefined :: JSVal -> Bool

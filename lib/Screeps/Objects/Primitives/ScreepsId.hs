@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Screeps.Objects.ScreepsId
+module Screeps.Objects.Primitives.ScreepsId
   ( ScreepsId(..)
   ) where
 

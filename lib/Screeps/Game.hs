@@ -9,7 +9,7 @@ module Screeps.Game
 
 import Screeps.Core
 import Screeps.Objects.Classes
-import Screeps.Objects.ScreepsId
+import Screeps.Objects.Primitives.ScreepsId
 import Screeps.Objects.Structure.StructureSpawn (StructureSpawn)
 import Screeps.Objects.Creep (Creep)
 

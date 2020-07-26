@@ -1,6 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Screeps.Objects.User
+module Screeps.Objects.Primitives.User
   ( User(..)
   , _username
   ) where

@@ -9,12 +9,15 @@ module Screeps.Objects.OwnedStructure
 
 import Screeps.Core
 import Screeps.Objects.Classes
-import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject
 import Screeps.Objects.Structure as Structure
 
-newtype OwnedStructure = OwnedStructure Structure deriving (HasScreepsId, HasRoomPosition, JSRef, JSShow)
+newtype OwnedStructure = OwnedStructure Structure deriving (JSRef, JSShow)
+instance Attackable OwnedStructure
+instance HasScreepsId OwnedStructure
+instance HasRoomPosition OwnedStructure
+instance HasOwner OwnedStructure
 instance IsRoomObject OwnedStructure where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_owned_structure . toJSRef
@@ -24,9 +27,6 @@ instance IsStructure OwnedStructure where
 instance IsOwnedStructure OwnedStructure where
   asOwnedStructure = id
   fromOwnedStruture = pure
-instance HasOwner OwnedStructure where
-  my = defaultMy
-  owner = defaultOwner
 
 class IsStructure a => IsOwnedStructure a where
   asOwnedStructure :: a -> OwnedStructure

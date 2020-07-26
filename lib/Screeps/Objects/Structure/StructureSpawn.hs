@@ -11,7 +11,6 @@ import Screeps.Core
 
 import Screeps.Objects.Classes
 import Screeps.Objects.Store
-import Screeps.Objects.ScreepsId
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject
 import Screeps.Objects.Structure
@@ -19,8 +18,13 @@ import Screeps.Objects.OwnedStructure
 import Screeps.Constants.BodyPart
 import Screeps.Constants.ReturnCode
 
-newtype StructureSpawn = StructureSpawn OwnedStructure deriving (HasOwner, HasScreepsId, HasRoomPosition, JSRef, JSShow)
-instance HasStore StructureSpawn where store = defaultStore
+newtype StructureSpawn = StructureSpawn OwnedStructure deriving (JSRef, JSShow)
+instance HasName StructureSpawn
+instance HasRoomPosition StructureSpawn
+instance HasScreepsId StructureSpawn
+instance HasOwner StructureSpawn
+instance Attackable StructureSpawn
+instance HasStore StructureSpawn
 instance IsRoomObject StructureSpawn where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_spawn . toJSRef
@@ -30,9 +34,6 @@ instance IsStructure StructureSpawn where
 instance IsOwnedStructure StructureSpawn where
   asOwnedStructure = coerce
   fromOwnedStruture = fromJSRef . maybe_spawn . toJSRef
-
-
-foreign import javascript "$1.name" name :: StructureSpawn -> JSString
 
 spawnCreep :: StructureSpawn -> [BodyPart] -> JSString -> IO ReturnCode
 spawnCreep spawn body creep_name = spawn_creep spawn (toJSRef body) creep_name
