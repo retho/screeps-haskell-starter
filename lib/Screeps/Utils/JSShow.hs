@@ -1,11 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Screeps.Core.JSShow
+module Screeps.Utils.JSShow
   ( JSShow(..)
   ) where
 
-import Screeps.Core.Ffi as Ffi
+import Screeps.Utils.Ffi as Ffi
 
 class JSShow a where
   showjs :: a -> JSString

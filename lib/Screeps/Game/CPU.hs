@@ -7,7 +7,7 @@ module Screeps.Game.CPU
   , getUsed
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 data HeapStatistics
   = HeapStatistics

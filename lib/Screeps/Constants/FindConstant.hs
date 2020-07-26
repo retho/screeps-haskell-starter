@@ -1,7 +1,8 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Constants.FindConstant
-  ( find_exit_top
+  ( FindConstant()
+  , find_exit_top
   , find_exit_right
   , find_exit_bottom
   , find_exit_left
@@ -40,17 +41,12 @@ module Screeps.Constants.FindConstant
   , find_ruins
   ) where
 
-import Screeps.Constants.Core.FindConstant
-import Screeps.Objects.Resource
-import Screeps.Objects.RoomPosition
-import Screeps.Objects.Creep
-import Screeps.Objects.Structure
-import Screeps.Objects.Structure.StructureSpawn
-import Screeps.Objects.Source
+import Screeps.Core
+
+import Screeps.Objects.Structures.StructureSpawn
 
 type Unknown = ()
 type Flag = Unknown
-type ConstructionSite = Unknown
 type Mineral = Unknown
 type Nuke = Unknown
 type Tombstone = Unknown

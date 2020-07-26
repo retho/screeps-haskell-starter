@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Screeps.Core.Default
+module Screeps.Utils.Default
   ( Default(..)
   ) where
 

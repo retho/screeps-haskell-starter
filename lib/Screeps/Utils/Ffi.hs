@@ -5,7 +5,7 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Screeps.Core.Ffi
+module Screeps.Utils.Ffi
   ( module Coerce
   , JSVal
   , JSString(..)

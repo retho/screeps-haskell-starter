@@ -1,8 +1,8 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Constants.BodyPart
-  ( cost
-  , BodyPart(..)
+  ( BodyPart()
+  , cost
   , move
   , work
   , carry
@@ -13,9 +13,8 @@ module Screeps.Constants.BodyPart
   , claim
   ) where
 
+import Screeps.Utils
 import Screeps.Core
-
-newtype BodyPart = BodyPart JSString deriving (JSShow, JSIndex, JSRef, Eq)
 
 foreign import javascript "BODYPART_COST[$1]" cost :: BodyPart -> Int
 

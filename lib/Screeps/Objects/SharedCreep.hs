@@ -3,15 +3,13 @@
 
 module Screeps.Objects.SharedCreep
   ( module RoomObject
-  , SharedCreep(..)
-  , IsSharedCreep(..)
+  , SharedCreep()
   , saying
   , ticksToLive
   , drop
   , drop'
   , moveTo
   , moveTo'
-  , notifyWhenAttacked
   , pickup
   , say
   , say'
@@ -23,36 +21,11 @@ module Screeps.Objects.SharedCreep
   ) where
 
 import Prelude hiding (drop)
+import Screeps.Utils
 import Screeps.Core
-import Screeps.Objects.Classes
-import Screeps.Objects.Resource hiding (amount)
-import Screeps.Objects.Store
-import Screeps.Objects.RoomPosition
+
 import Screeps.Objects.RoomObject as RoomObject
-import Screeps.Constants.ReturnCode
-import Screeps.Constants.ResourceType
 import Screeps.Objects.Options.SharedCreep
-
-
-newtype SharedCreep = SharedCreep RoomObject deriving (JSRef, JSShow)
-instance HasRoomPosition SharedCreep
-instance HasScreepsId SharedCreep
-instance HasStore SharedCreep
-instance HasName SharedCreep
-instance HasOwner SharedCreep
-instance Attackable SharedCreep
-instance Transferable SharedCreep
-instance Withdrawable SharedCreep
-instance IsRoomObject SharedCreep where
-  asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_shared_creep . toJSRef
-instance IsSharedCreep SharedCreep where
-  asSharedCreep = id
-  fromSharedCreep = pure
-
-class (IsRoomObject a, Attackable a, HasStore a, Transferable a, Withdrawable a, HasOwner a, HasName a, HasScreepsId a) => IsSharedCreep a where
-  asSharedCreep :: a -> SharedCreep
-  fromSharedCreep :: SharedCreep -> Maybe a
 
 
 saying :: IsSharedCreep c => c -> JSString
@@ -62,7 +35,6 @@ drop :: IsSharedCreep c => c -> ResourceType -> IO ReturnCode
 drop' :: IsSharedCreep c => c -> ResourceType -> Int -> IO ReturnCode
 moveTo :: (IsSharedCreep c, HasRoomPosition a) => c -> a -> IO ReturnCode
 moveTo' :: (IsSharedCreep c, HasRoomPosition a) => c -> a -> MoveToOptions -> IO ReturnCode
-notifyWhenAttacked :: IsSharedCreep c => c -> Bool -> IO ReturnCode
 pickup :: IsSharedCreep c => c -> Resource -> IO ReturnCode
 say :: IsSharedCreep c => c -> JSString -> IO ReturnCode
 say' :: IsSharedCreep c => c -> JSString -> Bool -> IO ReturnCode
@@ -81,7 +53,6 @@ drop self resource_type = js_drop (asSharedCreep self) resource_type
 drop' self resource_type amount = js_drop' (asSharedCreep self) resource_type amount
 moveTo self terget = js_moveTo (asSharedCreep self) (pos terget)
 moveTo' self terget opts = js_moveTo' (asSharedCreep self) (pos terget) (toJSRef opts)
-notifyWhenAttacked self enabled = js_notifyWhenAttacked (asSharedCreep self) enabled
 pickup self resource_type = js_pickup (asSharedCreep self) resource_type
 say self text = js_say (asSharedCreep self) text
 say' self text public = js_say' (asSharedCreep self) text public
@@ -92,8 +63,6 @@ withdraw self target = js_withdraw (asSharedCreep self) (asWithdrawable target)
 withdraw' self target amount = js_withdraw' (asSharedCreep self) (asWithdrawable target) amount
 
 
-foreign import javascript "$1 instanceof Screep || $1 instanceof PowerScreep ? $1 : null" maybe_shared_creep :: JSVal -> JSVal
-
 foreign import javascript "$1.saying" js_saying :: SharedCreep -> JSString
 foreign import javascript "$1.ticksToLive" js_ticksToLive :: SharedCreep -> Int
 
@@ -101,7 +70,6 @@ foreign import javascript "$1.drop($2)" js_drop :: SharedCreep -> ResourceType -
 foreign import javascript "$1.drop($2, $3)" js_drop' :: SharedCreep -> ResourceType -> Int -> IO ReturnCode
 foreign import javascript "$1.moveTo($2)" js_moveTo :: SharedCreep -> RoomPosition -> IO ReturnCode
 foreign import javascript "$1.moveTo($2, $3)" js_moveTo' :: SharedCreep -> RoomPosition -> JSVal -> IO ReturnCode
-foreign import javascript "$1.notifyWhenAttacked($2)" js_notifyWhenAttacked :: SharedCreep -> Bool -> IO ReturnCode
 foreign import javascript "$1.pickup($2)" js_pickup :: SharedCreep -> Resource -> IO ReturnCode
 foreign import javascript "$1.say($2)" js_say :: SharedCreep -> JSString -> IO ReturnCode
 foreign import javascript "$1.say($2, $3)" js_say' :: SharedCreep -> JSString -> Bool -> IO ReturnCode
