@@ -10,8 +10,7 @@ module Screeps.Game
 import Screeps.Utils
 import Screeps.Core
 
-import Screeps.Objects.Structure.StructureSpawn (StructureSpawn)
-import Screeps.Objects.Creep (Creep)
+import Screeps.Objects.Structures.StructureSpawn (StructureSpawn)
 
 foreign import javascript "Game.time" time :: IO Int
 foreign import javascript "Game.spawns" spawns :: IO (JSHashMap JSString StructureSpawn)

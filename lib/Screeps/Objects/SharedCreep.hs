@@ -3,8 +3,7 @@
 
 module Screeps.Objects.SharedCreep
   ( module RoomObject
-  , SharedCreep(..)
-  , IsSharedCreep(..)
+  , SharedCreep()
   , saying
   , ticksToLive
   , drop
@@ -25,33 +24,8 @@ import Prelude hiding (drop)
 import Screeps.Utils
 import Screeps.Core
 
-import Screeps.Objects.Resource hiding (amount)
-import Screeps.Objects.Store
-import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
 import Screeps.Objects.Options.SharedCreep
-
-
-newtype SharedCreep = SharedCreep RoomObject deriving (JSRef, JSShow)
-instance HasRoomPosition SharedCreep
-instance IsRoomObject SharedCreep where
-  asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_shared_creep . toJSRef
-instance HasScreepsId SharedCreep
-instance HasStore SharedCreep
-instance HasName SharedCreep
-instance HasOwner SharedCreep
-instance Attackable SharedCreep
-instance Transferable SharedCreep
-instance Withdrawable SharedCreep
-instance NotifyWhenAttacked SharedCreep
-instance IsSharedCreep SharedCreep where
-  asSharedCreep = id
-  fromSharedCreep = pure
-
-class (IsRoomObject a, HasScreepsId a, HasStore a, HasName a, HasOwner a, Attackable a, Transferable a, Withdrawable a, NotifyWhenAttacked a) => IsSharedCreep a where
-  asSharedCreep :: a -> SharedCreep
-  fromSharedCreep :: SharedCreep -> Maybe a
 
 
 saying :: IsSharedCreep c => c -> JSString
@@ -88,8 +62,6 @@ transfer' self target resource_type amount = js_transfer' (asSharedCreep self) (
 withdraw self target = js_withdraw (asSharedCreep self) (asWithdrawable target)
 withdraw' self target amount = js_withdraw' (asSharedCreep self) (asWithdrawable target) amount
 
-
-foreign import javascript "$1 instanceof Screep || $1 instanceof PowerScreep ? $1 : null" maybe_shared_creep :: JSVal -> JSVal
 
 foreign import javascript "$1.saying" js_saying :: SharedCreep -> JSString
 foreign import javascript "$1.ticksToLive" js_ticksToLive :: SharedCreep -> Int

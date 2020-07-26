@@ -1,6 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Screeps.Objects.Structure.StructureSpawn
+module Screeps.Objects.Structures.StructureSpawn
   ( module OwnedStructure
   , StructureSpawn(..)
   , store
@@ -10,8 +10,6 @@ module Screeps.Objects.Structure.StructureSpawn
 import Screeps.Utils
 import Screeps.Core
 
-import Screeps.Objects.Store
-import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject
 import Screeps.Objects.Structure
 import Screeps.Objects.OwnedStructure as OwnedStructure

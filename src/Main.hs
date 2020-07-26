@@ -15,14 +15,14 @@ import qualified Screeps.Memory as Mem
 import qualified Screeps.Game.CPU as Game.CPU
 import qualified Screeps.Objects.Room as Room
 import qualified Screeps.Objects.Creep as Creep
-import qualified Screeps.Objects.Structure.StructureSpawn as Spawn
+import qualified Screeps.Objects.Structures.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
 import qualified Screeps.Constants.ResourceType as ResourceType
 import qualified Screeps.Constants.ReturnCode as ReturnCode
 import Screeps.Constants.FindConstant as ReturnCode
 
-
 import Logging as Logging
+
 
 main :: IO ()
 main = do

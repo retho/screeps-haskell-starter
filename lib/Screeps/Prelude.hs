@@ -8,8 +8,25 @@ module Screeps.Prelude
 
 import Screeps.Utils as Utils hiding (Coercible, coerce)
 import Screeps.Core as Core
+  ( ScreepsId()
+  , HasScreepsId(..)
+  , Harvestable(..)
+  , HasOwner(..)
+  , Attackable(..)
+  , hits
+  , hitsMax
+  , HasName(..)
+  , Transferable(..)
+  , Withdrawable(..)
+  , NotifyWhenAttacked(..)
+  , HasRoomPosition(..)
+  , IsRoomObject(..)
+  , HasStore(..)
+  , IsSharedCreep(..)
+  , IsStructure(..)
+  )
 import Screeps.Memory as Common (HasMemory(..))
-import Screeps.Objects.Store as Common (HasStore(..), storeCapacity, storeFreeCapacity, storeUsedCapacity)
+import Screeps.Objects.Store as Common (storeCapacity, storeFreeCapacity, storeUsedCapacity)
 
 
 foreign import javascript "console.log($1)" console_log :: JSString -> IO ()

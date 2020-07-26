@@ -2,9 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Screeps.Objects.Creep
-  ( module RoomObject
-  , module SharedCreep
-  , Creep(..)
+  ( module SharedCreep
+  , Creep()
   , spawning
   , attack
   , attackController
@@ -27,31 +26,9 @@ module Screeps.Objects.Creep
 import Screeps.Utils
 import Screeps.Core
 
-import Screeps.Memory
 import Screeps.Objects.SharedCreep as SharedCreep
-import Screeps.Objects.Store
-import Screeps.Objects.RoomPosition
-import Screeps.Objects.ConstructionSite
-import Screeps.Objects.RoomObject as RoomObject
-import Screeps.Objects.Structure.StructureController
+import Screeps.Objects.Structures.StructureController
 
-newtype Creep = Creep SharedCreep deriving (JSRef, JSShow)
-instance HasRoomPosition Creep
-instance IsRoomObject Creep where
-  asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_creep . toJSRef
-instance HasScreepsId Creep
-instance HasStore Creep
-instance HasName Creep
-instance HasOwner Creep
-instance Attackable Creep
-instance Transferable Creep
-instance Withdrawable Creep
-instance NotifyWhenAttacked Creep
-instance IsSharedCreep Creep where
-  asSharedCreep = coerce
-  fromSharedCreep = fromJSRef . maybe_creep . toJSRef
-instance HasMemory Creep where memory x = Memory ["creeps", name x]
 
 foreign import javascript "$1.spawning" spawning :: Creep -> Bool
 
@@ -91,8 +68,6 @@ reserveController = js_reserveController
 signController = js_signController
 upgradeController = js_upgradeController
 
-
-foreign import javascript "$1 instanceof Creep ? $1 : null" maybe_creep :: JSVal -> JSVal
 
 foreign import javascript "$1.attack($2)" js_attack :: Creep -> JSVal -> IO ReturnCode
 foreign import javascript "$1.attackController($2)" js_attackController :: Creep -> StructureController -> IO ReturnCode

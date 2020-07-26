@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Screeps.Objects.Room
-  ( module Room
+  ( Room()
   , find
   , controller
   ) where
@@ -11,9 +11,7 @@ module Screeps.Objects.Room
 import Screeps.Utils
 import Screeps.Core
 
-import Screeps.Objects.Core.Room as Room
-import Screeps.Objects.Structure.StructureController
-
+import Screeps.Objects.Structures.StructureController
 
 find :: JSRef a => FindConstant a -> Room -> IO [a]
 find x rm = raw_find rm (toJSRef x) >>= pure . fromJSRef

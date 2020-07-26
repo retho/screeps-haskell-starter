@@ -2,26 +2,14 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module Screeps.Objects.RoomObject
-  ( RoomObject(..)
-  , IsRoomObject(..)
+  ( RoomObject()
   , room
   , effects
   ) where
 
 import Screeps.Utils
+import Screeps.Core
 
-import Screeps.Objects.Core.Room
-import Screeps.Objects.RoomPosition
-
-newtype RoomObject = RoomObject JSObject deriving (JSRef, JSShow)
-instance HasRoomPosition RoomObject
-instance IsRoomObject RoomObject where
-  asRoomObject = id
-  fromRoomObject = pure
-
-class HasRoomPosition a => IsRoomObject a where
-  asRoomObject :: a -> RoomObject
-  fromRoomObject :: RoomObject -> Maybe a
 
 room :: IsRoomObject a => a -> Room
 room = raw_room . asRoomObject
