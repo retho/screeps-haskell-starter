@@ -11,8 +11,9 @@ import Screeps.Objects.Classes
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
 
-newtype Source = Source RoomObject deriving (HasRoomPosition, JSRef, JSShow)
-instance Harvestable Source where asHarvestable = coerce
+newtype Source = Source RoomObject deriving (JSRef, JSShow)
+instance HasRoomPosition Source
+instance Harvestable Source
 instance IsRoomObject Source where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_source . toJSRef
