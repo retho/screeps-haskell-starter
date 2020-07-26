@@ -25,7 +25,7 @@ module Screeps.Constants.StructureType
   , invader_core
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 newtype StructureType = StructureType JSString deriving (JSShow, JSIndex, JSRef, Eq)
 

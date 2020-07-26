@@ -7,7 +7,7 @@ module Screeps.Objects.OwnedStructure
   , IsOwnedStructure(..)
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Objects.Classes
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject

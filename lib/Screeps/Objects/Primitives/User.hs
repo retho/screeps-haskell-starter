@@ -5,7 +5,7 @@ module Screeps.Objects.Primitives.User
   , _username
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 newtype User = User JSObject deriving (JSRef, JSShow)
 

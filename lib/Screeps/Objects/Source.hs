@@ -6,7 +6,7 @@ module Screeps.Objects.Source
   , Source(..)
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Objects.Classes
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject

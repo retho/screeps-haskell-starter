@@ -13,7 +13,7 @@ module Screeps.Constants.BodyPart
   , claim
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 newtype BodyPart = BodyPart JSString deriving (JSShow, JSIndex, JSRef, Eq)
 

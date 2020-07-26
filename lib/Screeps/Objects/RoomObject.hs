@@ -8,7 +8,7 @@ module Screeps.Objects.RoomObject
   , effects
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Objects.Core.Room
 import Screeps.Objects.RoomPosition
 

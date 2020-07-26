@@ -11,7 +11,7 @@ module Screeps.Objects.RoomPosition
   , isNearTo
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 newtype RoomPosition = RoomPosition JSObject deriving (JSRef, JSShow)
 instance HasRoomPosition RoomPosition where pos = id

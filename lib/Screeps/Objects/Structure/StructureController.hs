@@ -6,7 +6,7 @@ module Screeps.Objects.Structure.StructureController
   , spawnCreep
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 import Screeps.Objects.Classes
 import Screeps.Objects.Store

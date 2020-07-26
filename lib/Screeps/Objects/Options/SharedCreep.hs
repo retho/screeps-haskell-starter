@@ -4,7 +4,7 @@ module Screeps.Objects.Options.SharedCreep
   ( MoveToOptions(..)
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 data MoveToOptions =
   MoveToOptions

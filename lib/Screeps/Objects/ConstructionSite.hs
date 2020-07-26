@@ -10,7 +10,7 @@ module Screeps.Objects.ConstructionSite
   , remove
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Objects.Classes
 import Screeps.Constants.StructureType
 import Screeps.Objects.RoomPosition

@@ -10,7 +10,7 @@ module Screeps.Objects.Store
   , storeUsedCapacity
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Constants.ResourceType (ResourceType)
 
 newtype Store = Store JSObject deriving (JSRef, JSShow)

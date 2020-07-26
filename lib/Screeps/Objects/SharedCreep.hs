@@ -22,7 +22,7 @@ module Screeps.Objects.SharedCreep
   ) where
 
 import Prelude hiding (drop)
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Objects.Classes
 import Screeps.Objects.Resource hiding (amount)
 import Screeps.Objects.Store

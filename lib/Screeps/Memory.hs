@@ -13,7 +13,7 @@ module Screeps.Memory
   , HasMemory(..)
   ) where
 
-import Screeps.Core hiding (keys)
+import Screeps.Utils hiding (keys)
 
 data Memory = Memory [JSString]
 

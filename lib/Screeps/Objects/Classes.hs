@@ -14,7 +14,7 @@ module Screeps.Objects.Classes
   , NotifyWhenAttacked(..)
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 import Screeps.Objects.Primitives.ScreepsId
 import Screeps.Objects.Primitives.User
 import Screeps.Constants.ReturnCode

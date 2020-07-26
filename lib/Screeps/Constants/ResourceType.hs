@@ -5,7 +5,7 @@ module Screeps.Constants.ResourceType
   , energy
   ) where
 
-import Screeps.Core
+import Screeps.Utils
 
 newtype ResourceType = ResourceType JSString deriving (JSShow, JSIndex, JSRef, Eq)
 
