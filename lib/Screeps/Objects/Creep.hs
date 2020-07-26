@@ -28,7 +28,6 @@ import Screeps.Utils
 import Screeps.Core
 
 import Screeps.Memory
-import Screeps.Objects.Classes
 import Screeps.Objects.SharedCreep as SharedCreep
 import Screeps.Objects.Store
 import Screeps.Objects.RoomPosition

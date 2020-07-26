@@ -10,7 +10,6 @@ module Screeps.Objects.Structure.StructureSpawn
 import Screeps.Utils
 import Screeps.Core
 
-import Screeps.Objects.Classes
 import Screeps.Objects.Store
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject

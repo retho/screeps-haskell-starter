@@ -8,9 +8,8 @@ module Screeps.Game
   ) where
 
 import Screeps.Utils
+import Screeps.Core
 
-import Screeps.Objects.Classes
-import Screeps.Objects.Primitives.ScreepsId
 import Screeps.Objects.Structure.StructureSpawn (StructureSpawn)
 import Screeps.Objects.Creep (Creep)
 
