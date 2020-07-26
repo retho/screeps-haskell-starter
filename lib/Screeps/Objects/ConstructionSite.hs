@@ -16,12 +16,13 @@ import Screeps.Constants.StructureType
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
 
-newtype ConstructionSite = ConstructionSite RoomObject deriving (HasRoomPosition, JSRef, JSShow)
-instance HasScreepsId ConstructionSite
-instance HasOwner ConstructionSite
+newtype ConstructionSite = ConstructionSite RoomObject deriving (JSRef, JSShow)
+instance HasRoomPosition ConstructionSite
 instance IsRoomObject ConstructionSite where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_construction_site . toJSRef
+instance HasScreepsId ConstructionSite
+instance HasOwner ConstructionSite
 
 
 foreign import javascript "$1.progress" progress :: ConstructionSite -> Int

@@ -19,17 +19,17 @@ import Screeps.Constants.ReturnCode
 
 newtype Structure = Structure RoomObject deriving (JSRef, JSShow)
 instance HasRoomPosition Structure
-instance HasScreepsId Structure
-instance Attackable Structure
-instance NotifyWhenAttacked Structure
 instance IsRoomObject Structure where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_structure . toJSRef
+instance HasScreepsId Structure
+instance Attackable Structure
+instance NotifyWhenAttacked Structure
 instance IsStructure Structure where
   asStructure = id
   fromStructure = pure
 
-class (IsRoomObject a, Attackable a, HasScreepsId a, NotifyWhenAttacked a) => IsStructure a where
+class (IsRoomObject a, HasScreepsId a, Attackable a, NotifyWhenAttacked a) => IsStructure a where
   asStructure :: a -> Structure
   fromStructure :: Structure -> Maybe a
 

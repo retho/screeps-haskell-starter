@@ -35,6 +35,9 @@ import Screeps.Objects.Options.SharedCreep
 
 newtype SharedCreep = SharedCreep RoomObject deriving (JSRef, JSShow)
 instance HasRoomPosition SharedCreep
+instance IsRoomObject SharedCreep where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_shared_creep . toJSRef
 instance HasScreepsId SharedCreep
 instance HasStore SharedCreep
 instance HasName SharedCreep
@@ -43,14 +46,11 @@ instance Attackable SharedCreep
 instance Transferable SharedCreep
 instance Withdrawable SharedCreep
 instance NotifyWhenAttacked SharedCreep
-instance IsRoomObject SharedCreep where
-  asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_shared_creep . toJSRef
 instance IsSharedCreep SharedCreep where
   asSharedCreep = id
   fromSharedCreep = pure
 
-class (IsRoomObject a, Attackable a, HasStore a, Transferable a, Withdrawable a, HasOwner a, HasName a, HasScreepsId a, NotifyWhenAttacked a) => IsSharedCreep a where
+class (IsRoomObject a, HasScreepsId a, HasStore a, HasName a, HasOwner a, Attackable a, Transferable a, Withdrawable a, NotifyWhenAttacked a) => IsSharedCreep a where
   asSharedCreep :: a -> SharedCreep
   fromSharedCreep :: SharedCreep -> Maybe a
 

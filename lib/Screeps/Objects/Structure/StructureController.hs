@@ -18,22 +18,22 @@ import Screeps.Constants.BodyPart
 import Screeps.Constants.ReturnCode
 
 newtype StructureController = StructureController OwnedStructure deriving (JSRef, JSShow)
-instance Attackable StructureController
-instance HasOwner StructureController
-instance HasScreepsId StructureController
 instance HasRoomPosition StructureController
-instance HasStore StructureController
-instance HasName StructureController
-instance NotifyWhenAttacked StructureController
 instance IsRoomObject StructureController where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_spawn . toJSRef
+instance HasScreepsId StructureController
+instance Attackable StructureController
+instance NotifyWhenAttacked StructureController
 instance IsStructure StructureController where
   asStructure = coerce
   fromStructure = fromJSRef . maybe_spawn . toJSRef
+instance HasOwner StructureController
 instance IsOwnedStructure StructureController where
   asOwnedStructure = coerce
   fromOwnedStruture = fromJSRef . maybe_spawn . toJSRef
+instance HasStore StructureController
+instance HasName StructureController
 
 
 spawnCreep :: StructureController -> [BodyPart] -> JSString -> IO ReturnCode

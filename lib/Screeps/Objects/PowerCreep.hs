@@ -16,22 +16,22 @@ import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
 
 newtype PowerCreep = PowerCreep SharedCreep deriving (JSRef, JSShow)
-instance HasScreepsId PowerCreep
-instance HasMemory PowerCreep where memory x = Memory ["creeps", name x]
-instance HasStore PowerCreep
 instance HasRoomPosition PowerCreep
+instance IsRoomObject PowerCreep where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_power_creep . toJSRef
+instance HasScreepsId PowerCreep
+instance HasStore PowerCreep
 instance HasName PowerCreep
 instance HasOwner PowerCreep
 instance Attackable PowerCreep
 instance Transferable PowerCreep
 instance Withdrawable PowerCreep
 instance NotifyWhenAttacked PowerCreep
-instance IsRoomObject PowerCreep where
-  asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_power_creep . toJSRef
 instance IsSharedCreep PowerCreep where
   asSharedCreep = coerce
   fromSharedCreep = fromJSRef . maybe_power_creep . toJSRef
+instance HasMemory PowerCreep where memory x = Memory ["powerCreeps", name x]
 
 
 -- *
