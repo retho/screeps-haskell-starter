@@ -47,6 +47,7 @@ instance HasOwner Creep
 instance Attackable Creep
 instance Transferable Creep
 instance Withdrawable Creep
+instance NotifyWhenAttacked Creep
 instance IsRoomObject Creep where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_creep . toJSRef

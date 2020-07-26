@@ -18,6 +18,7 @@ instance Attackable OwnedStructure
 instance HasScreepsId OwnedStructure
 instance HasRoomPosition OwnedStructure
 instance HasOwner OwnedStructure
+instance NotifyWhenAttacked OwnedStructure
 instance IsRoomObject OwnedStructure where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_owned_structure . toJSRef

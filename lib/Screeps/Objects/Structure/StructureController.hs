@@ -3,7 +3,6 @@
 module Screeps.Objects.Structure.StructureController
   ( module OwnedStructure
   , StructureController(..)
-  , name
   , spawnCreep
   ) where
 
@@ -25,6 +24,7 @@ instance HasScreepsId StructureController
 instance HasRoomPosition StructureController
 instance HasStore StructureController
 instance HasName StructureController
+instance NotifyWhenAttacked StructureController
 instance IsRoomObject StructureController where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_spawn . toJSRef
