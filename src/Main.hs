@@ -33,7 +33,7 @@ main = do
     debug $ "running spawn " <> name spawn
     let body = [BodyPart.move, BodyPart.move, BodyPart.carry, BodyPart.work]
     when (storeUsedCapacity spawn (pure ResourceType.energy) >= sum (map BodyPart.cost body)) $ do
-      -- * create a unique nm, spawn.
+      -- * create a unique name, spawn.
       name_base <- Game.time
       let
         loop :: (a -> Bool) -> [IO a] -> IO a
