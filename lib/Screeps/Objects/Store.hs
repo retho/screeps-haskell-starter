@@ -11,7 +11,7 @@ module Screeps.Objects.Store
   ) where
 
 import Screeps.Utils
-import Screeps.Constants.ResourceType (ResourceType)
+import Screeps.Core
 
 newtype Store = Store JSObject deriving (JSRef, JSShow)
 instance HasStore Store where store = id

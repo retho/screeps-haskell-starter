@@ -11,11 +11,11 @@ module Screeps.Objects.Structure
   ) where
 
 import Screeps.Utils
+import Screeps.Core
+
 import Screeps.Objects.Classes
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
-import Screeps.Constants.StructureType
-import Screeps.Constants.ReturnCode
 
 newtype Structure = Structure RoomObject deriving (JSRef, JSShow)
 instance HasRoomPosition Structure

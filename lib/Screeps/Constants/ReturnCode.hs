@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Constants.ReturnCode
-  ( ReturnCode(..)
+  ( ReturnCode()
   , ok
   , err_not_owner
   , err_no_path
@@ -21,9 +21,7 @@ module Screeps.Constants.ReturnCode
   , err_gcl_not_enough
   ) where
 
-import Screeps.Utils
-
-newtype ReturnCode = ReturnCode Int deriving (JSShow, JSIndex, JSRef, Eq)
+import Screeps.Core
 
 foreign import javascript "OK" ok :: ReturnCode
 foreign import javascript "ERR_NOT_OWNER" err_not_owner :: ReturnCode

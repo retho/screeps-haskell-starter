@@ -8,7 +8,6 @@ import Text.Printf (printf)
 import Control.Monad (when, void)
 import Data.Foldable (for_)
 
-import Screeps.Constants.FindConstant
 import Screeps.Objects.RoomPosition (isNearTo)
 
 import qualified Screeps.Game as Game
@@ -20,6 +19,8 @@ import qualified Screeps.Objects.Structure.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
 import qualified Screeps.Constants.ResourceType as ResourceType
 import qualified Screeps.Constants.ReturnCode as ReturnCode
+import Screeps.Constants.FindConstant as ReturnCode
+
 
 import Logging as Logging
 

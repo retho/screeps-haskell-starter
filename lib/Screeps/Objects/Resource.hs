@@ -9,10 +9,11 @@ module Screeps.Objects.Resource
   ) where
 
 import Screeps.Utils
+import Screeps.Core
+
 import Screeps.Objects.Classes
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
-import Screeps.Constants.ResourceType
 
 newtype Resource = Resource RoomObject deriving (JSRef, JSShow)
 instance HasRoomPosition Resource

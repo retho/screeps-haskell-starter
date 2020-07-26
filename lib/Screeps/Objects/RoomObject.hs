@@ -9,6 +9,7 @@ module Screeps.Objects.RoomObject
   ) where
 
 import Screeps.Utils
+
 import Screeps.Objects.Core.Room
 import Screeps.Objects.RoomPosition
 

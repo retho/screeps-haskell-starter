@@ -7,6 +7,7 @@ module Screeps.Objects.Structure.StructureController
   ) where
 
 import Screeps.Utils
+import Screeps.Core
 
 import Screeps.Objects.Classes
 import Screeps.Objects.Store
@@ -14,8 +15,6 @@ import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject
 import Screeps.Objects.Structure
 import Screeps.Objects.OwnedStructure as OwnedStructure
-import Screeps.Constants.BodyPart
-import Screeps.Constants.ReturnCode
 
 newtype StructureController = StructureController OwnedStructure deriving (JSRef, JSShow)
 instance HasRoomPosition StructureController

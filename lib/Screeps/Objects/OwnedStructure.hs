@@ -8,6 +8,7 @@ module Screeps.Objects.OwnedStructure
   ) where
 
 import Screeps.Utils
+
 import Screeps.Objects.Classes
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject

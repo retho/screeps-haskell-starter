@@ -9,7 +9,8 @@ module Screeps.Objects.Room
   ) where
 
 import Screeps.Utils
-import Screeps.Constants.Core.FindConstant
+import Screeps.Core
+
 import Screeps.Objects.Core.Room as Room
 import Screeps.Objects.Structure.StructureController
 

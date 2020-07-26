@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Constants.StructureType
-  ( StructureType(..)
+  ( StructureType()
   , spawn
   , extension
   , road
@@ -25,9 +25,7 @@ module Screeps.Constants.StructureType
   , invader_core
   ) where
 
-import Screeps.Utils
-
-newtype StructureType = StructureType JSString deriving (JSShow, JSIndex, JSRef, Eq)
+import Screeps.Core
 
 foreign import javascript "STRUCTURE_SPAWN" spawn :: StructureType
 foreign import javascript "STRUCTURE_EXTENSION" extension :: StructureType

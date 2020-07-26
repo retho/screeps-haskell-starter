@@ -23,13 +23,13 @@ module Screeps.Objects.SharedCreep
 
 import Prelude hiding (drop)
 import Screeps.Utils
+import Screeps.Core
+
 import Screeps.Objects.Classes
 import Screeps.Objects.Resource hiding (amount)
 import Screeps.Objects.Store
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
-import Screeps.Constants.ReturnCode
-import Screeps.Constants.ResourceType
 import Screeps.Objects.Options.SharedCreep
 
 

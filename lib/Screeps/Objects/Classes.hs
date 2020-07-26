@@ -15,9 +15,10 @@ module Screeps.Objects.Classes
   ) where
 
 import Screeps.Utils
+import Screeps.Core
+
 import Screeps.Objects.Primitives.ScreepsId
 import Screeps.Objects.Primitives.User
-import Screeps.Constants.ReturnCode
 
 
 class JSRef a => HasScreepsId a where

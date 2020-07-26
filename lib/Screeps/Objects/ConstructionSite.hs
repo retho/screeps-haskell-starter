@@ -11,8 +11,9 @@ module Screeps.Objects.ConstructionSite
   ) where
 
 import Screeps.Utils
+import Screeps.Core
+
 import Screeps.Objects.Classes
-import Screeps.Constants.StructureType
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.RoomObject as RoomObject
 

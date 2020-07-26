@@ -1,7 +1,8 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Screeps.Constants.FindConstant
-  ( find_exit_top
+  ( FindConstant()
+  , find_exit_top
   , find_exit_right
   , find_exit_bottom
   , find_exit_left
@@ -40,7 +41,8 @@ module Screeps.Constants.FindConstant
   , find_ruins
   ) where
 
-import Screeps.Constants.Core.FindConstant
+import Screeps.Core.Constants
+
 import Screeps.Objects.Resource
 import Screeps.Objects.RoomPosition
 import Screeps.Objects.Creep

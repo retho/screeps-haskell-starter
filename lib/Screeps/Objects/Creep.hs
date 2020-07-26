@@ -25,6 +25,8 @@ module Screeps.Objects.Creep
   ) where
 
 import Screeps.Utils
+import Screeps.Core
+
 import Screeps.Memory
 import Screeps.Objects.Classes
 import Screeps.Objects.SharedCreep as SharedCreep
@@ -33,8 +35,6 @@ import Screeps.Objects.RoomPosition
 import Screeps.Objects.ConstructionSite
 import Screeps.Objects.RoomObject as RoomObject
 import Screeps.Objects.Structure.StructureController
-import Screeps.Constants.ReturnCode
-import Screeps.Constants.BodyPart (BodyPart(..))
 
 newtype Creep = Creep SharedCreep deriving (JSRef, JSShow)
 instance HasRoomPosition Creep

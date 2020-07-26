@@ -7,6 +7,7 @@ module Screeps.Objects.Core.Room
   ) where
 
 import Screeps.Utils
+
 import Screeps.Memory
 
 newtype Room = Room JSObject deriving (JSRef, JSShow)

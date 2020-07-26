@@ -8,6 +8,7 @@ module Screeps.Objects.PowerCreep
   ) where
 
 import Screeps.Utils
+
 import Screeps.Memory
 import Screeps.Objects.Classes
 import Screeps.Objects.SharedCreep as SharedCreep
