@@ -8,6 +8,8 @@ const startsWith = (selfstr, search, rawPos) => {
   return selfstr.substring(pos, pos + search.length) === search;
 }
 
+const startedAt = Game.time;
+
 export default
   mdle
     .then(m => rts.newAsteriusInstance(Object.assign(req, {module: m})))
@@ -28,6 +30,8 @@ export default
           global.runImmediateQueue();
         } catch (err) {
           if (err.message && startsWith(err.message, 'ReentrancyGuard:')) Game.cpu.halt();
+          const ticksWithoutErrors = Game.time - startedAt;
+          if (ticksWithoutErrors > 100) Game.cpu.halt();
           throw err;
         }
         return promise;
