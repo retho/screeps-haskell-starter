@@ -43,7 +43,6 @@ module Screeps.Constants.FindConstant
 
 import Screeps.Internal
 
-import Screeps.Objects.Structures.StructureSpawn
 
 foreign import javascript "FIND_EXIT_TOP" find_exit_top :: FindConstant RoomPosition
 foreign import javascript "FIND_EXIT_RIGHT" find_exit_right :: FindConstant RoomPosition

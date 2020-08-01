@@ -99,12 +99,15 @@ instance HasScreepsId PowerCreep
 instance HasScreepsId Resource
 instance HasScreepsId Structure
 instance HasScreepsId OwnedStructure
+instance HasScreepsId StructureController
+instance HasScreepsId StructureSpawn
 
 
 instance HasName Room
 instance HasName SharedCreep
 instance HasName Creep
 instance HasName PowerCreep
+instance HasName StructureSpawn
 
 
 instance HasOwner ConstructionSite
@@ -112,19 +115,24 @@ instance HasOwner SharedCreep
 instance HasOwner Creep
 instance HasOwner PowerCreep
 instance HasOwner OwnedStructure
+instance HasOwner StructureController
+instance HasOwner StructureSpawn
 
 
 instance HasStore Store where store = id
 instance HasStore SharedCreep
 instance HasStore Creep
 instance HasStore PowerCreep
+instance HasStore StructureSpawn
 
 
+instance Attackable StructureController
 instance Attackable SharedCreep
 instance Attackable Creep
 instance Attackable PowerCreep
 instance Attackable Structure
 instance Attackable OwnedStructure
+instance Attackable StructureSpawn
 
 
 instance Transferable SharedCreep
@@ -137,14 +145,18 @@ instance Withdrawable Creep
 instance Withdrawable PowerCreep
 
 
+instance NotifyWhenAttacked StructureController
 instance NotifyWhenAttacked SharedCreep
 instance NotifyWhenAttacked Creep
 instance NotifyWhenAttacked PowerCreep
 instance NotifyWhenAttacked Structure
 instance NotifyWhenAttacked OwnedStructure
+instance NotifyWhenAttacked StructureSpawn
 
 
 instance Harvestable Source
+instance Harvestable Mineral
+instance Harvestable Deposit
 
 
 instance HasRoomPosition RoomPosition where pos = id
@@ -163,6 +175,8 @@ instance HasRoomPosition Ruin
 instance HasRoomPosition Tombstone
 instance HasRoomPosition Structure
 instance HasRoomPosition OwnedStructure
+instance HasRoomPosition StructureController
+instance HasRoomPosition StructureSpawn
 
 
 instance IsSharedCreep SharedCreep where
@@ -221,6 +235,12 @@ instance IsRoomObject Structure where
 instance IsRoomObject OwnedStructure where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_owned_structure . toJSRef
+instance IsRoomObject StructureController where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_structure_controller . toJSRef
+instance IsRoomObject StructureSpawn where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_structure_spawn . toJSRef
 
 
 instance IsStructure Structure where
@@ -229,11 +249,23 @@ instance IsStructure Structure where
 instance IsStructure OwnedStructure where
   asStructure = coerce
   fromStructure = fromJSRef . maybe_owned_structure . toJSRef
+instance IsStructure StructureController where
+  asStructure = coerce
+  fromStructure = fromJSRef . maybe_structure_controller . toJSRef
+instance IsStructure StructureSpawn where
+  asStructure = coerce
+  fromStructure = fromJSRef . maybe_structure_spawn . toJSRef
 
 
 instance IsOwnedStructure OwnedStructure where
   asOwnedStructure = id
   fromOwnedStruture = pure
+instance IsOwnedStructure StructureController where
+  asOwnedStructure = coerce
+  fromOwnedStruture = fromJSRef . maybe_structure_controller . toJSRef
+instance IsOwnedStructure StructureSpawn where
+  asOwnedStructure = coerce
+  fromOwnedStruture = fromJSRef . maybe_structure_spawn . toJSRef
 
 
 -- *
@@ -262,3 +294,5 @@ foreign import javascript "$1 instanceof Ruin ? $1 : null" maybe_ruin :: JSVal -
 foreign import javascript "$1 instanceof Tombstone ? $1 : null" maybe_tombstone :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Structure ? $1 : null" maybe_structure :: JSVal -> JSVal
 foreign import javascript "$1 instanceof OwnedStructure ? $1 : null" maybe_owned_structure :: JSVal -> JSVal
+foreign import javascript "$1 instanceof StructureController ? $1 : null" maybe_structure_controller :: JSVal -> JSVal
+foreign import javascript "$1 instanceof StructureSpawn ? $1 : null" maybe_structure_spawn :: JSVal -> JSVal

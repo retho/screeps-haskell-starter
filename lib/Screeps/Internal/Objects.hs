@@ -25,6 +25,8 @@ module Screeps.Internal.Objects
   , Source(..)
   , Structure(..)
   , OwnedStructure(..)
+  , StructureController(..)
+  , StructureSpawn(..)
   ) where
 
 import Screeps.Utils
@@ -75,3 +77,7 @@ newtype PowerCreep = PowerCreep SharedCreep deriving (JSRef, JSShow)
 newtype Structure = Structure RoomObject deriving (JSRef, JSShow)
 
 newtype OwnedStructure = OwnedStructure Structure deriving (JSRef, JSShow)
+
+newtype StructureController = StructureController OwnedStructure deriving (JSRef, JSShow)
+
+newtype StructureSpawn = StructureSpawn OwnedStructure deriving (JSRef, JSShow)
