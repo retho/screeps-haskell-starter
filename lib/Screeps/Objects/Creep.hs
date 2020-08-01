@@ -27,7 +27,6 @@ import Screeps.Utils
 import Screeps.Internal
 
 import Screeps.Objects.SharedCreep as SharedCreep
-import Screeps.Objects.Structures.StructureController
 
 
 foreign import javascript "$1.spawning" spawning :: Creep -> Bool

@@ -11,7 +11,6 @@ module Screeps.Objects.Room
 import Screeps.Utils
 import Screeps.Internal
 
-import Screeps.Objects.Structures.StructureController
 
 find :: JSRef a => FindConstant a -> Room -> IO [a]
 find x rm = raw_find rm (toJSRef x) >>= pure . fromJSRef
