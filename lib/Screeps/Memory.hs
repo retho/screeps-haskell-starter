@@ -14,6 +14,7 @@ module Screeps.Memory
   ) where
 
 import Screeps.Utils hiding (keys)
+import Screeps.Internal
 
 data Memory = Memory [JSString]
 
@@ -39,6 +40,11 @@ keys (Memory mem_path) = mem_keys (join mem_path ".") >>= pure . fromJSRef
 
 class HasMemory a where
   memory :: a -> Memory
+
+instance HasMemory Room where memory x = Memory ["rooms", name x]
+instance HasMemory Creep where memory x = Memory ["creeps", name x]
+instance HasMemory PowerCreep where memory x = Memory ["powerCreeps", name x]
+
 
 
 join :: [JSString] -> JSString -> JSString
