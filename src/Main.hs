@@ -19,7 +19,7 @@ import qualified Screeps.Objects.StructureSpawn as Spawn
 import qualified Screeps.Constants.BodyPart as BodyPart
 import qualified Screeps.Constants.ResourceType as ResourceType
 import qualified Screeps.Constants.ReturnCode as ReturnCode
-import Screeps.Constants.FindConstant as ReturnCode
+import Screeps.Constants.FindConstant
 
 import Logging as Logging
 
