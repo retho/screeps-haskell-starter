@@ -5,6 +5,6 @@ module Screeps.Objects.Source
   ( Source()
   ) where
 
-import Screeps.Core
+import Screeps.Internal
 
 -- *

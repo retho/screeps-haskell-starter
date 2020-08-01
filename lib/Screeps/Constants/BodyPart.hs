@@ -14,7 +14,7 @@ module Screeps.Constants.BodyPart
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 foreign import javascript "BODYPART_COST[$1]" cost :: BodyPart -> Int
 

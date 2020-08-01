@@ -24,7 +24,7 @@ module Screeps.Objects.Creep
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.SharedCreep as SharedCreep
 import Screeps.Objects.Structures.StructureController

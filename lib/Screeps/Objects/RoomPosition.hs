@@ -11,7 +11,7 @@ module Screeps.Objects.RoomPosition
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 foreign import javascript "new RoomPosition($1, $2, $3)" new :: Int -> Int -> JSString -> RoomPosition
 

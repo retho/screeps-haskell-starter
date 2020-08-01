@@ -10,7 +10,7 @@ module Screeps.Objects.Structure
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.RoomObject as RoomObject
 

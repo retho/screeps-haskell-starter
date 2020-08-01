@@ -8,7 +8,7 @@ module Screeps.Objects.Resource
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 
 foreign import javascript "$1.amount" amount :: Resource -> Int

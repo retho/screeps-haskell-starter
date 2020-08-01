@@ -22,7 +22,7 @@ module Screeps.Objects.SharedCreep
 
 import Prelude hiding (drop)
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.RoomObject as RoomObject
 import Screeps.Objects.Options.SharedCreep

@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Screeps.Core.Constants
-  ( module Screeps.Core.Constants
+module Screeps.Internal.Constants
+  ( module Screeps.Internal.Constants
   ) where
 
 import Screeps.Utils

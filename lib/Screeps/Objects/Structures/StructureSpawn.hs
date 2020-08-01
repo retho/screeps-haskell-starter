@@ -8,7 +8,7 @@ module Screeps.Objects.Structures.StructureSpawn
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.RoomObject
 import Screeps.Objects.Structure

@@ -6,6 +6,6 @@ module Screeps.Objects.OwnedStructure
   , OwnedStructure()
   ) where
 
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.Structure as Structure

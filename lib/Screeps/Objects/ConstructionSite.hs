@@ -10,7 +10,7 @@ module Screeps.Objects.ConstructionSite
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 foreign import javascript "$1.progress" progress :: ConstructionSite -> Int
 foreign import javascript "$1.progressTotal" progressTotal :: ConstructionSite -> Int

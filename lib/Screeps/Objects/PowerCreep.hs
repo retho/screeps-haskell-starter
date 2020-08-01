@@ -6,7 +6,7 @@ module Screeps.Objects.PowerCreep
   , PowerCreep()
   ) where
 
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.SharedCreep as SharedCreep
 

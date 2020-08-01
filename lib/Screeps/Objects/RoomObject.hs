@@ -8,7 +8,7 @@ module Screeps.Objects.RoomObject
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 
 room :: IsRoomObject a => a -> Room
