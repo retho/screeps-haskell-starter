@@ -45,7 +45,7 @@ instance HasMemory Room where memory x = Memory ["rooms", name x]
 instance HasMemory Creep where memory x = Memory ["creeps", name x]
 instance HasMemory PowerCreep where memory x = Memory ["powerCreeps", name x]
 
-
+-- *
 
 join :: [JSString] -> JSString -> JSString
 join [] _ = ""

@@ -1,30 +1,13 @@
 
 module Screeps.Prelude
   ( module Utils
-  , module Core
+  , module Classes
   , module Common
   , consoleLog
   ) where
 
 import Screeps.Utils as Utils hiding (Coercible, coerce)
-import Screeps.Internal as Core
-  ( ScreepsId()
-  , HasScreepsId(..)
-  , Harvestable(..)
-  , HasOwner(..)
-  , Attackable(..)
-  , hits
-  , hitsMax
-  , HasName(..)
-  , Transferable(..)
-  , Withdrawable(..)
-  , NotifyWhenAttacked(..)
-  , HasRoomPosition(..)
-  , IsRoomObject(..)
-  , HasStore(..)
-  , IsSharedCreep(..)
-  , IsStructure(..)
-  )
+import Screeps.Internal.Classes as Classes
 import Screeps.Memory as Common (HasMemory(..))
 import Screeps.Objects.Store as Common (storeCapacity, storeFreeCapacity, storeUsedCapacity)
 
