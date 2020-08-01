@@ -41,7 +41,7 @@ module Screeps.Constants.FindConstant
   , find_ruins
   ) where
 
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.Structures.StructureSpawn
 

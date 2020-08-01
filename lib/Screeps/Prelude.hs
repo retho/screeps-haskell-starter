@@ -7,7 +7,7 @@ module Screeps.Prelude
   ) where
 
 import Screeps.Utils as Utils hiding (Coercible, coerce)
-import Screeps.Core as Core
+import Screeps.Internal as Core
   ( ScreepsId()
   , HasScreepsId(..)
   , Harvestable(..)

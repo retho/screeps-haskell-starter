@@ -21,7 +21,7 @@ module Screeps.Constants.ReturnCode
   , err_gcl_not_enough
   ) where
 
-import Screeps.Core
+import Screeps.Internal
 
 foreign import javascript "OK" ok :: ReturnCode
 foreign import javascript "ERR_NOT_OWNER" err_not_owner :: ReturnCode

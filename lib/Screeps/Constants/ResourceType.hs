@@ -6,6 +6,6 @@ module Screeps.Constants.ResourceType
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 foreign import javascript "RESOURCE_ENERGY" energy :: ResourceType

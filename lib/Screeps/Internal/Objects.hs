@@ -3,7 +3,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 
-module Screeps.Core.Objects
+module Screeps.Internal.Objects
   ( ScreepsId(..)
   , HasScreepsId(..)
   , User(..)
@@ -38,7 +38,7 @@ module Screeps.Core.Objects
   ) where
 
 import Screeps.Utils
-import Screeps.Core.Constants
+import Screeps.Internal.Constants
 import Data.String (IsString)
 import Screeps.Memory
 

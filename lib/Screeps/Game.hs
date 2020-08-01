@@ -8,7 +8,7 @@ module Screeps.Game
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 import Screeps.Objects.Structures.StructureSpawn (StructureSpawn)
 

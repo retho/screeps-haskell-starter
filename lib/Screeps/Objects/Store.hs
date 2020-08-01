@@ -10,7 +10,7 @@ module Screeps.Objects.Store
   ) where
 
 import Screeps.Utils
-import Screeps.Core
+import Screeps.Internal
 
 
 storeCapacity :: HasStore a => a -> Maybe ResourceType -> Int
