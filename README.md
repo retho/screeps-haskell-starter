@@ -35,7 +35,7 @@ npm run deploy
 
 `npm run test:<target-name> -- --suite=<suite-path>` runs test suite within environment `<target-name>`, where `<suite-path>` is path to folder with test, e.g. `--suite=tests/basic`
   + `npm run test:node-screeps -- --suite=<suite-path>` must work as well as `npm run test:node -- --suite=<suite-path>`
-  + requires Node >= v14.5.0
+  + requires `node >= v14.5.0`
 
 
 

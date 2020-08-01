@@ -16,6 +16,12 @@ module Screeps.Internal.Objects
   , Creep(..)
   , PowerCreep(..)
   , Resource(..)
+  , Deposit(..)
+  , Flag(..)
+  , Mineral(..)
+  , Nuke(..)
+  , Ruin(..)
+  , Tombstone(..)
   , Source(..)
   , Structure(..)
   , OwnedStructure(..)
@@ -57,3 +63,15 @@ newtype Source = Source RoomObject deriving (JSRef, JSShow)
 newtype Structure = Structure RoomObject deriving (JSRef, JSShow)
 
 newtype OwnedStructure = OwnedStructure Structure deriving (JSRef, JSShow)
+
+newtype Deposit = Deposit JSObject deriving (JSRef, JSShow)
+
+newtype Flag = Flag JSObject deriving (JSRef, JSShow)
+
+newtype Mineral = Mineral JSObject deriving (JSRef, JSShow)
+
+newtype Nuke = Nuke JSObject deriving (JSRef, JSShow)
+
+newtype Ruin = Ruin JSObject deriving (JSRef, JSShow)
+
+newtype Tombstone = Tombstone JSObject deriving (JSRef, JSShow)

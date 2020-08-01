@@ -155,6 +155,12 @@ instance HasRoomPosition Creep
 instance HasRoomPosition PowerCreep
 instance HasRoomPosition Resource
 instance HasRoomPosition Source
+instance HasRoomPosition Deposit
+instance HasRoomPosition Flag
+instance HasRoomPosition Mineral
+instance HasRoomPosition Nuke
+instance HasRoomPosition Ruin
+instance HasRoomPosition Tombstone
 instance HasRoomPosition Structure
 instance HasRoomPosition OwnedStructure
 
@@ -176,9 +182,6 @@ instance IsRoomObject RoomObject where
 instance IsRoomObject ConstructionSite where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_construction_site . toJSRef
-instance IsRoomObject SharedCreep where
-  asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_shared_creep . toJSRef
 instance IsRoomObject Creep where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_creep . toJSRef
@@ -188,12 +191,33 @@ instance IsRoomObject PowerCreep where
 instance IsRoomObject Resource where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_resource . toJSRef
-instance IsRoomObject Structure where
+instance IsRoomObject Deposit where
   asRoomObject = coerce
-  fromRoomObject = fromJSRef . maybe_structure . toJSRef
+  fromRoomObject = fromJSRef . maybe_deposit . toJSRef
+instance IsRoomObject Flag where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_flag . toJSRef
+instance IsRoomObject Mineral where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_mineral . toJSRef
+instance IsRoomObject Nuke where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_nuke . toJSRef
+instance IsRoomObject Ruin where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_ruin . toJSRef
+instance IsRoomObject Tombstone where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_tombstone . toJSRef
 instance IsRoomObject Source where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_source . toJSRef
+instance IsRoomObject SharedCreep where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_shared_creep . toJSRef
+instance IsRoomObject Structure where
+  asRoomObject = coerce
+  fromRoomObject = fromJSRef . maybe_structure . toJSRef
 instance IsRoomObject OwnedStructure where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_owned_structure . toJSRef
@@ -230,5 +254,11 @@ foreign import javascript "$1 instanceof Creep ? $1 : null" maybe_creep :: JSVal
 foreign import javascript "$1 instanceof PowerCreep ? $1 : null" maybe_power_creep :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Resource ? $1 : null" maybe_resource :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Source ? $1 : null" maybe_source :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Deposit ? $1 : null" maybe_deposit :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Mineral ? $1 : null" maybe_mineral :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Flag ? $1 : null" maybe_flag :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Nuke ? $1 : null" maybe_nuke :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Ruin ? $1 : null" maybe_ruin :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Tombstone ? $1 : null" maybe_tombstone :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Structure ? $1 : null" maybe_structure :: JSVal -> JSVal
 foreign import javascript "$1 instanceof OwnedStructure ? $1 : null" maybe_owned_structure :: JSVal -> JSVal

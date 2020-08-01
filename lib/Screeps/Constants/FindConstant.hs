@@ -46,10 +46,6 @@ import Screeps.Internal
 import Screeps.Objects.Structures.StructureSpawn
 
 type Unknown = ()
-type Flag = Unknown
-type Mineral = Unknown
-type Nuke = Unknown
-type Tombstone = Unknown
 
 foreign import javascript "FIND_EXIT_TOP" find_exit_top :: FindConstant RoomPosition
 foreign import javascript "FIND_EXIT_RIGHT" find_exit_right :: FindConstant RoomPosition
@@ -86,6 +82,6 @@ foreign import javascript "FIND_TOMBSTONES" find_tombstones :: FindConstant Tomb
 foreign import javascript "FIND_POWER_CREEPS" find_power_creeps :: FindConstant Unknown
 foreign import javascript "FIND_MY_POWER_CREEPS" find_my_power_creeps :: FindConstant Unknown
 foreign import javascript "FIND_HOSTILE_POWER_CREEPS" find_hostile_power_creeps :: FindConstant Unknown
-foreign import javascript "FIND_DEPOSITS" find_deposits :: FindConstant Unknown
-foreign import javascript "FIND_RUINS" find_ruins :: FindConstant Unknown
+foreign import javascript "FIND_DEPOSITS" find_deposits :: FindConstant Deposit
+foreign import javascript "FIND_RUINS" find_ruins :: FindConstant Ruin
 
