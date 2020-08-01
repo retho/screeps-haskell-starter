@@ -249,7 +249,7 @@ foreign import javascript "$1.store" default_store :: JSVal -> Store
 
 
 foreign import javascript "$1 instanceof Structure ? $1 : null" maybe_construction_site :: JSVal -> JSVal
-foreign import javascript "$1 instanceof Screep || $1 instanceof PowerScreep ? $1 : null" maybe_shared_creep :: JSVal -> JSVal
+foreign import javascript "$1 instanceof Creep || $1 instanceof PowerCreep ? $1 : null" maybe_shared_creep :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Creep ? $1 : null" maybe_creep :: JSVal -> JSVal
 foreign import javascript "$1 instanceof PowerCreep ? $1 : null" maybe_power_creep :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Resource ? $1 : null" maybe_resource :: JSVal -> JSVal

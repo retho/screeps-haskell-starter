@@ -50,28 +50,28 @@ newtype RoomObject = RoomObject JSObject deriving (JSRef, JSShow)
 
 newtype ConstructionSite = ConstructionSite RoomObject deriving (JSRef, JSShow)
 
+newtype Resource = Resource RoomObject deriving (JSRef, JSShow)
+
+newtype Source = Source RoomObject deriving (JSRef, JSShow)
+
+newtype Deposit = Deposit RoomObject deriving (JSRef, JSShow)
+
+newtype Flag = Flag RoomObject deriving (JSRef, JSShow)
+
+newtype Mineral = Mineral RoomObject deriving (JSRef, JSShow)
+
+newtype Nuke = Nuke RoomObject deriving (JSRef, JSShow)
+
+newtype Ruin = Ruin RoomObject deriving (JSRef, JSShow)
+
+newtype Tombstone = Tombstone RoomObject deriving (JSRef, JSShow)
+
 newtype SharedCreep = SharedCreep RoomObject deriving (JSRef, JSShow)
 
 newtype Creep = Creep SharedCreep deriving (JSRef, JSShow)
 
 newtype PowerCreep = PowerCreep SharedCreep deriving (JSRef, JSShow)
 
-newtype Resource = Resource RoomObject deriving (JSRef, JSShow)
-
-newtype Source = Source RoomObject deriving (JSRef, JSShow)
-
 newtype Structure = Structure RoomObject deriving (JSRef, JSShow)
 
 newtype OwnedStructure = OwnedStructure Structure deriving (JSRef, JSShow)
-
-newtype Deposit = Deposit JSObject deriving (JSRef, JSShow)
-
-newtype Flag = Flag JSObject deriving (JSRef, JSShow)
-
-newtype Mineral = Mineral JSObject deriving (JSRef, JSShow)
-
-newtype Nuke = Nuke JSObject deriving (JSRef, JSShow)
-
-newtype Ruin = Ruin JSObject deriving (JSRef, JSShow)
-
-newtype Tombstone = Tombstone JSObject deriving (JSRef, JSShow)
