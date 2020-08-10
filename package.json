@@ -10,8 +10,8 @@
     "test:node": "cross-env TARGET=node node scripts/test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "Unlicense",
+  "author": "Evgeniy Safonov",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
