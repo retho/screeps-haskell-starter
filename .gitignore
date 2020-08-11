@@ -1,7 +1,10 @@
 node_modules/
+dist/
+dist-newstyle/
+
 build/
+bin/
+
 screeps.json
 
-
 .notes/
-

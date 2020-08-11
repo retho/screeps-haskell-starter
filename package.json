@@ -26,7 +26,7 @@
     "rollup-plugin-terser": "^6.1.0"
   },
   "engines": {
-    "node": ">=14.5.0",
+    "node": ">=14.4.0",
     "npm": ">=6.14.5"
   },
   "dependencies": {
