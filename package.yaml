@@ -63,7 +63,7 @@ default-extensions:
 
 
 library:
-  source-dirs: lib
+  source-dirs: src-lib
 
 executables:
   main:
