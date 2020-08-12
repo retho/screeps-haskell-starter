@@ -3,7 +3,6 @@ module Screeps.Objects.StructureController
   , StructureController()
   ) where
 
-import Screeps.Utils
 import Screeps.Internal
 
 import Screeps.Objects.RoomObject

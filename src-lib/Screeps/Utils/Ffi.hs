@@ -40,15 +40,15 @@ class JSIndex a where
 newtype JSHashMap k v = JSHashMap JSObject deriving JSRef
 unsafeGet :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> v
 safeGet :: (JSIndex k, JSRef v) => k -> JSHashMap k v -> Maybe v
-keys :: (JSIndex k, JSRef v) => JSHashMap k v -> [] k
-values :: (JSIndex k, JSRef v) => JSHashMap k v -> [] v
+keys :: (JSIndex k) => JSHashMap k v -> [] k
+values :: (JSRef v) => JSHashMap k v -> [] v
 entries :: (JSIndex k, JSRef v) => JSHashMap k v -> [] (k, v)
 fromEntries :: (JSIndex k, JSRef v) => [] (k, v) -> JSHashMap k v
 
 class (JSIndex k, JSRef v) => AsJSHashMap a k v | a -> k v where
   hashmap :: a -> JSHashMap k v
 
-defaultHashmap :: (Coercible a JSObject, JSIndex k, JSRef v) => a -> JSHashMap k v
+defaultHashmap :: (Coercible a JSObject) => a -> JSHashMap k v
 defaultHashmap = coerce
 
 -- * impl
