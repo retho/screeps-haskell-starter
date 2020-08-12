@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "watch": "nodemon --watch src --watch lib -e hs --exec ahc-cabal v1-build main --builddir=ahc-cabal-build-watch",
-    "check": "ahc-cabal v1-build main --builddir=ahc-cabal-build",
-    "check:all": "ahc-cabal v1-build main --builddir=ahc-cabal-build-from-scratch && rm -rf ahc-cabal-build-from-scratch"
+    "watch": "shell-scripts/hpack.sh && nodemon --watch src --watch lib -e hs --exec ahc-cabal v1-build main --builddir=ahc-cabal-build-watch",
+    "check": "shell-scripts/hpack.sh && ahc-cabal v1-build main --builddir=ahc-cabal-build",
+    "check:all": "shell-scripts/hpack.sh && ahc-cabal v1-build main --builddir=ahc-cabal-build-from-scratch && rm -rf ahc-cabal-build-from-scratch",
+    "deploy": "shell-scripts/hpack.sh && node node-scripts/build.js && node node-scripts/upload.js --distdir=build-screeps/dist/"
   },
   "author": "Evgeniy Safonov",
   "license": "MIT",
