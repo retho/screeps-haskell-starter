@@ -25,6 +25,7 @@ module Screeps.Constants.StructureType
   , invader_core
   ) where
 
+import Screeps.Utils
 import Screeps.Internal
 
 foreign import javascript "STRUCTURE_SPAWN" spawn :: StructureType
