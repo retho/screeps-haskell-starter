@@ -1,6 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-
 module Screeps.Objects.RoomObject
   ( RoomObject()
   , room

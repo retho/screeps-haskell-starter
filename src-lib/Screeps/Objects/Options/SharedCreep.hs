@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Screeps.Objects.Options.SharedCreep
   ( MoveToOptions(..)
   ) where

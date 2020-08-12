@@ -1,6 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 module Screeps.Objects.PowerCreep
   ( module SharedCreep
   , PowerCreep()

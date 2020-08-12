@@ -1,5 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
 module Screeps.Internal.Constants
   ( module Screeps.Internal.Constants
   ) where

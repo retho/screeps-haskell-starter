@@ -1,6 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
 module Screeps.Utils.JSShow
   ( JSShow(..)
   ) where

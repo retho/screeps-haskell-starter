@@ -1,5 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
 module Screeps.Constants.BodyPart
   ( BodyPart()
   , cost

@@ -1,9 +1,4 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE FlexibleContexts #-}
 
 module Screeps.Utils.Ffi
   ( module Coerce

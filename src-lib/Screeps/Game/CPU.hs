@@ -1,6 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-
 module Screeps.Game.CPU
   ( HeapStatistics(..)
   , getHeapStatistics

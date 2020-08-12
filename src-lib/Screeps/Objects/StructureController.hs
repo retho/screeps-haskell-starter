@@ -1,5 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
 module Screeps.Objects.StructureController
   ( module OwnedStructure
   , StructureController()

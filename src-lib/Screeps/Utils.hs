@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Screeps.Utils
   ( module Ffi
   , module JSShow

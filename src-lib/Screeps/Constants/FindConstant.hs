@@ -1,5 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-
 module Screeps.Constants.FindConstant
   ( FindConstant()
   , find_exit_top

@@ -1,6 +1,3 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-
 module Screeps.Objects.OwnedStructure
   ( module Structure
   , OwnedStructure()
