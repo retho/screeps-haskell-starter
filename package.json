@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "watch": "nodemon --watch src --watch lib -e hs --exec ahc-cabal v1-run main"
+    "watch": "nodemon --watch src --watch lib -e hs --exec ahc-cabal v1-build main --builddir=ahc-cabal-build-watch",
+    "check": "ahc-cabal v1-build main --builddir=ahc-cabal-build",
+    "check:all": "ahc-cabal v1-build main --builddir=ahc-cabal-build-from-scratch && rm -rf ahc-cabal-build-from-scratch"
   },
   "author": "Evgeniy Safonov",
   "license": "MIT",
