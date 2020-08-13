@@ -17,7 +17,7 @@ cd screeps-haskell-starter
 # enter to docker container
 ./start.sh
 
-# install cli dependencies:
+# cli dependencies:
 shell-scripts/install.sh
 
 # configure for uploading:
