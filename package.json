@@ -3,30 +3,25 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "cross-env TARGET=screeps nodemon --watch src --watch lib -e hs scripts/compile.js --input=watch-input --output=watch-output",
-    "deploy": "cross-env-shell TARGET=screeps OPTIMIZE=true SHRINK=true \"node scripts/compile.js && node scripts/link.js && node scripts/upload.js\"",
-    "docker-it": "node scripts/docker-it.js",
-    "test:node-screeps": "cross-env TARGET=node-screeps node scripts/test.js",
-    "test:node": "cross-env TARGET=node node scripts/test.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "shell-scripts/hpack.sh && nodemon --watch src --watch lib -e hs --exec ahc-cabal v1-build main --builddir=ahc-cabal-build-watch",
+    "check": "shell-scripts/hpack.sh && ahc-cabal v1-build main --builddir=ahc-cabal-build",
+    "check:all": "shell-scripts/hpack.sh && rm -rf ahc-cabal-build-from-scratch && ahc-cabal v1-build main --builddir=ahc-cabal-build-from-scratch",
+    "deploy": "shell-scripts/hpack.sh && node node-scripts/build.js && node node-scripts/upload.js --distdir=build-screeps/dist/"
   },
-  "author": "",
-  "license": "Unlicense",
+  "author": "Evgeniy Safonov",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "args-parser": "^1.1.0",
-    "cross-env": "^7.0.2",
-    "glob": "^7.1.6",
     "moment": "^2.27.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
-    "recursive-copy": "^2.0.10",
     "rollup": "^2.18.1",
     "rollup-plugin-terser": "^6.1.0"
   },
   "engines": {
-    "node": ">=14.5.0",
+    "node": ">=14.4.0",
     "npm": ">=6.14.5"
   },
   "dependencies": {

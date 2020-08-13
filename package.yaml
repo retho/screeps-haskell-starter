@@ -1,0 +1,73 @@
+name:                screeps-haskell-starter
+version:             0.1.0.0
+github:              "retho/screeps-haskell-starter"
+license:             MIT
+author:              "Evgeniy Safonov"
+maintainer:          "safonov.e.s@gmail.com"
+copyright:           "2020 Evgeniy Safonov"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at https://github.com/retho/screeps-haskell-starter#readme
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+default-extensions:
+- BangPatterns
+- BinaryLiterals
+- ConstraintKinds
+- DataKinds
+- DefaultSignatures
+- DeriveDataTypeable
+- DeriveFoldable
+- DeriveFunctor
+- DeriveGeneric
+- DeriveTraversable
+- DoAndIfThenElse
+- EmptyDataDecls
+- ExistentialQuantification
+- FlexibleContexts
+- FlexibleInstances
+- FunctionalDependencies
+- GADTs
+- GeneralizedNewtypeDeriving
+- InstanceSigs
+- KindSignatures
+- LambdaCase
+- MultiParamTypeClasses
+- MultiWayIf
+- NamedFieldPuns
+# - NoImplicitPrelude
+- OverloadedStrings
+- PartialTypeSignatures
+- PatternGuards
+- PolyKinds
+- RankNTypes
+- RecordWildCards
+- ScopedTypeVariables
+- StandaloneDeriving
+- TupleSections
+- TypeFamilies
+- TypeSynonymInstances
+- ViewPatterns
+
+
+library:
+  source-dirs: src-lib
+
+executables:
+  main:
+    main:                Main.hs
+    source-dirs:         src
+    dependencies:
+    - screeps-haskell-starter
