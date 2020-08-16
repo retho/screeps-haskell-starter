@@ -5,9 +5,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-  input: `build-screeps/rollup-input/main.mjs`,
+  input: `.cabal-screeps-work/rollup-input/main.mjs`,
   output: {
-    file: "build-screeps/dist/main.js",
+    file: ".cabal-screeps-work/dist/main.js",
     format: "iife",
     sourcemap: false
   },

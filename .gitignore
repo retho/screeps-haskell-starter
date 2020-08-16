@@ -1,15 +1,7 @@
 node_modules/
 dist/
 dist-newstyle/
-
-bin/
-
-ahc-cabal-build-from-scratch/
-ahc-cabal-build-watch/
-ahc-cabal-build/
-build/
-build-screeps/
-
+.cabal-screeps-work/
 
 screeps.json
 
