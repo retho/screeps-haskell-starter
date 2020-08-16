@@ -25,4 +25,4 @@ fetch(`${screepsConfig.screeps_host}/api/user/code`, {
   }),
 })
   .then(res => Promise.all([res.status, res.json()]))
-  .then(([status, body]) => console.log(status, body, body.timestamp ? moment(body.timestamp).format('YYYY-MM-DD HH:mm:ss') : ''));
+  .then(([status, body]) => console.log(status, body, body.timestamp ? moment(body.timestamp).format() : ''));
