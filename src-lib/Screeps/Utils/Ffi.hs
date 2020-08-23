@@ -5,6 +5,7 @@ module Screeps.Utils.Ffi
   , JSVal
   , JSString(..)
   , JSObject(..)
+  , JSFunction(..)
   , toJSString
   , fromJSString
   , JSIndex(..)
@@ -20,7 +21,7 @@ module Screeps.Utils.Ffi
   , defaultHashmap
   ) where
 
-import Asterius.Types (JSVal, JSString(..), JSArray(..), toJSString, fromJSString, toJSArray, fromJSArray)
+import Asterius.Types (JSVal, JSString(..), JSArray(..), JSFunction(..), toJSString, fromJSString, toJSArray, fromJSArray)
 import Data.Coerce as Coerce (Coercible, coerce)
 
 newtype JSObject = JSObject JSVal deriving JSRef

@@ -5,7 +5,7 @@
   "scripts": {
     "watch": "shell-scripts/hpack.sh && nodemon --watch src --watch lib -e hs --exec ahc-cabal v1-build main --builddir=.cabal-screeps-work/ahc-cabal-build-watch",
     "check": "shell-scripts/hpack.sh && ahc-cabal v1-build main --builddir=.cabal-screeps-work/ahc-cabal-build-check",
-    "check:all": "shell-scripts/hpack.sh && rm -rf .cabal-screeps-work/ahc-cabal-build-check-all && ahc-cabal v1-build main --builddir=ahc-cabal-build-check-all",
+    "check:all": "shell-scripts/hpack.sh && rm -rf .cabal-screeps-work/ahc-cabal-build-check-all && ahc-cabal v1-build main --builddir=.cabal-screeps-work/ahc-cabal-build-check-all",
     "deploy": "shell-scripts/hpack.sh && node node-scripts/build.js && node node-scripts/upload.js --distdir=.cabal-screeps-work/dist/"
   },
   "author": "Evgeniy Safonov",
