@@ -7,6 +7,7 @@ import Screeps.Utils.Ffi as Ffi
 class JSShow a where
   showjs :: a -> JSString
 
+foreign import javascript "'' + $1" show_jsval :: JSVal -> JSString
 foreign import javascript "$1.toString()" show_jsobj :: JSVal -> JSString
 foreign import javascript "JSON.stringify($1)" json_stringify :: JSVal -> JSString
 
@@ -15,6 +16,7 @@ instance JSShow Double where showjs = json_stringify . toJSRef
 instance JSShow Bool where
   showjs True = "True"
   showjs False = "False"
+instance JSShow JSVal where showjs = show_jsval
 instance JSShow JSString where showjs = json_stringify . coerce
 instance JSShow JSObject where showjs = show_jsobj . coerce
 instance JSShow (JSHashMap k v) where showjs = show_jsobj . coerce

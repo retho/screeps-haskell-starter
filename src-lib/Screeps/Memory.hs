@@ -48,10 +48,10 @@ join [] _ = ""
 join (x:[]) _ = x
 join (x:xs) sep = x <> sep <> join xs sep
 
-foreign import javascript "Object.keys(_.get(global.Memory, $1))" mem_keys :: JSString -> IO JSVal
+foreign import javascript "Object.keys(_.get(Memory, $1))" mem_keys :: JSString -> IO JSVal
 
-foreign import javascript "_.get(global.Memory, $1)" mem_get :: JSString -> IO JSVal
+foreign import javascript "_.get(Memory, $1)" mem_get :: JSString -> IO JSVal
 
-foreign import javascript "_.set(global.Memory, $1, $2)" mem_set :: JSString -> JSVal -> IO ()
+foreign import javascript "_.set(Memory, $1, $2)" mem_set :: JSString -> JSVal -> IO ()
 
-foreign import javascript "((obj, path, key) => {delete _.get(obj, path)[key];})(global.Memory, $1, $2)" mem_del :: JSString -> JSString -> IO ()
+foreign import javascript "((obj, path, key) => {delete _.get(obj, path)[key];})(Memory, $1, $2)" mem_del :: JSString -> JSString -> IO ()
