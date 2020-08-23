@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rm *.cabal && hpack
+rm -f *.cabal && hpack

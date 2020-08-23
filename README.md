@@ -37,8 +37,3 @@ This scripts should be running inside docker container (enter to container via `
 - `npm run check` checks if it compiles
 - `npm run check:all` checks if it compiles and shows all warnings
 - `npm run deploy` compiles and uploads it to the server (based on settings in `screeps.json`)
-
-
-# Known Issues
-
-May not work in Simulation.
