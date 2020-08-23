@@ -1,7 +1,5 @@
-import Prelude hiding (break)
 import Screeps.Prelude
 
-import Text.Printf (printf)
 import Control.Monad (when, void)
 import Data.Foldable (for_)
 
@@ -20,11 +18,20 @@ import Screeps.Constants.FindConstant
 
 import Logging as Logging
 
+foreign import javascript "wrapper"
+  makeHaskellCallback :: IO () -> IO JSFunction
+foreign import javascript "module.exports.loop = global.wrapHaskellCallback($1)" export_game_loop :: JSFunction -> IO ()
+
 
 main :: IO ()
 main = do
-  Game.CPU.getUsed >>= \cpu -> debug $ "loop starting! cpu: " <> showjs cpu
   setupLogging Logging.Info
+  fn <- makeHaskellCallback game_loop
+  export_game_loop fn
+
+game_loop :: IO ()
+game_loop = do
+  Game.CPU.getUsed >>= \cpu -> debug $ "loop starting! cpu: " <> showjs cpu
 
   game_spawns <- Game.spawns
   for_ (values game_spawns) $ \spawn -> do
@@ -36,7 +43,7 @@ main = do
       let
         loop :: (a -> Bool) -> [IO a] -> IO a
         loop _ [] = undefined
-        loop break (x:xs) = x >>= \r -> if break r then pure r else loop break xs
+        loop break' (x:xs) = x >>= \r -> if break' r then pure r else loop break' xs
       res <- loop (/= ReturnCode.err_name_exists) $ flip map [0..] $ \(additional :: Int) -> do
         let nm = showjs name_base <> "-" <> showjs additional
         Spawn.spawnCreep spawn body nm
@@ -74,8 +81,7 @@ main = do
     info "running memory cleanup"
     cleanup_memory
 
-  Game.CPU.getUsed >>= \cpu -> info . toJSString $ printf "done! cpu: %.2f" cpu
-
+  Game.CPU.getUsed >>= \cpu -> info $ "done! cpu: " <> showjs cpu
 
 cleanup_memory :: IO ()
 cleanup_memory = do
