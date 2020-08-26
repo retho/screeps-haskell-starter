@@ -3,6 +3,8 @@ cabal-version: 1.12
 -- This file has been generated from package.yaml by hpack version 0.34.2.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: d1c9c099ed398edfd7692bc6da3e2c3187933924ddb3051a15734e8ee3affb74
 
 name:           screeps-haskell-starter
 version:        0.1.0.0
