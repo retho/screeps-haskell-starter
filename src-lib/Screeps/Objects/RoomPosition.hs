@@ -20,6 +20,5 @@ isNearTo :: (HasRoomPosition a, HasRoomPosition b) => a -> b -> Bool
 isNearTo xx yy = is_near_to (pos xx) (pos yy)
 
 
--- *
 
 foreign import javascript "$1.isNearTo($2)" is_near_to :: RoomPosition -> RoomPosition -> Bool

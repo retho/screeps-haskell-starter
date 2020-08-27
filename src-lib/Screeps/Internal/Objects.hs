@@ -20,7 +20,7 @@ module Screeps.Internal.Objects
   , Source(..)
   , Structure(..)
   , OwnedStructure(..)
-  -- *
+  --
   , StructureContainer(..)
   , StructureController(..)
   , StructureExtension(..)

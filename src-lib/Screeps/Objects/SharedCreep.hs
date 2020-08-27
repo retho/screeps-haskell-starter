@@ -42,7 +42,7 @@ withdraw :: (IsSharedCreep c, Withdrawable a) => c -> a -> IO ReturnCode
 withdraw' :: (IsSharedCreep c, Withdrawable a) => c -> a -> Int -> IO ReturnCode
 
 
--- *
+
 saying = js_saying . asSharedCreep
 ticksToLive = js_ticksToLive . asSharedCreep
 

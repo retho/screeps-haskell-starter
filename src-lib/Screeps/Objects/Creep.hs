@@ -46,7 +46,6 @@ signController :: Creep -> StructureController -> JSString -> IO ReturnCode
 upgradeController :: Creep -> StructureController -> IO ReturnCode
 
 
--- *
 attack self target = js_attack self (asAttackable target)
 attackController = js_attackController
 build = js_build
