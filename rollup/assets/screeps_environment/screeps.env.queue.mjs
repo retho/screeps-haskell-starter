@@ -38,8 +38,8 @@ const setImmediateByCallImmediately = (callback, ...args) => {
   callback(...args);
 }
 
-// * `global.setImmediateByCallImmediately` for Promise polyfill,
-// * `global.setImmediate = setImmediateByQueue` for rest (i.e. for Asterius)
+// `global.setImmediateByCallImmediately` for Promise polyfill,
+// `global.setImmediate = setImmediateByQueue` for rest (i.e. for Asterius)
 global.setTimeout = null;
 global.setImmediateByCallImmediately = setImmediateByCallImmediately;
 global.setImmediate = setImmediateByQueue;

@@ -3,7 +3,6 @@ module Screeps.Prelude
   ( module Utils
   , module Classes
   , module Common
-  , consoleLog
   ) where
 
 import Screeps.Utils as Utils hiding (Coercible, coerce)

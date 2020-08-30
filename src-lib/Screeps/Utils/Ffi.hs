@@ -52,8 +52,8 @@ class (JSIndex k, JSRef v) => AsJSHashMap a k v | a -> k v where
 defaultHashmap :: (Coercible a JSObject) => a -> JSHashMap k v
 defaultHashmap = coerce
 
--- * impl
 
+--
 foreign import javascript "$1..toString()" int_to_index :: Int -> JSKey
 foreign import javascript "+$1" index_to_int :: JSKey -> Int
 instance JSIndex Int where

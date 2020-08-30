@@ -14,5 +14,3 @@ foreign import javascript "$1.progressTotal" progressTotal :: ConstructionSite -
 foreign import javascript "$1.structureType" structureType :: ConstructionSite -> StructureType
 
 foreign import javascript "$1.remove()" remove :: ConstructionSite -> IO ()
-
--- *

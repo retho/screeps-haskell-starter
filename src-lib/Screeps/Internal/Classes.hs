@@ -11,7 +11,7 @@ module Screeps.Internal.Classes
   , NotifyWhenAttacked(..)
   , HasRoomPosition(..)
   , HasStore(..)
-  -- *
+  --
   , IsRoomObject(..)
   , IsSharedCreep(..)
   , IsStructure(..)
@@ -86,7 +86,7 @@ class (IsStructure a, HasOwner a) => IsOwnedStructure a where
   fromOwnedStruture :: OwnedStructure -> Maybe a
 
 
--- *
+
 instance HasScreepsId ConstructionSite
 instance HasScreepsId SharedCreep
 instance HasScreepsId Creep
@@ -94,7 +94,7 @@ instance HasScreepsId PowerCreep
 instance HasScreepsId Resource
 instance HasScreepsId Structure
 instance HasScreepsId OwnedStructure
--- *
+--
 instance HasScreepsId StructureContainer
 instance HasScreepsId StructureController
 instance HasScreepsId StructureExtension
@@ -130,7 +130,7 @@ instance HasOwner SharedCreep
 instance HasOwner Creep
 instance HasOwner PowerCreep
 instance HasOwner OwnedStructure
--- *
+--
 instance HasOwner StructureController
 instance HasOwner StructureExtension
 instance HasOwner StructureExtractor
@@ -153,7 +153,7 @@ instance HasStore Store where store = id
 instance HasStore SharedCreep
 instance HasStore Creep
 instance HasStore PowerCreep
--- *
+--
 instance HasStore StructureContainer
 instance HasStore StructureExtension
 instance HasStore StructureFactory
@@ -172,7 +172,7 @@ instance Attackable Creep
 instance Attackable PowerCreep
 instance Attackable Structure
 instance Attackable OwnedStructure
--- *
+--
 instance Attackable StructureContainer
 instance Attackable StructureController
 instance Attackable StructureExtension
@@ -200,7 +200,7 @@ instance Transferable SharedCreep
 instance Transferable Creep
 instance Transferable PowerCreep
 instance Transferable Structure
--- *
+--
 instance Transferable StructureContainer
 instance Transferable StructureExtension
 instance Transferable StructureFactory
@@ -217,7 +217,7 @@ instance Transferable StructureTower
 instance Withdrawable Tombstone
 instance Withdrawable Ruin
 instance Withdrawable Structure
--- *
+--
 instance Withdrawable StructureContainer
 instance Withdrawable StructureExtension
 instance Withdrawable StructureFactory
@@ -236,7 +236,7 @@ instance NotifyWhenAttacked Creep
 instance NotifyWhenAttacked PowerCreep
 instance NotifyWhenAttacked Structure
 instance NotifyWhenAttacked OwnedStructure
--- *
+--
 instance NotifyWhenAttacked StructureContainer
 instance NotifyWhenAttacked StructureController
 instance NotifyWhenAttacked StructureExtension
@@ -281,7 +281,7 @@ instance HasRoomPosition Ruin
 instance HasRoomPosition Tombstone
 instance HasRoomPosition Structure
 instance HasRoomPosition OwnedStructure
--- *
+--
 instance HasRoomPosition StructureContainer
 instance HasRoomPosition StructureController
 instance HasRoomPosition StructureExtension
@@ -361,7 +361,7 @@ instance IsRoomObject Structure where
 instance IsRoomObject OwnedStructure where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_owned_structure . toJSRef
--- *
+--
 instance IsRoomObject StructureContainer where
   asRoomObject = coerce
   fromRoomObject = fromJSRef . maybe_structure_container . toJSRef
@@ -433,7 +433,7 @@ instance IsStructure Structure where
 instance IsStructure OwnedStructure where
   asStructure = coerce
   fromStructure = fromJSRef . maybe_owned_structure . toJSRef
--- *
+--
 instance IsStructure StructureContainer where
   asStructure = coerce
   fromStructure = fromJSRef . maybe_structure_container . toJSRef
@@ -502,7 +502,7 @@ instance IsStructure StructureWall where
 instance IsOwnedStructure OwnedStructure where
   asOwnedStructure = id
   fromOwnedStruture = pure
--- *
+--
 instance IsOwnedStructure StructureController where
   asOwnedStructure = coerce
   fromOwnedStruture = fromJSRef . maybe_structure_controller . toJSRef
@@ -553,7 +553,6 @@ instance IsOwnedStructure StructureTower where
   fromOwnedStruture = fromJSRef . maybe_structure_tower . toJSRef
 
 
--- *
 foreign import javascript "$1.id" default_sid :: JSVal -> JSVal
 foreign import javascript "$1.my" def_my :: JSVal -> Bool
 foreign import javascript "$1.owner" def_owner :: JSVal -> User
@@ -579,7 +578,7 @@ foreign import javascript "$1 instanceof Ruin ? $1 : null" maybe_ruin :: JSVal -
 foreign import javascript "$1 instanceof Tombstone ? $1 : null" maybe_tombstone :: JSVal -> JSVal
 foreign import javascript "$1 instanceof Structure ? $1 : null" maybe_structure :: JSVal -> JSVal
 foreign import javascript "$1 instanceof OwnedStructure ? $1 : null" maybe_owned_structure :: JSVal -> JSVal
--- *
+--
 foreign import javascript "$1 instanceof StructureContainer ? $1 : null" maybe_structure_container :: JSVal -> JSVal
 foreign import javascript "$1 instanceof StructureController ? $1 : null" maybe_structure_controller :: JSVal -> JSVal
 foreign import javascript "$1 instanceof StructureExtension ? $1 : null" maybe_structure_extension :: JSVal -> JSVal

@@ -6,6 +6,3 @@ module Screeps.Objects.PowerCreep
 import Screeps.Internal
 
 import Screeps.Objects.SharedCreep as SharedCreep
-
-
--- *

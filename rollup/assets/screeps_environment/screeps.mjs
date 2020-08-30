@@ -11,7 +11,7 @@ global.wrapHaskellCallback = (cb) => (...args) => {
     .catch(err => {
       if (typeof err === 'string') {
         if (!(startsWith(err, 'ExitSuccess') || startsWith(err, 'ExitFailure '))) {
-          i.fs.writeSync(2, `Main: ${err}`);
+          console.log(`<span style="color: #ffa07a">Main: ${err}</span>`);
           throw err;
         }
       } else {
