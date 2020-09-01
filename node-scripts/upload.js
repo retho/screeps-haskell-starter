@@ -1,13 +1,10 @@
 process.on('unhandledRejection', up => { throw up })
 const moment = require('moment');
-const argsParser = require("args-parser");
 const fs = require('fs');
 const fetch = require('node-fetch');
 const screepsConfig = require('../screeps.json');
 
-const args = argsParser(process.argv);
-const distdir = args.distdir;
-if (!distdir) throw new Error('--distdir must be specified');
+const distdir = '.cabal-screeps-work/dist';
 
 console.log('uploading...');
 fetch(`${screepsConfig.screeps_host}/api/user/code`, {
