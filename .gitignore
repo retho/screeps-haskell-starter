@@ -2,6 +2,7 @@ node_modules/
 dist/
 dist-newstyle/
 .cabal-screeps-work/
+.bin/
 
 screeps.json
 
