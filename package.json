@@ -6,6 +6,7 @@
     "watch": "shell-scripts/hpack.sh && nodemon --watch src --watch src-lib -e hs node-scripts/check.js --profile=watch",
     "check": "shell-scripts/hpack.sh && node node-scripts/check.js --profile=check",
     "check:all": "shell-scripts/hpack.sh && node node-scripts/check.js --from-scratch --profile=check-from-scratch",
+    "build": "shell-scripts/hpack.sh && node node-scripts/build.js",
     "deploy": "shell-scripts/hpack.sh && node node-scripts/build.js && node node-scripts/upload.js"
   },
   "author": "Evgeniy Safonov",

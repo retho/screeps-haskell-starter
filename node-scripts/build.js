@@ -8,7 +8,7 @@ const shrinkLevel = 2; // Valid values are 0 to 2
 
 const builddir = '.cabal-screeps-work/ahc-cabal-build'
 const rollupdir = '.cabal-screeps-work/rollup-input'
-const distdir = '.cabal-screeps-work/dist'
+const distdir = '.dist'
 
 run(`rm -rf ${rollupdir}`)
 run(`rm -rf ${distdir}`)

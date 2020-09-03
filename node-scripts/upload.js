@@ -4,7 +4,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const screepsConfig = require('../screeps.json');
 
-const distdir = '.cabal-screeps-work/dist';
+const distdir = '.dist';
 
 console.log('uploading...');
 fetch(`${screepsConfig.screeps_host}/api/user/code`, {

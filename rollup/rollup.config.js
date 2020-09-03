@@ -5,7 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 const rollupdir = '.cabal-screeps-work/rollup-input'
-const distdir = '.cabal-screeps-work/dist'
+const distdir = '.dist'
 
 export default {
   input: `${rollupdir}/main.mjs`,

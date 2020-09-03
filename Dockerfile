@@ -1,8 +1,7 @@
 FROM terrorjack/asterius:200702
 
-RUN apt-get update && apt-get install nano
+VOLUME /workspace
+WORKDIR /workspace
 
+ARG force_update=no
 RUN ahc-cabal v1-update
-
-VOLUME /project
-WORKDIR /project
