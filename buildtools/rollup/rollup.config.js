@@ -4,11 +4,14 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
+const rollupinputdir = '.cabal-screeps-work/rollup-input'
+const distdir = '.dist'
+
 export default {
-  input: `.cabal-screeps-work/rollup-input/main.mjs`,
+  input: `${rollupinputdir}/main.mjs`,
   output: {
-    file: ".cabal-screeps-work/dist/main.js",
-    format: "iife",
+    file: `${distdir}/main.js`,
+    format: 'iife',
     sourcemap: false
   },
   plugins: [

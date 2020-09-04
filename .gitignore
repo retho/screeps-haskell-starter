@@ -2,7 +2,8 @@ node_modules/
 dist/
 dist-newstyle/
 .cabal-screeps-work/
+.bin/
+.dist/
+.notes/
 
 screeps.json
-
-.notes/

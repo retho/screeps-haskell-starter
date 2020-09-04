@@ -14,26 +14,24 @@ Haskell build tools for [Screeps](https://screeps.com/) based on [Asterius](http
 git clone https://github.com/retho/screeps-haskell-starter.git
 cd screeps-haskell-starter
 
-# enter to docker container
-./start.sh
-
 # cli dependencies:
-shell-scripts/install.sh
+./cabal-screeps.sh install
 
 # configure for uploading:
 cp screeps.example.json screeps.json
 nano screeps.json
 
 # compile and upload:
-npm run deploy
+./cabal-screeps.sh deploy
 ```
 
 
 
 # Scripts
 
-This scripts should be running inside docker container (enter to container via `./start.sh`).
-
-- `npm run check` checks if it compiles
-- `npm run check:all` checks if it compiles and shows all warnings
-- `npm run deploy` compiles and uploads it to the server (based on settings in `screeps.json`)
+- `./cabal-screeps.sh update` updates ahc-cabal's package list
+- `./cabal-screeps.sh watch` checks if it compiles on changes in src/
+- `./cabal-screeps.sh check` checks if it compiles
+- `./cabal-screeps.sh check:all` checks if it compiles and shows all warnings
+- `./cabal-screeps.sh build` builds it, puts files in .dist/ in project root
+- `./cabal-screeps.sh deploy [profile]` builds and uploads it to the server (based on settings in `screeps.json`)

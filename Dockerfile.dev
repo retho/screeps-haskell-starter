@@ -1,0 +1,7 @@
+FROM terrorjack/asterius:200830
+
+VOLUME /workspace
+WORKDIR /workspace
+
+ARG force_update=no
+RUN ahc-cabal new-update
