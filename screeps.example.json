@@ -1,5 +1,10 @@
 {
-  "auth_token": "your auth token",
-  "screeps_host": "https://screeps.com",
-  "branch": "default"
+  "default_profile": "default",
+  "profiles": {
+    "default": {
+      "branch": "default",
+      "screeps_host": "https://screeps.com",
+      "auth_token": "your auth token"
+    }
+  }
 }

@@ -21,7 +21,7 @@ then
 buildtools/docker-build.sh npm run build
 elif [[ $1 == "deploy" ]]
 then
-buildtools/docker-build.sh npm run deploy
+buildtools/docker-build.sh npm run deploy -- --profile=$2
 elif [[ $1 == "docker:dev" ]]
 then
 buildtools/docker-dev.sh

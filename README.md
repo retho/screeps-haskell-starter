@@ -34,4 +34,4 @@ nano screeps.json
 - `./cabal-screeps.sh check` checks if it compiles
 - `./cabal-screeps.sh check:all` checks if it compiles and shows all warnings
 - `./cabal-screeps.sh build` builds it, puts files in .dist/ in project root
-- `./cabal-screeps.sh deploy` builds and uploads it to the server (based on settings in `screeps.json`)
+- `./cabal-screeps.sh deploy [profile]` builds and uploads it to the server (based on settings in `screeps.json`)
