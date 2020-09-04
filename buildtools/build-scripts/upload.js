@@ -2,7 +2,7 @@ process.on('unhandledRejection', up => { throw up })
 const moment = require('moment');
 const fs = require('fs');
 const fetch = require('node-fetch');
-const screepsConfig = require('../screeps.json');
+const screepsConfig = require(process.env.PWD + '/screeps.json');
 
 const distdir = '.dist';
 

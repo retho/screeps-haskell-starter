@@ -11,4 +11,4 @@ const builddir_base = '.cabal-screeps-work/ahc-cabal-build';
 const builddir = profile ? `${builddir_base}-${profile}` : builddir_base
 
 from_scratch && run(`rm -rf ${builddir}`)
-run(`ahc-cabal v1-build main --builddir=${builddir}`)
+run(`ahc-cabal new-build main -O0 --builddir=${builddir}`)

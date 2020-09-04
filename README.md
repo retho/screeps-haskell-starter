@@ -30,6 +30,7 @@ nano screeps.json
 # Scripts
 
 - `./cabal-screeps.sh update` updates ahc-cabal's package list
+- `./cabal-screeps.sh watch` checks if it compiles on changes in src/
 - `./cabal-screeps.sh check` checks if it compiles
 - `./cabal-screeps.sh check:all` checks if it compiles and shows all warnings
 - `./cabal-screeps.sh build` builds it, puts files in .dist/ in project root
