@@ -3,7 +3,7 @@ module Screeps.Memory
   , root
   , get
   , set
-  , del
+  , unset
   , path
   , keys
   , HasMemory(..)
@@ -25,8 +25,8 @@ get key (Memory mem_path) = do
 set :: JSRef a => JSString -> a -> Memory -> IO ()
 set key val (Memory mem_path) = mem_set (join mem_path "." <> "." <> key) $ toJSRef val
 
-del :: Memory -> JSString -> IO ()
-del (Memory mem_path) key = mem_del (join mem_path ".") key
+unset :: Memory -> IO ()
+unset (Memory mem_path) = mem_unset $ join mem_path "."
 
 path :: Memory -> [JSString] -> Memory
 path (Memory init_path) extra_path = Memory $ init_path <> extra_path
@@ -55,4 +55,4 @@ foreign import javascript "_.get(Memory, $1)" mem_get :: JSString -> IO JSVal
 
 foreign import javascript "_.set(Memory, $1, $2)" mem_set :: JSString -> JSVal -> IO ()
 
-foreign import javascript "((obj, path, key) => {delete _.get(obj, path)[key];})(Memory, $1, $2)" mem_del :: JSString -> JSString -> IO ()
+foreign import javascript "lodash_es.unset(Memory, $1)" mem_unset :: JSString -> IO ()

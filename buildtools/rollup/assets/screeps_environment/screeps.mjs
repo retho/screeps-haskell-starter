@@ -1,4 +1,5 @@
 import './screeps.env.mjs';
+import './screeps.utils.mjs';
 
 const startsWith = (selfstr, search, rawPos) => {
   const pos = rawPos > 0 ? rawPos|0 : 0;

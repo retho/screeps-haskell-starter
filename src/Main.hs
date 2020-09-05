@@ -92,4 +92,4 @@ cleanup_memory = do
   for_ creeps_memory_keys $ \mem_name -> do
     when (mem_name `notElem` alive_creeps) $ do
       debug $ "cleaning up creep memory of dead creep " <> mem_name
-      Mem.del creeps_mem mem_name
+      Mem.unset $ Mem.path creeps_mem [mem_name]

@@ -63,7 +63,7 @@ instance JSIndex JSString where
   toIndex = coerce
   fromIndex = coerce
 
-foreign import javascript "undefined" js_null :: JSVal
+foreign import javascript "null" js_null :: JSVal
 
 foreign import javascript "$1" jsval_as_int :: JSVal -> Int
 foreign import javascript "$1" int_as_jsval :: Int -> JSVal
@@ -71,8 +71,8 @@ foreign import javascript "$1" int_as_jsval :: Int -> JSVal
 foreign import javascript "$1" jsval_as_double :: JSVal -> Double
 foreign import javascript "$1" double_as_jsval :: Double -> JSVal
 
-foreign import javascript "$1" jsval_as_bool :: JSVal -> Bool
-foreign import javascript "$1" bool_as_jsval :: Bool -> JSVal
+foreign import javascript "Boolean($1)" jsval_as_bool :: JSVal -> Bool
+foreign import javascript "Boolean($1)" bool_as_jsval :: Bool -> JSVal
 
 instance JSRef Int where
   fromJSRef = jsval_as_int
