@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "fast-text-encoding": "^1.0.3",
+    "lodash-es": "^4.17.15",
     "promise-polyfill": "^8.1.3"
   }
 }
