@@ -2,7 +2,6 @@
 
 if [[ $1 == "install" ]]
 then
-buildtools/ahc-cabal-update.sh
 buildtools/docker-build.sh buildtools/common-scripts/install.sh
 elif [[ $1 == "update" ]]
 then

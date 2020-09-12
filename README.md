@@ -15,6 +15,7 @@ git clone https://github.com/retho/screeps-haskell-starter.git
 cd screeps-haskell-starter
 
 # cli dependencies:
+./cabal-screeps.sh update
 ./cabal-screeps.sh install
 
 # configure for uploading:
