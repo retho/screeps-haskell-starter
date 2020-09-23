@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "watch": "buildtools/common-scripts/hpack.sh && nodemon --watch src --watch src-lib -e hs buildtools/dev-scripts/check.js --profile=watch",
-    "check": "buildtools/common-scripts/hpack.sh && node buildtools/dev-scripts/check.js --profile=check",
-    "check:all": "buildtools/common-scripts/hpack.sh && node buildtools/dev-scripts/check.js --from-scratch --profile=check-from-scratch",
+    "watch": "buildtools/common-scripts/hpack.sh && nodemon --watch src --watch src-lib -e hs buildtools/dev-scripts/check.js --sub=watch",
+    "check": "buildtools/common-scripts/hpack.sh && node buildtools/dev-scripts/check.js --sub=check",
+    "check:all": "buildtools/common-scripts/hpack.sh && node buildtools/dev-scripts/check.js --from-scratch --sub=check-from-scratch",
     "build": "buildtools/common-scripts/hpack.sh && node buildtools/build-scripts/build.js",
     "deploy": "buildtools/common-scripts/hpack.sh && node buildtools/build-scripts/build.js && node buildtools/build-scripts/upload.js"
   },
