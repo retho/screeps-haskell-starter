@@ -17,7 +17,6 @@ run(`rm -rf ${distdir}`)
 run(`ahc-cabal v1-install -j --bindir=${rollupinputdir} --builddir=${builddir}`)
 run(`ahc-dist --input-exe=${rollupinputdir}/main --browser --gc-threshold=${gcThreshold} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`)
 
-run(`cp -rf ${rollupconfigdir}/assets/screeps_environment/. ${rollupinputdir}`)
-run(`cp -rf ${rollupconfigdir}/assets/entry/. ${rollupinputdir}`)
+run(`cp -rf ${rollupconfigdir}/assets/. ${rollupinputdir}`)
 run(`npx rollup -c=${rollupconfigdir}/rollup.config.js`)
 run(`cp ${rollupinputdir}/main.wasm ${distdir}/compiled.wasm`)
