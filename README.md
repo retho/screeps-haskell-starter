@@ -15,24 +15,24 @@ git clone https://github.com/retho/screeps-haskell-starter.git
 cd screeps-haskell-starter
 
 # cli dependencies:
-./cabal-screeps.sh update
-./cabal-screeps.sh install
+./run.sh update
+./run.sh install
 
 # configure for uploading:
 cp screeps.example.json screeps.json
 nano screeps.json
 
 # compile and upload:
-./cabal-screeps.sh deploy
+./run.sh deploy
 ```
 
 
 
 # Scripts
 
-- `./cabal-screeps.sh update` updates ahc-cabal's package list
-- `./cabal-screeps.sh watch` checks if it compiles on changes in src/
-- `./cabal-screeps.sh check` checks if it compiles
-- `./cabal-screeps.sh check:all` checks if it compiles and shows all warnings
-- `./cabal-screeps.sh build` builds it, puts files in .dist/ in project root
-- `./cabal-screeps.sh deploy [profile]` builds and uploads it to the server (based on settings in `screeps.json`)
+- `./run.sh update` updates ahc-cabal's package list
+- `./run.sh watch` checks if it compiles on changes in src/
+- `./run.sh check` checks if it compiles
+- `./run.sh check:all` checks if it compiles and shows all warnings
+- `./run.sh build` builds it, puts files in .dist/ in project root
+- `./run.sh deploy [profile]` builds and uploads it to the server (based on settings in `screeps.json`)

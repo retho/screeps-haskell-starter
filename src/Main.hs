@@ -1,3 +1,5 @@
+-- this is a close translation of the script from
+-- https://github.com/rustyscreeps/screeps-starter-rust (c) 2018 David Ross
 import Screeps.Prelude
 
 import Control.Monad (when, void)
@@ -42,7 +44,7 @@ game_loop = do
       name_base <- Game.time
       let
         loop :: (a -> Bool) -> [IO a] -> IO a
-        loop _ [] = undefined
+        loop _ [] = panic "finite loop"
         loop break' (x:xs) = x >>= \r -> if break' r then pure r else loop break' xs
       res <- loop (/= ReturnCode.err_name_exists) $ flip map [0..] $ \(additional :: Int) -> do
         let nm = showjs name_base <> "-" <> showjs additional

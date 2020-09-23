@@ -1,17 +1,14 @@
-const debug = global.debug;
 
 let nextHandle = 1; // Spec says greater than zero
 const tasksByHandle = {};
 
 const setImmediateByQueue = (callback, ...args) => {
-  debug('setImmediateByQueue', callback);
   const task = { callback: callback, args: args };
   tasksByHandle[nextHandle] = task;
   return nextHandle++;
 }
 
 function clearImmediate(handle) {
-  debug('clearImmediate', handle);
   delete tasksByHandle[handle];
 }
 
@@ -22,8 +19,6 @@ const run = (task) => {
 }
 
 const runImmediateQueue = () => {
-  debug('runImmediateQueue', tasksByHandle);
-
   let handle = Object.keys(tasksByHandle)[0];
   while (handle) {
     const task = tasksByHandle[handle];
@@ -34,7 +29,6 @@ const runImmediateQueue = () => {
 }
 
 const setImmediateByCallImmediately = (callback, ...args) => {
-  debug('setImmediateByCallImmediately', callback);
   callback(...args);
 }
 

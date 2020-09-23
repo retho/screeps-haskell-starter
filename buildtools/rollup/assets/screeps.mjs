@@ -18,7 +18,6 @@ global.wrapHaskellCallback = (cb) => (...args) => {
       console.log(`<span style="color: #ffa07a">Main: ${err}</span>`);
     }
     haltRequired = true;
-    Game.cpu.halt();
     throw err;
   } finally {
     if (haltRequired && Game.time - startedAt > 100) Game.cpu.halt();
