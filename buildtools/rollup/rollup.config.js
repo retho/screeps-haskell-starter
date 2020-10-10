@@ -2,6 +2,7 @@
 
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import cleanup from 'rollup-plugin-cleanup';
 import { terser } from 'rollup-plugin-terser';
 
 const rollupinputdir = '.cabal-screeps-work/rollup-input'
@@ -17,6 +18,7 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
+    false && cleanup(),
     false && terser(),
   ],
 }

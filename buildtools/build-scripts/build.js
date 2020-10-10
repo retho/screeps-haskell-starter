@@ -11,8 +11,8 @@ const builddir = '.cabal-screeps-work/ahc-cabal-build'
 const rollupinputdir = '.cabal-screeps-work/rollup-input'
 const distdir = '.dist'
 
-run(`rm -rf ${rollupinputdir}`)
-run(`rm -rf ${distdir}`)
+run(`rm -rf ${rollupinputdir}/*`)
+run(`rm -rf ${distdir}/*`)
 
 run(`ahc-cabal v1-install -j --bindir=${rollupinputdir} --builddir=${builddir}`)
 run(`ahc-dist --input-exe=${rollupinputdir}/main --browser --gc-threshold=${gcThreshold} --optimize-level=${optimizeLevel} --shrink-level=${shrinkLevel}`)
