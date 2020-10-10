@@ -83,6 +83,7 @@ game_loop = do
     info "running memory cleanup"
     cleanup_memory
 
+  handle_memory_access_error
   Game.CPU.getUsed >>= \cpu -> info $ "done! cpu: " <> showjs cpu
 
 cleanup_memory :: IO ()
@@ -95,3 +96,13 @@ cleanup_memory = do
     when (mem_name `notElem` alive_creeps) $ do
       debug $ "cleaning up creep memory of dead creep " <> mem_name
       Mem.unset $ Mem.path creeps_mem [mem_name]
+
+handle_memory_access_error :: IO ()
+handle_memory_access_error = do
+  t <- Game.time
+  let val = t `mod` 2 == 0
+  Mem.set "memory_check" val Mem.root
+  readval <- Mem.get "memory_check" Mem.root >>= pure . maybe False id
+  when (val /= readval) $ do
+    warn "memory read/write error, halted"
+    Game.CPU.halt

@@ -8,6 +8,7 @@ module Logging
 
 import Screeps.Prelude
 import Control.Monad (when)
+import qualified Screeps.Game as Game
 
 data Logging = Debug | Info | Warn deriving (Eq, Ord, Enum)
 
@@ -28,7 +29,10 @@ getLogging = get_log_level >>= pure . maybe Info toEnum . fromJSRef
 logger :: Logging -> JSString -> IO ()
 logger logger_logging msg = do
   current_logging <- getLogging
-  when (logger_logging >= current_logging) $ consoleLog $ showjs logger_logging <> " " <> msg
+  when (logger_logging >= current_logging) $ do
+    let msg_str = showjs logger_logging <> " " <> msg
+    consoleLog msg_str
+    when (logger_logging >= Warn) $ Game.notify msg_str
 
 debug :: JSString -> IO ()
 info :: JSString -> IO ()

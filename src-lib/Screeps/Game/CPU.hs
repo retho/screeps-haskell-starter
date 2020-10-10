@@ -2,6 +2,7 @@ module Screeps.Game.CPU
   ( HeapStatistics(..)
   , getHeapStatistics
   , getUsed
+  , halt
   ) where
 
 import Screeps.Utils
@@ -39,6 +40,8 @@ getHeapStatistics = do
       , does_zap_garbage = unsafeGet "does_zap_garbage" obj
       , externally_allocated_size = unsafeGet "externally_allocated_size" obj
       }
+
+foreign import javascript "Game.cpu.halt()" halt :: IO ()
 
 foreign import javascript "Game.cpu.getUsed()" js_get_used :: IO Double
 getUsed :: IO Double
