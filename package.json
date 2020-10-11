@@ -15,7 +15,6 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "args-parser": "^1.1.0",
-    "moment": "^2.27.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.4",
     "rollup": "^2.18.1",

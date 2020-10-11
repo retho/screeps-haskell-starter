@@ -1,5 +1,4 @@
 process.on('unhandledRejection', up => { throw up })
-const moment = require('moment');
 const fs = require('fs');
 const argsParser = require('args-parser');
 const fetch = require('node-fetch');
@@ -13,7 +12,10 @@ if (!profile) throw new Error('Unknown profile name: ' + profileName)
 
 const distdir = '.dist';
 
-console.log('uploading...');
+const fgCyan = '\x1b[36m'
+const withColor = (color, str) => `${color}${str}\x1b[0m`
+
+console.log(`uploading to ${withColor(fgCyan, profile.branch)} branch...`);
 fetch(`${profile.screeps_host}/api/user/code`, {
   method: 'POST',
   headers: {
@@ -29,4 +31,4 @@ fetch(`${profile.screeps_host}/api/user/code`, {
   }),
 })
   .then(res => Promise.all([res.status, res.json()]))
-  .then(([status, body]) => console.log(status, body, body.timestamp ? moment(body.timestamp).format() : ''));
+  .then(([status, body]) => console.log(status, body, body.timestamp ? new Date(body.timestamp).toJSON() : ''));
