@@ -16,7 +16,7 @@
     "@rollup/plugin-node-resolve": "^8.1.0",
     "args-parser": "^1.1.0",
     "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.22",
     "rollup": "^2.80.0",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-terser": "^6.1.0"
